@@ -1,0 +1,53 @@
+<h1 class="fw-bold text-primary" style="text-align: center;">Bazar</h1>
+<br>
+<div class="container shadow-lg p-3 mb-5 bg-body rounded" style="height: 90%;width: 40%;">
+	<h3 class="text-body-tertiary" style="text-align: center;">Login</h3>
+	<br>
+	<form [formGroup]="userData">
+		<div class="form-floating mb-3">
+			<input type="email" [class]="(validators.email && this.userData.get('email')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="email" placeholder="name@example.com">
+			<label for="floatingInput">Email address</label>
+			<span *ngIf="validators.email && this.userData.get('email')!.invalid" class="text-danger">email is required</span>
+		</div>
+		<div class="form-floating">
+			<input type="password" [class]="(validators.password && this.userData.get('password')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="password" placeholder="Password">
+			<label for="floatingPassword">Password</label>
+			<span *ngIf="validators.password && this.userData.get('password')!.invalid" class="text-danger">password is required</span>
+		</div>
+	</form>
+	<br>
+	<button type="submit" class="btn btn-primary" style="width: 100%;" (click)="onSignIn()">Sign in</button>
+	<hr>
+	<p class="text-secondary" style="text-align: center;">New to Bazar?</p>
+	<button type="submit" class="btn btn-light shadow bg-body-tertiary rounded" style="width: 100%;" (click)="onSignUp()">Sign up</button>
+
+	<div class="text-center mb-3">
+		<br>
+		<hr>
+        <p class="text-secondary">Sign in with Google:</p>
+        <button type="button" class="btn btn-link btn-floating fs-2" style="margin-top: -20px;">
+			<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 488 512">
+				<style>svg{fill:#0080c0}</style>
+				<path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+			</svg>
+        </button>
+	</div>
+
+	<div id="g_id_onload"
+	     data-client_id="956881088059-j4a0vd8vji5t7h5od9smm1tft4hp966b.apps.googleusercontent.com"
+	     data-context="signin"
+	     data-ux_mode="popup"
+	     data-auto_select="true"
+	     data-itp_support="true"
+		 data-login_uri="http://localhost:8080/api/v1/auth/googleLogin">
+		</div>
+		
+		<div class="g_id_signin"
+		data-type="standard"
+		data-shape="pill"
+		data-theme="filled_blue"
+		data-text="signin_with"
+		data-size="large"
+	    data-logo_alignment="left">
+	</div>
+</div>

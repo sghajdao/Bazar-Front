@@ -6,6 +6,29 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <script>
+    function decodeJWTToken(token) {
+      console.log("SAAD", token);
+      return JSON.parse(atob(token.split(".")[1]));
+    }
+    function handleCredentialResponse(response) {
+      const responsePayload = decodeJWTToken(response.credential);
+      // sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
+      localStorage.setItem("token", response.credential)
+      const Http = new XMLHttpRequest();
+      Http.open("POST", "http://localhost:8080/api/v1/auth/google");
+      Http.send(response.credential);
+
+      Http.onload = function () {
+        window.location.href = "/home";
+      }
+    }
+    function handleSignout() {
+      google.accounts.id.disableAutoSelect();
+    }
+  </script>
+
 </head>
 <body>
   <app-root></app-root>
