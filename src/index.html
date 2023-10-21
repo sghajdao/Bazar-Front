@@ -9,19 +9,28 @@
 
   <script>
     function decodeJWTToken(token) {
-      console.log("SAAD", token);
       return JSON.parse(atob(token.split(".")[1]));
     }
     function handleCredentialResponse(response) {
       const responsePayload = decodeJWTToken(response.credential);
-      // sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
       localStorage.setItem("token", response.credential)
       const Http = new XMLHttpRequest();
       Http.open("POST", "http://localhost:8080/api/v1/auth/google");
       Http.send(response.credential);
 
       Http.onload = function () {
-        window.location.href = "/home";
+        window.location.href = "/profile";
+      }
+    }
+    function handleCredentialLoginResponse(response) {
+      const responsePayload = decodeJWTToken(response.credential);
+      localStorage.setItem("token", response.credential)
+      const Http = new XMLHttpRequest();
+      Http.open("POST", "http://localhost:8080/api/v1/auth/googleLogin");
+      Http.send(response.credential);
+      Http.onreadystatechange = function () {
+        if (Http.responseText === "true")
+          window.location.href = "/profile";
       }
     }
     function handleSignout() {

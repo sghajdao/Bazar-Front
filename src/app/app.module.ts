@@ -11,13 +11,13 @@ import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-s
 import {
   GoogleLoginProvider
 } from '@abacritt/angularx-social-login';
-import { HomeComponent } from './components/home/home.component';
+import { HomeModule } from './components/home/home.module';
+import { ProfileModule } from './components/profile/profile.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +25,9 @@ import { HomeComponent } from './components/home/home.component';
     LoginModule,
     RegisterModule,
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    HomeModule,
+    ProfileModule
   ],
   providers: [
     {

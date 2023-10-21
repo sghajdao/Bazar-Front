@@ -17,26 +17,16 @@ export class AuthService {
     ) { }
 
   registerUser(user:Register) {
-    return this.http.post<string>(environment.urlRequest + 'api/v1/auth/register', user, {responseType:'text' as 'json'})
+    return this.http.post<LoginResponse>(environment.urlRequest + 'api/v1/auth/register', user)
   }
 
   loginUser(user:Login) {
-    return this.http.post<LoginResponse>(environment.urlRequest + 'api/v1/auth/login', user, {responseType:'text' as 'json'})
-  }
-
-  welcome() {
-    const token = localStorage.getItem("token")
-    if (token) {
-      const data:any = jwtDecode(token)
-      return this.http.post<User>(environment.urlRequest + "api/v1/auth/welcome", data.email, this.getHeaders());
-    }
-    else
-      return null;
+    return this.http.post<LoginResponse>(environment.urlRequest + 'api/v1/auth/login', user)
   }
 
   getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };
-    return { headers };
+    return {headers};
   }
 }

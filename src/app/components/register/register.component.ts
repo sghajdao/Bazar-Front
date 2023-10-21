@@ -1,27 +1,30 @@
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Register } from 'src/app/models/register.dto';
+import jwtDecode from 'jwt-decode';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { environment } from 'src/environments/environment';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit, OnDestroy{
 
   constructor(
     private router:Router,
     private fb:FormBuilder,
     private authService: AuthService,
     private googleService: SocialAuthService,
-    private http: HttpClient
+    private userService: UserService,
     ) {
     }
+
+  subsciptions: Subscription[] = []
 
   userData = this.fb.group({
     firstname: ['', Validators.required],
@@ -41,12 +44,20 @@ export class RegisterComponent implements OnInit{
   loggedIn?: boolean;
 
   ngOnInit(): void {
-    this.googleService.authState.subscribe((user) => {
-      console.log(user);
-      
+    const sub:Subscription = this.googleService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
+
+      localStorage.setItem("token", user.idToken)
+      const Http = new XMLHttpRequest();
+      Http.open("POST", "http://localhost:8080/api/v1/auth/google");
+      Http.send(user.idToken);
+
+      Http.onload = function () {
+        window.location.href = "/profile";
+      }
     });
+    this.subsciptions.push(sub);
   }
 
   onSignUp() {
@@ -60,22 +71,27 @@ export class RegisterComponent implements OnInit{
     if (!this.validators.firstname && !this.validators.lastname &&
         !this.validators.email && !this.validators.password) {
           let user:any = this.userData.value
-          this.authService.registerUser(user).subscribe(data=> {
+          const sub:Subscription = this.authService.registerUser(user).subscribe(data=> {
             if (data) {
-              localStorage.setItem("token", data);
-              console.log(data); 
+              if (data.message === "Already exist") {
+                this.router.navigateByUrl('/login')
+                return;
+              }
+              localStorage.setItem("token", data.token);
+              this.router.navigateByUrl('/profile')
             }
           })
+          this.subsciptions.push(sub);
       }
   }
 
   onSignIn() {
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/login').then(() => {
+      window.location.reload();
+    });
   }
 
-  // refreshToken(): void {
-  //   this.googleService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then(data=> {
-  //     // console.log(data);
-  //   })
-  // }
+  ngOnDestroy(): void {
+    this.subsciptions.forEach(sub=> sub.unsubscribe())
+  }
 }

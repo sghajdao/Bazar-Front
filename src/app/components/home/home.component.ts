@@ -14,7 +14,6 @@ import { environment } from 'src/environments/environment';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private googleService: SocialAuthService,
     private authService: AuthService
     ) {}
 
@@ -24,13 +23,9 @@ export class HomeComponent implements OnInit {
   loggedInUser:any;
 
   ngOnInit(): void {
-    if (this.authService.welcome())
-    this.authService.welcome()?.subscribe(data=> {
-      this.loggedInUser = data
-      console.log(data);
-      
-    })
-    // this.loggedInUser = JSON.parse((sessionStorage.getItem("loggedInUser") || ""));
-    // console.log(this.loggedInUser);
+    // if (this.authService.welcome())
+    // this.authService.welcome()?.subscribe(data=> {
+    //   this.loggedInUser = data
+    // })
   }
 }
