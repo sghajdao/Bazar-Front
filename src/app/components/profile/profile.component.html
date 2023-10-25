@@ -1,4 +1,3 @@
-<ng-container>
-    <p *ngIf="loggedInUser">Welcome {{loggedInUser.firstname}}</p>
-    <!-- <img [src]="loggedInUser.picture" alt=""> -->
-</ng-container>
+<app-navbar [loggedInUser]="loggedInUser"></app-navbar>
+
+<app-statistics></app-statistics>

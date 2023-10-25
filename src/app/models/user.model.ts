@@ -5,3 +5,9 @@ export interface User {
     email:string,
     password:string
 }
+
+export interface UserLite {
+    firstname:string,
+    lastname:string,
+    email:string
+}

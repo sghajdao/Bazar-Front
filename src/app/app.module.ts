@@ -13,7 +13,9 @@ import {
 } from '@abacritt/angularx-social-login';
 import { HomeModule } from './components/home/home.module';
 import { ProfileModule } from './components/profile/profile.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { ProfileModule } from './components/profile/profile.module';
     HttpClientModule,
     SocialLoginModule,
     HomeModule,
-    ProfileModule
+    ProfileModule,
+    BrowserAnimationsModule,
+    MatTooltipModule,
+    MatSlideToggleModule
   ],
   providers: [
     {
