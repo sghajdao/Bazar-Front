@@ -4,6 +4,11 @@ import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: "",
+    loadChildren:()=>import("./components/home/home.module").then(m=>m.HomeModule),
+    // canActivate: [authGuard],
+  },
+  {
     path: "login",
     loadChildren:()=>import("./components/login/login.module").then(m=>m.LoginModule),
   },
@@ -12,13 +17,13 @@ const routes: Routes = [
     loadChildren:()=>import("./components/register/register.module").then(m=>m.RegisterModule)
   },
   {
-    path: "",
-    loadChildren:()=>import("./components/home/home.module").then(m=>m.HomeModule),
-    // canActivate: [authGuard],
-  },
-  {
     path: "profile",
     loadChildren:()=>import("./components/profile/profile.module").then(m=>m.ProfileModule),
+    canActivate: [authGuard],
+  },
+  {
+    path: "new-product",
+    loadChildren:()=>import("./components/new-product/new-product.module").then(m=>m.NewProductModule),
     canActivate: [authGuard],
   }
 ];

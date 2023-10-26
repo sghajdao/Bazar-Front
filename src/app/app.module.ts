@@ -16,6 +16,8 @@ import { ProfileModule } from './components/profile/profile.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NewProductModule } from './components/new-product/new-product.module';
+import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
 
 @NgModule({
   declarations: [
@@ -30,9 +32,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     SocialLoginModule,
     HomeModule,
     ProfileModule,
+    NewProductModule,
+    UserNavbarModule,
     BrowserAnimationsModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   providers: [
     {
