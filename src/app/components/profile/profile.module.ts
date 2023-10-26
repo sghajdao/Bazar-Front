@@ -9,16 +9,20 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ChartModule } from 'angular-highcharts';
+import { SalseChartComponent } from './salse-chart/salse-chart.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
     StatisticsComponent,
-    NavbarComponent
+    NavbarComponent,
+    SalseChartComponent
   ],
   imports: [
     CommonModule,
     ProfileRoutingModule,
+    ChartModule,
     MatSlideToggleModule,
     MatButtonModule, MatMenuModule,
     MatCardModule

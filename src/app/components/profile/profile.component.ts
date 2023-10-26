@@ -18,8 +18,6 @@ export class ProfileComponent implements OnInit {
 
   loggedInUser?:UserLite;
 
-  showFiller = false;
-
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
