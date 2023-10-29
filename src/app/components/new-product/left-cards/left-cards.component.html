@@ -1,0 +1,93 @@
+<div>
+    <div style="padding-right: 20px;">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-subtitle>MAIN INFO</mat-card-subtitle>
+            </mat-card-header>
+            <hr>
+            <mat-card-content>
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Title</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput></textarea>
+                </mat-form-field>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <br>
+    <br>
+
+    <div style="display: flex;padding-right: 20px;" class="container">
+        <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-subtitle>IMAGES</mat-card-subtitle>
+            </mat-card-header>
+            <hr>
+            <mat-card-content>
+                <div style="display: flex;">
+                    <div class="mb-4 d-flex justify-content-center">
+                        <div class="example-button-container" *ngIf="selectedImage[0]" (click)="onRemoveImage(0)">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path fill="red" d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
+                            </svg>
+                        </div>
+                        <label for="customFile1" style="cursor: pointer;">
+                            <img id="selectedImage" [src]="selectedImage[0]"
+                            alt="example placeholder" style="width: 220px;border-radius: 10px;"
+                            onerror="this.src='./../../../assets/placeholder.jpg'"/>
+                            <input type="file" class="form-control d-none" id="customFile1" (change)="onImageSelected($event, 0)"/>
+                        </label>
+                    </div>
+
+                    <div class="mb-4 ms-2 d-flex justify-content-center">
+                        <div class="example-button-container" *ngIf="selectedImage[1]" (click)="onRemoveImage(1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path fill="red" d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
+                            </svg>
+                        </div>
+                        <label for="customFile2" style="cursor: pointer;">
+                            <img id="selectedImage" [src]="selectedImage[1]"
+                            alt="example placeholder" style="width: 220px;border-radius: 10px;"
+                            onerror="this.src='./../../../assets/placeholder.jpg'"/>
+                            <input type="file" class="form-control d-none" id="customFile2" (change)="onImageSelected($event, 1)"/>
+                        </label>
+                    </div>
+                </div>
+
+                <div style="display: flex;">
+                    <div class="mb-4 d-flex justify-content-center">
+                        <div class="example-button-container" *ngIf="selectedImage[2]" (click)="onRemoveImage(2)">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path fill="red" d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
+                            </svg>
+                        </div>
+                        <label for="customFile3" style="cursor: pointer;">
+                            <img id="selectedImage" [src]="selectedImage[2]"
+                            alt="example placeholder" style="width: 220px;border-radius: 10px;"
+                            onerror="this.src='./../../../assets/placeholder.jpg'"/>
+                            <input type="file" class="form-control d-none" id="customFile3" (change)="onImageSelected($event, 2)"/>
+                        </label>
+                    </div>
+
+                    <div class="mb-4 ms-2 d-flex justify-content-center">
+                        <div class="example-button-container" *ngIf="selectedImage[3]" (click)="onRemoveImage(3)">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
+                                <path fill="red" d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
+                            </svg>
+                        </div>
+                        <label for="customFile4" style="cursor: pointer;">
+                            <img id="selectedImage" [src]="selectedImage[3]"
+                            alt="example placeholder" style="width: 220px;border-radius: 10px;"
+                            onerror="this.src='./../../../assets/placeholder.jpg'"/>
+                            <input type="file" class="form-control d-none" id="customFile4" (change)="onImageSelected($event, 3)"/>
+                        </label>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
