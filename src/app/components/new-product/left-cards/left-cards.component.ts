@@ -1,16 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-left-cards',
   templateUrl: './left-cards.component.html',
   styleUrls: ['./left-cards.component.css']
 })
-export class LeftCardsComponent {
+export class LeftCardsComponent implements OnInit {
 
-  constructor() {}
+  @Output() leftData = new EventEmitter<{title:string, description:string, images:(string | ArrayBuffer)[]}>();
+  @Output() nextStep = new EventEmitter<boolean>()
 
+  constructor(
+    private fb: FormBuilder
+  ) {}
+  
   selectedFile: File[] = [new File([], ''), new File([], ''), new File([], ''), new File([], '')]
   selectedImage: (string | ArrayBuffer)[] = ['','','',''];
+
+  filled:boolean = true
+
+  mainInfo = this.fb.group({
+    title: ['', Validators.required],
+    description: ['', Validators.required]
+  })
+  
+  ngOnInit(): void {
+  }
 
   onImageSelected(event :any, index:number) {
     this.selectedFile[index] = (event.target.files[0]);
@@ -32,5 +48,15 @@ export class LeftCardsComponent {
   onRemoveImage(index:number) {
     this.selectedImage[index] = ''
     this.selectedFile[index] = new File([], '')
+  }
+
+  onNextStep() {
+    if (!this.mainInfo.value.title || !this.mainInfo.value.description) {
+      this.filled = false;
+      return;
+    }
+    const event = {title: this.mainInfo.value.title!, description: this.mainInfo.value.description!, images:this.selectedImage!}
+    this.leftData?.emit(event)
+    this.nextStep.emit(true)
   }
 }

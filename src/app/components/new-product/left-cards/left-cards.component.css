@@ -1,5 +1,6 @@
 .example-card {
     max-width: 600px;
+    min-width: 300px;
 }
 
 .example-button-container {
@@ -11,4 +12,18 @@
 
 .example-button-container:hover {
     font-size: 20px;
+}
+
+.images {
+    display: flex;
+}
+
+img {
+    width: 225px;border-radius: 10px;
+}
+
+@media (max-width: 1330px) {
+    .images {
+        display: block;
+    }
 }

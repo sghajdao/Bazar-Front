@@ -26,6 +26,9 @@ export class NewProductComponent {
   seasons: string[] = ['Public', 'Protected(Subscribers)', 'Private'];
   editVisibility:boolean = false
 
+  leftData?:{title:string, description:string, images:(string | ArrayBuffer)[]}
+  nextStep:boolean = false
+
   onImageSelected(event :any) {
     this.selectedFile = event.target.files[0];
     if (this.selectedFile) {
@@ -69,5 +72,13 @@ export class NewProductComponent {
 
   onEditVisibility() {
     this.editVisibility = !this.editVisibility
+  }
+
+  onGetEvent(event:any) {
+    this.leftData = event
+  }
+
+  onNextStep(event:any) {
+    this.nextStep = event
   }
 }

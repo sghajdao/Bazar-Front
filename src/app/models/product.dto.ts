@@ -5,7 +5,7 @@ export interface Product {
     price:number,
     amount:number,
     category:Category,
-    brand:Brand,
+    brand:string,
     collection:Collection,
     tags:string[],
     visibility:string,
@@ -13,13 +13,24 @@ export interface Product {
 }
 
 export enum Category {
-
-}
-
-export enum Brand {
-
+    DIGITAL = "digital services",
+    COSMITICS = "cosmetics and body care",
+    FOOD = "food and beverage",
+    FURNITURE = "furniture and decor",
+    HEALTH = "health and wellness",
+    HOUSEHOLD = "household items",
+    MEDIA = "media",
+    PET = "pet care",
+    OFFICE = "office equipment",
 }
 
 export enum Collection {
-
+    SPRING = "spring",
+    SUMMER = "summer",
+    AUTUMN = "autumn",
+    WINTER = "winter",
+    MALE = "male",
+    FEMALE = "female",
+    ADULTS = "adults",
+    KIDS = "kids"
 }
