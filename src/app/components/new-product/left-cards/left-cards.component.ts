@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable, firstValueFrom } from 'rxjs';
+import { ImageResponse } from 'src/app/models/ImageResponse.dto';
+import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
   selector: 'app-left-cards',
@@ -12,7 +15,8 @@ export class LeftCardsComponent implements OnInit {
   @Output() nextStep = new EventEmitter<boolean>()
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private imageService: ImagesService,
   ) {}
   
   selectedFile: File[] = [new File([], ''), new File([], ''), new File([], ''), new File([], '')]
@@ -37,12 +41,17 @@ export class LeftCardsComponent implements OnInit {
       };
       reader.readAsDataURL(this.selectedFile[index]);
       
-      if (this.selectedFile) {
-        const formData = new FormData();
-        formData.append('image', this.selectedFile[index]);
-        // this.imageService.uploadImage(formData).subscribe(data=> console.log(data))
-      }
+      
     }
+  }
+
+  uploadImage(index:number): Observable<ImageResponse> {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('image', this.selectedFile[index]);
+      return this.imageService.uploadImage(formData)
+    }
+    return new Observable();
   }
 
   onRemoveImage(index:number) {
@@ -50,13 +59,15 @@ export class LeftCardsComponent implements OnInit {
     this.selectedFile[index] = new File([], '')
   }
 
-  onNextStep() {
+  async onNextStep() {
     if (!this.mainInfo.value.title || !this.mainInfo.value.description) {
       this.filled = false;
       return;
     }
-    const event = {title: this.mainInfo.value.title!, description: this.mainInfo.value.description!, images:this.selectedImage!}
-    this.leftData?.emit(event)
-    this.nextStep.emit(true)
+    this.uploadImage(0).subscribe(data=> {
+      const event = {title: this.mainInfo.value.title!, description: this.mainInfo.value.description!, images:[data.name]}
+      this.leftData?.emit(event)
+      this.nextStep.emit(true)
+    })
   }
 }

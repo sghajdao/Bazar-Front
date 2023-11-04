@@ -2,7 +2,10 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Category, Collection } from 'src/app/models/product.dto';
+import { Router } from '@angular/router';
+import { Category, Collection, Product } from 'src/app/models/product.dto';
+import { ProductService } from 'src/app/services/product.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-right-cards',
@@ -15,7 +18,10 @@ export class RightCardsComponent implements OnInit {
   @Output() back = new EventEmitter<boolean>()
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private productService:ProductService,
+    private userService:UserService,
+    private router:Router
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 20, 0, 1);
@@ -37,7 +43,7 @@ export class RightCardsComponent implements OnInit {
     Category.OFFICE,
     Category.PET
   ]
-  category:string = ''
+  category?:Category
   collections:string[] = [
     Collection.ADULTS,
     Collection.KIDS,
@@ -48,7 +54,7 @@ export class RightCardsComponent implements OnInit {
     Collection.SPRING,
     Collection.SUMMER
   ]
-  collection = new FormControl('')
+  collection = new FormControl()
   brand = '';
   keywords = ['Tag']
   formControl = new FormControl();
@@ -94,18 +100,26 @@ export class RightCardsComponent implements OnInit {
   }
 
   onPublish() {
-    let data = {
-      price: this.priceAndStock.value.price,
-      stock: this.priceAndStock.value.stock,
-      category: this.category,
-      brand: this.brand,
-      collectios: this.collection.value,
-      keywords: this.keywords,
-      visibility: this.visibility,
-      pushDate: this.selectedDate
+    if (this.priceAndStock.value.price && this.priceAndStock.value.stock) {
+      let data:Product = {
+        title: this.leftData?.title!,
+        description: this.leftData?.description!,
+        images: this.leftData?.images,
+        price: this.priceAndStock.value.price,
+        stock: this.priceAndStock.value.stock,
+        category: this.category!,
+        brand: this.brand,
+        collection: this.collection.value,
+        keywords: this.keywords,
+        visibility: this.visibility!,
+        pushDate: this.selectedDate
+      }
+      const email = this.userService.getLogedInUser()
+      
+      this.productService.newProduct(data, email).subscribe(data=>{
+        this.router.navigateByUrl('/profile')
+      });
     }
-    console.log(this.leftData);
-    console.log(data);
   }
 
   onBack() {

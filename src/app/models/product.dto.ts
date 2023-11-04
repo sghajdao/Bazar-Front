@@ -1,15 +1,15 @@
 export interface Product {
     title:string,
     description:string,
-    images:string[],
+    images?:(string | ArrayBuffer)[],
     price:number,
-    amount:number,
+    stock:number,
     category:Category,
     brand:string,
     collection:Collection,
-    tags:string[],
+    keywords?:string[],
     visibility:string,
-    publishDate:Date
+    pushDate?:Date
 }
 
 export enum Category {

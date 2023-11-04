@@ -13,6 +13,17 @@ export class UserService {
     private http:HttpClient
   ) { }
 
+  getLogedInUser() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const data:any = jwtDecode(token);
+      if (data.iss)
+        return data.email;
+      return data.sub;
+    }
+    return null;
+  }
+
   getUserByEmail(email:string) {
     return this.http.post<any>(environment.urlRequest + "api/user/email", email, this.getHeaders());
   }
@@ -32,7 +43,7 @@ export class UserService {
       return null;
   }
 
-  getHeaders(){
+  private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };
     return {headers};

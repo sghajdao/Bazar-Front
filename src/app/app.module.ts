@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NewProductModule } from './components/new-product/new-product.module';
 import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
+import { UserProductsModule } from './components/user-products/user-products.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
     ProfileModule,
     NewProductModule,
     UserNavbarModule,
+    UserProductsModule,
     BrowserAnimationsModule,
     MatTooltipModule,
     MatSlideToggleModule,
