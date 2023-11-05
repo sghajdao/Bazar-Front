@@ -17,6 +17,10 @@ export class ProductService {
     return this.http.post<Product>(environment.urlRequest + "api/product/new", data, this.getHeaders());
   }
 
+  getUserProducts(id:number) {
+    return this.http.get<Product[]>(environment.urlRequest + "api/product/" + id, this.getHeaders());
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

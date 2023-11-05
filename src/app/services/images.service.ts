@@ -16,6 +16,10 @@ export class ImagesService {
     return this.http.post<ImageResponse>(environment.urlRequest + "api/image/upload", image, this.getHeaders());
   }
 
+  getImage(name:(string | ArrayBuffer)) {
+    return this.http.get(environment.urlRequest + 'api/image/' + name, this.getHeaders());
+  }
+
   getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

@@ -1,18 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/models/product.dto';
+import { ImagesService } from 'src/app/services/images.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-user-products',
   templateUrl: './user-products.component.html',
   styleUrls: ['./user-products.component.css']
 })
-export class UserProductsComponent {
+export class UserProductsComponent implements OnInit {
 
   constructor(
-    private activateRoute: ActivatedRoute
+    private activateRoute: ActivatedRoute,
+    private productService: ProductService,
+    private imageService: ImagesService,
   ) {
-    activateRoute.params.subscribe(data=>{
+  }
+
+  products:Product[] = []
+
+  ngOnInit(): void {
+    this.activateRoute.params.subscribe(data=>{
       console.log(data['id']);
+      this.productService.getUserProducts(data['id']).subscribe(prods=>{
+        this.products = prods
+      })
     })
+  }
+
+  onTest() {
+    this.imageService.getImage(this.products[0].images![0]).subscribe(data=>console.log(data))
   }
 }
