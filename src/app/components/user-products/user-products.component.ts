@@ -19,17 +19,15 @@ export class UserProductsComponent implements OnInit {
   }
 
   products:Product[] = []
+  userId?:number
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe(data=>{
       console.log(data['id']);
+      this.userId = data['id']
       this.productService.getUserProducts(data['id']).subscribe(prods=>{
         this.products = prods
       })
     })
-  }
-
-  onTest() {
-    this.imageService.getImage(this.products[0].images![0]).subscribe(data=>console.log(data))
   }
 }

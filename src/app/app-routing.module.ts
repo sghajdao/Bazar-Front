@@ -30,6 +30,11 @@ const routes: Routes = [
     path: "products",
     loadChildren:()=>import("./components/user-products/user-products.module").then(m=>m.UserProductsModule),
     canActivate: [authGuard],
+  },
+  {
+    path: "newStore",
+    loadChildren:()=>import("./components/store-creation/store-creation.module").then(m=>m.StoreCreationModule),
+    canActivate: [authGuard],
   }
 ];
 

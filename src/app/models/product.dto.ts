@@ -1,3 +1,5 @@
+import { User } from "./user.model"
+
 export interface Product {
     title:string,
     description:string,
@@ -10,6 +12,7 @@ export interface Product {
     keywords?:string[],
     visibility:string,
     pushDate?:Date
+    seller?:User
 }
 
 export enum Category {

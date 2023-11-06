@@ -19,6 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NewProductModule } from './components/new-product/new-product.module';
 import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
 import { UserProductsModule } from './components/user-products/user-products.module';
+import { StoreCreationModule } from './components/store-creation/store-creation.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UserProductsModule } from './components/user-products/user-products.mod
     NewProductModule,
     UserNavbarModule,
     UserProductsModule,
+    StoreCreationModule,
     BrowserAnimationsModule,
     MatTooltipModule,
     MatSlideToggleModule,

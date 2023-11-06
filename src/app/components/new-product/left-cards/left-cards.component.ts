@@ -59,6 +59,10 @@ export class LeftCardsComponent implements OnInit {
     this.selectedFile[index] = new File([], '')
   }
 
+  onNewImage() {
+    
+  }
+
   async onNextStep() {
     if (!this.mainInfo.value.title || !this.mainInfo.value.description) {
       this.filled = false;

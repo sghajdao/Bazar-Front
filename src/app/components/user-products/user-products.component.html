@@ -2,24 +2,19 @@
 
 <div style="padding-left: 30px;padding-right: 30px;padding-bottom: 20px;display: flex;">
     <div style="margin-left: 20px;" *ngFor="let item of products">
-        <mat-card class="example-card">
+        <mat-card class="example-card" style="height: 430px;">
+            <img mat-card-image height="200" *ngIf="item" [src]="'http://localhost:8080/api/image/' + item.images![0]" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p style="padding-top: 10px;">
+                {{item.description}}
+              </p>
+              <h3>${{item.price}}</h3>
+            </mat-card-content>
             <mat-card-header>
               <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>Shiba Inu</mat-card-title>
-              <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+              <mat-card-title>{{item.seller?.firstname}} {{item.seller?.lastname}}</mat-card-title>
+              <mat-card-subtitle>Seller</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-            <mat-card-content>
-              <p>
-
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button>LIKE</button>
-              <button mat-button>SHARE</button>
-            </mat-card-actions>
         </mat-card>
     </div>
 </div>
-
-<button (click)="onTest()">Test</button>
