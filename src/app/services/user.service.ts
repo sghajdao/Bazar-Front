@@ -25,7 +25,7 @@ export class UserService {
   }
 
   getUserByEmail(email:string) {
-    return this.http.post<any>(environment.urlRequest + "api/user/email", email, this.getHeaders());
+    return this.http.post<User>(environment.urlRequest + "api/user/email", email, this.getHeaders());
   }
 
   welcome() {

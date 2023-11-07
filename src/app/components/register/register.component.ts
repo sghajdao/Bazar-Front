@@ -20,7 +20,6 @@ export class RegisterComponent implements OnInit, OnDestroy{
     private fb:FormBuilder,
     private authService: AuthService,
     private googleService: SocialAuthService,
-    private userService: UserService,
     ) {
     }
 

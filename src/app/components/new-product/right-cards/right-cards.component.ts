@@ -101,24 +101,28 @@ export class RightCardsComponent implements OnInit {
 
   onPublish() {
     if (this.priceAndStock.value.price && this.priceAndStock.value.stock) {
-      let data:Product = {
-        title: this.leftData?.title!,
-        description: this.leftData?.description!,
-        images: this.leftData?.images,
-        price: this.priceAndStock.value.price,
-        stock: this.priceAndStock.value.stock,
-        category: this.category!,
-        brand: this.brand,
-        collection: this.collection.value,
-        keywords: this.keywords,
-        visibility: this.visibility!,
-        pushDate: this.selectedDate
-      }
       const email = this.userService.getLogedInUser()
-      
-      this.productService.newProduct(data, email).subscribe(data=>{
-        this.router.navigateByUrl('/profile')
-      });
+      this.userService.getUserByEmail(email).subscribe(user=> {
+        let data:Product = {
+          title: this.leftData?.title!,
+          description: this.leftData?.description!,
+          images: this.leftData?.images,
+          price: this.priceAndStock.value.price!,
+          stock: this.priceAndStock.value.stock!,
+          category: this.category!,
+          brand: this.brand,
+          collection: this.collection.value,
+          keywords: this.keywords,
+          visibility: this.visibility!,
+          pushDate: this.selectedDate
+        }
+
+        console.log(user);
+        
+        this.productService.newProduct(data, user.store?.email!).subscribe(data=>{
+          this.router.navigateByUrl('/profile')
+        });
+      })
     }
   }
 

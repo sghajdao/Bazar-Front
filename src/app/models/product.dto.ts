@@ -1,3 +1,4 @@
+import { Store } from "./store.dto"
 import { User } from "./user.model"
 
 export interface Product {
@@ -12,7 +13,7 @@ export interface Product {
     keywords?:string[],
     visibility:string,
     pushDate?:Date
-    seller?:User
+    store?:Store,
 }
 
 export enum Category {

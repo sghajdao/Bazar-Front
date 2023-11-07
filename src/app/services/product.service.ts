@@ -13,7 +13,7 @@ export class ProductService {
   ) { }
 
   newProduct(product:Product, email:string) {
-    const data:{product:Product, email:string} = {product, email}
+    const data:{product:Product, storeEmail:string} = {product:product, storeEmail:email}
     return this.http.post<Product>(environment.urlRequest + "api/product/new", data, this.getHeaders());
   }
 
