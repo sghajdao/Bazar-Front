@@ -53,21 +53,23 @@ export class StoreCreationComponent {
   }
 
   createStore() {
-    this.uploadImage().subscribe(data=> {
-      if (this.form.value.country && this.form.value.email && this.form.value.name
-        && this.form.value.phone && this.form.value.subtitle) {
-          const store:Store = {
-            name: this.form.value.name,
-            subtitle: this.form.value.subtitle,
-            email: this.form.value.email,
-            country: this.form.value.country,
-            phone: this.form.value.phone,
-            image: data.name
-          }
-
-          const email = this.userService.getLogedInUser()
-          this.storeService.newStore(store, email).subscribe(message=>console.log(message))
-      }
-    })
+    if (this.selectedImage) {
+      this.uploadImage().subscribe(data=> {
+        if (this.form.value.country && this.form.value.email && this.form.value.name
+          && this.form.value.phone && this.form.value.subtitle) {
+            const store:Store = {
+              name: this.form.value.name,
+              subtitle: this.form.value.subtitle,
+              email: this.form.value.email,
+              country: this.form.value.country,
+              phone: this.form.value.phone,
+              image: data.name
+            }
+          
+            const email = this.userService.getLogedInUser()
+            this.storeService.newStore(store, email).subscribe(message=>console.log(message))
+        }
+      })
+    }
   }
 }
