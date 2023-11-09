@@ -13,7 +13,7 @@ export class ImagesService {
   ) { }
 
   uploadImage(image: FormData) {
-    return this.http.post<ImageResponse>(environment.urlRequest + "api/image/upload", image, this.getHeaders());
+    return this.http.post<ImageResponse[]>(environment.urlRequest + "api/image/upload", image, this.getHeaders());
   }
 
   getImage(name:(string | ArrayBuffer)) {

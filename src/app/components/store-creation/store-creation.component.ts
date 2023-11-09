@@ -43,7 +43,7 @@ export class StoreCreationComponent {
     }
   }
 
-  uploadImage(): Observable<ImageResponse> {
+  uploadImage(): Observable<ImageResponse[]> {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('image', this.selectedFile);
@@ -63,7 +63,7 @@ export class StoreCreationComponent {
               email: this.form.value.email,
               country: this.form.value.country,
               phone: this.form.value.phone,
-              image: data.name
+              image: data[0].name
             }
           
             const email = this.userService.getLogedInUser()

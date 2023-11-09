@@ -45,12 +45,14 @@ export class LeftCardsComponent implements OnInit {
     }
   }
 
-  uploadImage(): Observable<ImageResponse> {
+  uploadImage(): Observable<ImageResponse[]> {
     if (this.selectedFile) {
       const formData = new FormData();
       for (let index = 0; index < this.selectedFile.length; index++) {
-        const element = this.selectedFile[index];
-        formData.append('image', element);
+        if (this.selectedFile[index].name) {
+          const element = this.selectedFile[index];
+          formData.append('image', element);
+        }
       }
       return this.imageService.uploadImage(formData)
     }
@@ -68,7 +70,10 @@ export class LeftCardsComponent implements OnInit {
       return;
     }
     this.uploadImage().subscribe(data=> {
-      const event = {title: this.mainInfo.value.title!, description: this.mainInfo.value.description!, images:[data.name]}
+      console.log(data);
+      let images:any[] = []
+      data.forEach(item=> images.push(item.name))
+      const event = {title: this.mainInfo.value.title!, description: this.mainInfo.value.description!, images:images}
       this.leftData?.emit(event)
       this.nextStep.emit(true)
     })
