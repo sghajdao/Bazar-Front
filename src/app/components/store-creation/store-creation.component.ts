@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ImageResponse } from 'src/app/models/ImageResponse.dto';
 import { Store } from 'src/app/models/store.dto';
@@ -19,6 +20,7 @@ export class StoreCreationComponent {
     private storeService: StoreService,
     private imageService: ImagesService,
     private userService: UserService,
+    private router: Router,
   ) {}
 
   form = this.fb.group({
@@ -67,7 +69,13 @@ export class StoreCreationComponent {
             }
           
             const email = this.userService.getLogedInUser()
-            this.storeService.newStore(store, email).subscribe(message=>console.log(message))
+            this.storeService.newStore(store, email).subscribe({
+              next: message=> {
+                localStorage.setItem('store', message.store.id?.toString()!)
+                this.router.navigateByUrl('/profile')
+              },
+              error: err=> localStorage.setItem('store', '-1')
+            })
         }
       })
     }

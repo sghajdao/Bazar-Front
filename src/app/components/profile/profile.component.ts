@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
   ) {}
 
   loggedInUser?:UserLite;

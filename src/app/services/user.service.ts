@@ -17,7 +17,7 @@ export class UserService {
     const token = localStorage.getItem('token');
     if (token) {
       const data:any = jwtDecode(token);
-      if (data.iss)
+      if (data && data.iss === "https://accounts.google.com")
         return data.email;
       return data.sub;
     }

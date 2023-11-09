@@ -2,6 +2,7 @@ import { Product } from "./product.dto"
 import { User } from "./user.model"
 
 export interface Store {
+    id?:number
     image: string,
     name: string,
     subtitle: string,
