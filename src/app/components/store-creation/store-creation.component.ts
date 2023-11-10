@@ -71,10 +71,8 @@ export class StoreCreationComponent {
             const email = this.userService.getLogedInUser()
             this.storeService.newStore(store, email).subscribe({
               next: message=> {
-                localStorage.setItem('store', message.store.id?.toString()!)
                 this.router.navigateByUrl('/profile')
-              },
-              error: err=> localStorage.setItem('store', '-1')
+              }
             })
         }
       })

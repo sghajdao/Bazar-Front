@@ -6,6 +6,7 @@ export interface User {
     lastname:string,
     email:string,
     password:string
+    role: string,
     store?: Store
 }
 

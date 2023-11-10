@@ -15,7 +15,7 @@
             <li class="nav-item">
               <a class="nav-link" [routerLink]="'/store/' + userId">My Store</a>
             </li>
-            <li class="nav-item" *ngIf="!store">
+            <li class="nav-item" *ngIf="storeExist">
               <a class="nav-link" routerLink="/newStore">New Store</a>
             </li>
             <li class="nav-item">

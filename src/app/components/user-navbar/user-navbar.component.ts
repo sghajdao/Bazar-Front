@@ -23,7 +23,7 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = []
 
   loggedInUser?:UserLite;
-  store?: Store
+  storeExist:boolean = false
   userId?:number
 
   ngOnInit(): void {
@@ -31,8 +31,9 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
     const sub:Subscription = this.userService.getUserByEmail(email).subscribe({
       next: user=> {
         this.loggedInUser = user;
-        this.store = user.store
         this.userId = user.id
+        if (!user.store)
+          this.storeExist = true
       }
     });
     this.subscription.push(sub)
