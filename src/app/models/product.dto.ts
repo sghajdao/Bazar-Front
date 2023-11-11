@@ -2,6 +2,7 @@ import { Store } from "./store.dto"
 import { User } from "./user.model"
 
 export interface Product {
+    id?:number
     title:string,
     description:string,
     images?:(string | ArrayBuffer)[],

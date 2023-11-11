@@ -14,6 +14,8 @@ export class ProductService {
 
   newProduct(product:Product, email:string) {
     const data:{product:Product, storeEmail:string} = {product:product, storeEmail:email}
+    console.log(data);
+    
     return this.http.post<Product>(environment.urlRequest + "api/product/new", data, this.getHeaders());
   }
 

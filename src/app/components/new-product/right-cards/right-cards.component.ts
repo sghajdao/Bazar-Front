@@ -114,12 +114,12 @@ export class RightCardsComponent implements OnInit {
           collection: this.collection.value,
           keywords: this.keywords,
           visibility: this.visibility!,
-          pushDate: this.selectedDate
+          pushDate: this.selectedDate,
+          store: user.store
         }
-
-        console.log(user);
         
         this.productService.newProduct(data, user.store?.email!).subscribe(data=>{
+          
           this.router.navigateByUrl('/profile')
         });
       })

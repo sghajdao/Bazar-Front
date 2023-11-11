@@ -2,19 +2,21 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { StoreService } from '../services/store.service';
 import { map } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 export const merchantGuard: CanActivateFn = (route, state) => {
-  const storeService = inject(StoreService);
+  const userService = inject(UserService);
   const router = inject(Router);
-  return storeService.getStoreByUserEmail().pipe(
-    map(store => {
-      if (!store) {
-        // Valid store exists, navigate to the profile or any other route as needed
-        router.navigate(['/newStore']);
-        return true;
-      } else {
+  const userEmail = userService.getLogedInUser();
+  return userService.getUserByEmail(userEmail).pipe(
+    map(user=> {
+      // console.log(user);
+      
+      if (!user.store) {
+        router.navigateByUrl('/newStore')
         return false;
       }
+      return true;
     })
-  );
+  )
 };

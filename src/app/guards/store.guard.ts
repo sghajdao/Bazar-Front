@@ -2,19 +2,19 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { StoreService } from '../services/store.service';
 import { map } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 export const storeGuard: CanActivateFn = (route, state) => {
-  const storeService = inject(StoreService);
+  const userService = inject(UserService);
   const router = inject(Router);
-  return storeService.getStoreByUserEmail().pipe(
-    map(store => {
-      if (store) {
-        // Valid store exists, navigate to the profile or any other route as needed
-        router.navigate(['/profile']);
-        return true;
-      } else {
+  const userEmail = userService.getLogedInUser();
+  return userService.getUserByEmail(userEmail).pipe(
+    map(user=> {
+      if (user.store) {
+        router.navigateByUrl('/profile')
         return false;
       }
-    },)
-  );
+      return true;
+    })
+  )
 };

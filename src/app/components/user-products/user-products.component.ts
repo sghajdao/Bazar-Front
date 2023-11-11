@@ -21,9 +21,10 @@ export class UserProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe(data=>{
-      console.log(data['id']);
       this.userId = data['id']
       this.productService.getUserProducts(data['id']).subscribe(prods=>{
+        console.log(prods);
+        
         this.products = prods
       })
     })
