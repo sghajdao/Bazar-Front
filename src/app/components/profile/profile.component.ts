@@ -19,13 +19,17 @@ export class ProfileComponent implements OnInit {
   loggedInUser?:UserLite;
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const data:any = jwtDecode(token)
-      if (data && data.iss === "https://accounts.google.com")
-        this.loggedInUser = {firstname: data.given_name, lastname: data.family_name, email: data.mail}
-      else
-        this.userService.getUserByEmail(data.sub).subscribe(user=> this.loggedInUser = user);
-    }
+    const email = this.userService.getLogedInUser();
+    this.userService.getUserByEmail(email).subscribe({
+      next: user=> this.loggedInUser = user.user
+    })
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   const data:any = jwtDecode(token)
+    //   if (data && data.iss === "https://accounts.google.com")
+    //     this.loggedInUser = {firstname: data.given_name, lastname: data.family_name, email: data.mail}
+    //   else
+    //     this.userService.getUserByEmail(data.sub).subscribe(user=> this.loggedInUser = user);
+    // }
   }
 }

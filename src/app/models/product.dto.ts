@@ -2,7 +2,7 @@ import { Store } from "./store.dto"
 import { User } from "./user.model"
 
 export interface Product {
-    id?:number
+    id?:number,
     title:string,
     description:string,
     images?:(string | ArrayBuffer)[],
@@ -13,7 +13,7 @@ export interface Product {
     collection:Collection,
     keywords?:string[],
     visibility:string,
-    pushDate?:Date
+    pushDate?:Date,
     store?:Store,
 }
 
