@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product.dto';
+import { Store } from 'src/app/models/store.dto';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,15 +20,18 @@ export class UserProductsComponent implements OnInit {
   }
 
   products:Product[] = []
+  store?:Store
   userId?:number
 
   ngOnInit(): void {
     this.activateRoute.params.subscribe(data=>{
       this.userId = data['id']
-      this.productService.getUserProducts(data['id']).subscribe(prods=>{
-        console.log(prods[0]);
-        
-        this.products = prods
+      const email = this.userService.getLogedInUser();
+      this.userService.getUserByEmail(email).subscribe({
+        next: user=> {
+          this.products = user.user.store?.product!
+          this.store = user.user.store
+        }
       })
     })
   }

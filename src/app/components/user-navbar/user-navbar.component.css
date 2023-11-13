@@ -1,11 +1,11 @@
 .custom-button {
-    background-color: #3498db; /* Set the background color of the button */
-    color: #ffffff; /* Set the text color of the button */
-    border: none; /* Remove the default button border */
-    padding: 10px 20px; /* Adjust padding as needed */
-    cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
 .custom-button:disabled {
-    opacity: 0.6; /* Reduce the opacity of the button when disabled */
+    opacity: 0.6;
 }

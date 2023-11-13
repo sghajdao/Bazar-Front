@@ -4,16 +4,31 @@
     <div style="margin-left: 20px;" *ngFor="let item of products">
         <mat-card class="example-card" style="height: 430px;width: 250px;">
             <img mat-card-image height="200" *ngIf="item" [src]="'http://localhost:8080/api/image/' + item.images![0]" alt="image">
+            
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" style="position: absolute;">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+            
             <mat-card-content>
               <p class="description">
-                {{item.description}}
+                {{item.title}}
               </p>
               <h3>${{item.price}}</h3>
             </mat-card-content>
             <mat-card-header>
-              <div mat-card-avatar [style]="'background-image: url(http://localhost:8080/api/image/' + item.store?.image + ');'" class="example-header-image"></div>
-              <mat-card-title>{{item.store?.name}}</mat-card-title>
-              <mat-card-subtitle>{{item.store?.subtitle}}</mat-card-subtitle>
+              <div mat-card-avatar [style]="'background-image: url(http://localhost:8080/api/image/' + store?.image + ');'" class="example-header-image"></div>
+              <mat-card-title>{{store?.name}}</mat-card-title>
+              <mat-card-subtitle>{{store?.subtitle}}</mat-card-subtitle>
             </mat-card-header>
         </mat-card>
     </div>

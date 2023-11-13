@@ -6,6 +6,8 @@ import { UserNavbarModule } from '../user-navbar/user-navbar.module';
 import { UserProductsComponent } from './user-products.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     UserProductsRoutingModule,
     UserNavbarModule,
-    MatCardModule, MatButtonModule
+    MatCardModule, MatButtonModule, MatIconModule,
+    MatMenuModule
   ]
 })
 export class UserProductsModule { }
