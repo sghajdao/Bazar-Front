@@ -34,8 +34,6 @@ export class UserService {
     if (token) {
       const data:any = jwtDecode(token)
       if (data.iss) {
-        console.log(data.email);
-        
         return this.http.post<User>(environment.urlRequest + "api/user/welcome", data.email, this.getHeaders());
       }
       return this.http.post<any>(environment.urlRequest + "api/user/welcome", data.sub, this.getHeaders());

@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product.dto';
-import { Store } from 'src/app/models/store.dto';
-import { ProductService } from 'src/app/services/product.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-products',
@@ -12,27 +8,20 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserProductsComponent implements OnInit {
 
-  constructor(
-    private activateRoute: ActivatedRoute,
-    private productService: ProductService,
-    private userService: UserService,
-  ) {
+  constructor() {
   }
 
-  products:Product[] = []
-  store?:Store
-  userId?:number
+  productToEdit?: Product
+  edit: boolean = false
 
-  ngOnInit(): void {
-    this.activateRoute.params.subscribe(data=>{
-      this.userId = data['id']
-      const email = this.userService.getLogedInUser();
-      this.userService.getUserByEmail(email).subscribe({
-        next: user=> {
-          this.products = user.user.store?.product!
-          this.store = user.user.store
-        }
-      })
-    })
+  ngOnInit(): void {}
+
+  editProduct(product:Product) {
+    this.productToEdit = product;
+    this.edit = true
+  }
+
+  productEdited(edited:boolean) {
+    this.edit = edited
   }
 }

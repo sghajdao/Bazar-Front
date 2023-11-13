@@ -70,7 +70,6 @@ export class LeftCardsComponent implements OnInit {
       return;
     }
     this.uploadImage().subscribe(data=> {
-      console.log(data);
       let images:any[] = []
       data.forEach(item=> images.push(item.name))
       const event = {title: this.mainInfo.value.title!, description: this.mainInfo.value.description!, images:images}

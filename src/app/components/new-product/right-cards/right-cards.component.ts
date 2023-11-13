@@ -69,7 +69,6 @@ export class RightCardsComponent implements OnInit {
   selectedDate?: Date;
   
   ngOnInit(): void {
-    // console.log(this.leftData);
   }
 
   removeKeyword(keyword: string) {

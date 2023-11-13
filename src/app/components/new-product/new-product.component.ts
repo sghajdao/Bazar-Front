@@ -41,7 +41,6 @@ export class NewProductComponent {
       if (this.selectedFile) {
         const formData = new FormData();
         formData.append('image', this.selectedFile);
-        // this.imageService.uploadImage(formData).subscribe(data=> console.log(data))
       }
     }
   }

@@ -14,13 +14,19 @@ export class ProductService {
 
   newProduct(product:Product, email:string) {
     const data:{product:Product, storeEmail:string} = {product:product, storeEmail:email}
-    console.log(data);
-    
     return this.http.post<Product>(environment.urlRequest + "api/product/new", data, this.getHeaders());
   }
 
   getUserProducts(id:number) {
     return this.http.get<Product[]>(environment.urlRequest + "api/product/" + id, this.getHeaders());
+  }
+
+  updateProduct(product:Product) {
+    return this.http.put<Product>(environment.urlRequest + 'api/product/update', product, this.getHeaders());
+  }
+
+  deleteProduct(id:number) {
+    return this.http.delete<string>(environment.urlRequest + 'api/product/delete/' + id, this.getHeaders());
   }
 
   private getHeaders(){
