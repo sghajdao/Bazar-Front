@@ -37,6 +37,10 @@ const routes: Routes = [
     path: "newStore",
     loadChildren:()=>import("./components/store-creation/store-creation.module").then(m=>m.StoreCreationModule),
     canActivate: [authGuard, storeGuard],
+  },
+  {
+    path: "product",
+    loadChildren:()=>import("./components/product/product.module").then(m=>m.ProductModule),
   }
 ];
 

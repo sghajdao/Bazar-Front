@@ -1,7 +1,7 @@
 <div style="padding-left: 30px;padding-right: 30px;padding-bottom: 20px;display: flex;">
     <div style="margin-left: 20px;" *ngFor="let item of products">
         <mat-card class="example-card" style="height: 430px;width: 250px;">
-            <img mat-card-image height="200" *ngIf="item" [src]="'http://localhost:8080/api/image/' + item.images![0]" alt="image">
+            <img style="cursor: pointer;" (click)="openProduct(item)" mat-card-image height="200" *ngIf="item" [src]="'http://localhost:8080/api/image/' + item.images![0]" alt="image">
             
             <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" style="position: absolute;">
               <mat-icon>more_vert</mat-icon>
@@ -17,7 +17,7 @@
               </button>
             </mat-menu>
             
-            <mat-card-content>
+            <mat-card-content style="cursor: pointer;" (click)="openProduct(item)">
               <p class="description">
                 {{item.title}}
               </p>

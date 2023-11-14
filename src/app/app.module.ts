@@ -20,6 +20,8 @@ import { NewProductModule } from './components/new-product/new-product.module';
 import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
 import { UserProductsModule } from './components/user-products/user-products.module';
 import { StoreCreationModule } from './components/store-creation/store-creation.module';
+import { ProductComponent } from './components/product/product.component';
+import { ProductModule } from './components/product/product.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { StoreCreationModule } from './components/store-creation/store-creation.
     UserNavbarModule,
     UserProductsModule,
     StoreCreationModule,
+    ProductModule,
     BrowserAnimationsModule,
     MatTooltipModule,
     MatSlideToggleModule,

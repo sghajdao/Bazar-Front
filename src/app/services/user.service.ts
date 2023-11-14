@@ -29,17 +29,8 @@ export class UserService {
     return this.http.post<UserResponse>(environment.urlRequest + "api/user/email", email, this.getHeaders());
   }
 
-  welcome() {
-    const token = localStorage.getItem("token")
-    if (token) {
-      const data:any = jwtDecode(token)
-      if (data.iss) {
-        return this.http.post<User>(environment.urlRequest + "api/user/welcome", data.email, this.getHeaders());
-      }
-      return this.http.post<any>(environment.urlRequest + "api/user/welcome", data.sub, this.getHeaders());
-    }
-    else
-      return null;
+  getUserById(id:number) {
+    return this.http.post<User>(environment.urlRequest + 'api/user/id', id, this.getHeaders());
   }
 
   private getHeaders(){

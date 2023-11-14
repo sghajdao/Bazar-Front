@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.dto';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProductResponseDto } from '../models/productRsponse.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,11 @@ export class ProductService {
   }
 
   getUserProducts(id:number) {
-    return this.http.get<Product[]>(environment.urlRequest + "api/product/" + id, this.getHeaders());
+    return this.http.get<Product[]>(environment.urlRequest + "api/product/store/" + id, this.getHeaders());
+  }
+
+  getProductById(id:number) {
+    return this.http.get<ProductResponseDto>(environment.urlRequest + 'api/product/' + id, this.getHeaders())
   }
 
   updateProduct(product:Product) {

@@ -1,5 +1,4 @@
 import { Store } from "./store.dto"
-import { User } from "./user.model"
 
 export interface Product {
     id?:number,
@@ -10,7 +9,7 @@ export interface Product {
     stock:number,
     category:Category,
     brand:string,
-    collection:Collection,
+    collection:Collection[],
     keywords?:string[],
     visibility:string,
     pushDate?:Date,

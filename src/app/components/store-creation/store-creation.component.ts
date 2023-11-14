@@ -67,7 +67,7 @@ export class StoreCreationComponent implements OnDestroy {
               email: this.form.value.email,
               country: this.form.value.country,
               phone: this.form.value.phone,
-              image: data[0].name
+              image: data[0].name,
             }
           
             const email = this.userService.getLogedInUser()

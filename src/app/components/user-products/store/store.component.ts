@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, forkJoin, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
@@ -18,6 +18,7 @@ export class StoreComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private userService: UserService,
     private productService: ProductService,
+    private router: Router
   ) {}
 
   subscription: Subscription[] = []
@@ -59,6 +60,10 @@ export class StoreComponent implements OnInit, OnDestroy {
       })
       this.subscription.push(sub)
     }
+  }
+
+  openProduct(product:Product) {
+    this.router.navigateByUrl('/product/' + product.id)
   }
 
   ngOnDestroy(): void {
