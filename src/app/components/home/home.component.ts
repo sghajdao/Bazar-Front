@@ -23,9 +23,5 @@ export class HomeComponent implements OnInit {
   loggedInUser:any;
 
   ngOnInit(): void {
-    // if (this.authService.welcome())
-    // this.authService.welcome()?.subscribe(data=> {
-    //   this.loggedInUser = data
-    // })
   }
 }

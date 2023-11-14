@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, Subscription, firstValueFrom } from 'rxjs';
 import { ImageResponse } from 'src/app/models/ImageResponse.dto';
 import { ImagesService } from 'src/app/services/images.service';
 
@@ -9,7 +9,7 @@ import { ImagesService } from 'src/app/services/images.service';
   templateUrl: './left-cards.component.html',
   styleUrls: ['./left-cards.component.css']
 })
-export class LeftCardsComponent implements OnInit {
+export class LeftCardsComponent implements OnInit, OnDestroy {
 
   @Output() leftData = new EventEmitter<{title:string, description:string, images:(string | ArrayBuffer)[]}>();
   @Output() nextStep = new EventEmitter<boolean>()
@@ -18,6 +18,8 @@ export class LeftCardsComponent implements OnInit {
     private fb: FormBuilder,
     private imageService: ImagesService,
   ) {}
+
+  subscription: Subscription[] = []
   
   selectedFile: File[] = [new File([], ''), new File([], ''), new File([], ''), new File([], '')]
   selectedImage: (string | ArrayBuffer)[] = ['','','',''];
@@ -69,12 +71,17 @@ export class LeftCardsComponent implements OnInit {
       this.filled = false;
       return;
     }
-    this.uploadImage().subscribe(data=> {
+    const sub:Subscription = this.uploadImage().subscribe(data=> {
       let images:any[] = []
       data.forEach(item=> images.push(item.name))
       const event = {title: this.mainInfo.value.title!, description: this.mainInfo.value.description!, images:images}
       this.leftData?.emit(event)
       this.nextStep.emit(true)
     })
+    this.subscription.push(sub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(sub=> sub.unsubscribe())
   }
 }

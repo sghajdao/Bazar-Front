@@ -1,8 +1,9 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Category, Collection, Product } from 'src/app/models/product.dto';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './right-cards.component.html',
   styleUrls: ['./right-cards.component.css']
 })
-export class RightCardsComponent implements OnInit {
+export class RightCardsComponent implements OnInit, OnDestroy {
 
   @Input() leftData?:{title:string, description:string, images:(string | ArrayBuffer)[]}
   @Output() back = new EventEmitter<boolean>()
@@ -27,6 +28,8 @@ export class RightCardsComponent implements OnInit {
     this.minDate = new Date(currentYear - 20, 0, 1);
     this.maxDate = new Date(currentYear + 1, 11, 31);
   }
+
+  subscription: Subscription[] = []
   
   priceAndStock = this.fb.group({
     price: [0, Validators.required],
@@ -101,7 +104,7 @@ export class RightCardsComponent implements OnInit {
   onPublish() {
     if (this.priceAndStock.value.price && this.priceAndStock.value.stock) {
       const email = this.userService.getLogedInUser()
-      this.userService.getUserByEmail(email).subscribe(user=> {
+      const sub:Subscription = this.userService.getUserByEmail(email).subscribe(user=> {
         let data:Product = {
           title: this.leftData?.title!,
           description: this.leftData?.description!,
@@ -117,15 +120,21 @@ export class RightCardsComponent implements OnInit {
           store: user.user.store
         }
         
-        this.productService.newProduct(data, user.user.store?.email!).subscribe(data=>{
+        const sub2:Subscription = this.productService.newProduct(data, user.user.store?.email!).subscribe(data=>{
           
           this.router.navigateByUrl('/profile')
         });
+        this.subscription.push(sub2)
       })
+      this.subscription.push(sub)
     }
   }
 
   onBack() {
     this.back.emit(false)
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(sub=> sub.unsubscribe())
   }
 }

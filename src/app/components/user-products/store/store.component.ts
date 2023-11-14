@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, mergeMap } from 'rxjs';
+import { Subscription, forkJoin, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
 import { ProductService } from 'src/app/services/product.service';
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css']
 })
-export class StoreComponent implements OnInit {
+export class StoreComponent implements OnInit, OnDestroy {
 
   @Output() productToEdit = new EventEmitter<Product>()
   constructor(
@@ -20,6 +20,8 @@ export class StoreComponent implements OnInit {
     private productService: ProductService,
   ) {}
 
+  subscription: Subscription[] = []
+
   products:Product[] = []
   store?:Store
   userId?:number
@@ -27,16 +29,18 @@ export class StoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.userEmail = this.userService.getLogedInUser();
-    this.activateRoute.params.subscribe(data=>{
+    const sub:Subscription = this.activateRoute.params.subscribe(data=>{
       this.userId = data['id']
       this.userEmail = this.userService.getLogedInUser();
-      this.userService.getUserByEmail(this.userEmail!).subscribe({
+      const sub2:Subscription = this.userService.getUserByEmail(this.userEmail!).subscribe({
         next: user=> {
           this.products = user.user.store?.product!
           this.store = user.user.store
         }
       })
+      this.subscription.push(sub2)
     })
+    this.subscription.push(sub)
   }
 
   editProduct(product:Product) {
@@ -45,7 +49,7 @@ export class StoreComponent implements OnInit {
 
   deleteProduct(product:Product) {
     if (product.id) {
-      this.productService.deleteProduct(product.id).pipe(
+      const sub:Subscription = this.productService.deleteProduct(product.id).pipe(
         mergeMap(data=> this.userService.getUserByEmail(this.userEmail!))
       ).subscribe( {
         next: user=> {
@@ -53,6 +57,11 @@ export class StoreComponent implements OnInit {
           this.store = user.user.store
         }
       })
+      this.subscription.push(sub)
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(sub=> sub.unsubscribe())
   }
 }

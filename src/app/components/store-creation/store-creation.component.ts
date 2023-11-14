@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ImageResponse } from 'src/app/models/ImageResponse.dto';
 import { Store } from 'src/app/models/store.dto';
 import { ImagesService } from 'src/app/services/images.service';
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './store-creation.component.html',
   styleUrls: ['./store-creation.component.css']
 })
-export class StoreCreationComponent {
+export class StoreCreationComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
@@ -22,6 +22,8 @@ export class StoreCreationComponent {
     private userService: UserService,
     private router: Router,
   ) {}
+
+  subscription: Subscription[] = []
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -56,7 +58,7 @@ export class StoreCreationComponent {
 
   createStore() {
     if (this.selectedImage) {
-      this.uploadImage().subscribe(data=> {
+      const sub:Subscription =  this.uploadImage().subscribe(data=> {
         if (this.form.value.country && this.form.value.email && this.form.value.name
           && this.form.value.phone && this.form.value.subtitle) {
             const store:Store = {
@@ -69,13 +71,19 @@ export class StoreCreationComponent {
             }
           
             const email = this.userService.getLogedInUser()
-            this.storeService.newStore(store, email).subscribe({
+            const sub2:Subscription = this.storeService.newStore(store, email).subscribe({
               next: message=> {
                 this.router.navigateByUrl('/profile')
               }
             })
+            this.subscription.push(sub2)
         }
       })
+      this.subscription.push(sub)
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(sub=> sub.unsubscribe())
   }
 }

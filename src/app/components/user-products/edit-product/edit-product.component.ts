@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -8,7 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css']
 })
-export class EditProductComponent implements OnInit {
+export class EditProductComponent implements OnInit, OnDestroy {
 
   @Input() productToEdit?:Product
   @Output() edited = new EventEmitter<boolean>(true)
@@ -17,6 +18,8 @@ export class EditProductComponent implements OnInit {
     private fb: FormBuilder,
     private productService: ProductService,
   ) {}
+
+  subscription: Subscription[] = []
 
   productInfo:any
 
@@ -59,9 +62,13 @@ export class EditProductComponent implements OnInit {
       product.stock = this.productInfo.value.stock
       product.visibility = this.visibility
       product.pushDate = this.selectedDate
-      this.productService.updateProduct(product).subscribe({
+      const sub:Subscription = this.productService.updateProduct(product).subscribe({
         next: prod=> this.edited.emit(false)
       })
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.forEach(sub=> sub.unsubscribe())
   }
 }
