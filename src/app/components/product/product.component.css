@@ -1,12 +1,39 @@
 .product {
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 20px;
 }
 
 .example-card {
     max-width: 400px;
+    position: sticky;
+    top: 30px;
+    min-width: 350px;
 }
 
 .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
+}
+
+.title {
+    text-align: center;
+    font-size: 18px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: pre-wrap;
+}
+
+.description {
+    font-size: 18px;
+    /* max-width: 500px; */
+    min-height: 100%;
+    min-width: 350px;
+}
+
+.numbers {
+    max-width: 400px;
+    min-width: 230px;
+    min-height: 100%;
 }

@@ -22,6 +22,8 @@ export class ProductComponent implements OnInit {
   product?: Product
   store?: Store
 
+  pushDate: any
+
   ngOnInit(): void {
     this.activateRoute.params.pipe(
       mergeMap(res1=> this.productService.getProductById(res1['id']))
@@ -29,7 +31,18 @@ export class ProductComponent implements OnInit {
       next: data=> {
         this.product = data.product
         this.store = data.store
+        this.pushDate = this.getPushDate(this.product.pushDate!)
       }
     })
+  }
+
+  getPushDate(pushdate:Date) {
+    const date = new Date(pushdate)
+    const formattedDate = date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+    return formattedDate
   }
 }

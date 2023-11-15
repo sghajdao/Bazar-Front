@@ -117,7 +117,9 @@ export class RightCardsComponent implements OnInit, OnDestroy {
           keywords: this.keywords,
           visibility: this.visibility!,
           pushDate: this.selectedDate,
-          store: user.user.store
+          visitors: 0,
+          sales: 0,
+          store: user.user.store,
         }
         
         const sub2:Subscription = this.productService.newProduct(data, user.user.store?.email!).subscribe(data=>{

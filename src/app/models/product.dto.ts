@@ -13,6 +13,8 @@ export interface Product {
     keywords?:string[],
     visibility:string,
     pushDate?:Date,
+    visitors?:number,
+    sales?:number,
     store?:Store,
 }
 
