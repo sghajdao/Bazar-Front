@@ -1,0 +1,14 @@
+.numbers {
+    max-width: 400px;
+    min-width: 230px;
+    position: sticky;
+    top: 30px;
+}
+
+.variable {
+    color: #565959;
+}
+
+.value {
+    font-weight: bold;
+}

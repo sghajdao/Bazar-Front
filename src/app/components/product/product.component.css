@@ -4,15 +4,8 @@
     padding-bottom: 20px;
 }
 
-.example-card {
-    max-width: 400px;
-    position: sticky;
-    top: 30px;
-    min-width: 350px;
-}
-
-.example-header-image {
-    background-size: cover;
+.cards {
+    display: flex;
 }
 
 .title {
@@ -26,14 +19,20 @@
 }
 
 .description {
-    font-size: 18px;
-    /* max-width: 500px; */
-    min-height: 100%;
-    min-width: 350px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.numbers {
-    max-width: 400px;
-    min-width: 230px;
-    min-height: 100%;
+@media (max-width: 975px) {
+    .cards {
+        display: block;
+    }
+    .imags {
+        display: flex;
+        justify-content: center;
+    }
+    .numbers {
+        display: flex;
+        justify-content: center;
+    }
 }

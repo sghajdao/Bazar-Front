@@ -1,0 +1,16 @@
+.description {
+    font-size: 18px;
+    /* max-width: 500px; */
+    min-height: 100%;
+    min-width: 350px;
+}
+
+.header-icon {
+    height: 3rem;
+    width: 3rem;
+    background-color: #dadcf8;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 40px;
+}

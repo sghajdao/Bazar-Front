@@ -1,10 +1,13 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, forkJoin, mergeMap } from 'rxjs';
+import { Observable, Subscription, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
+import { ConfirmComponent } from '../../modals/confirm/confirm.component';
+import { UserResponse } from 'src/app/models/userResponse.dto';
 
 @Component({
   selector: 'app-store',
@@ -18,7 +21,8 @@ export class StoreComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private userService: UserService,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   subscription: Subscription[] = []
@@ -48,18 +52,27 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.productToEdit.emit(product);
   }
 
-  deleteProduct(product:Product) {
-    if (product.id) {
-      const sub:Subscription = this.productService.deleteProduct(product.id).pipe(
-        mergeMap(data=> this.userService.getUserByEmail(this.userEmail!))
-      ).subscribe( {
-        next: user=> {
+  deleteProduct(product:Product): void {
+    const sub:Subscription = this.dialog.open(ConfirmComponent, {
+      data: product
+    }).afterClosed().pipe(
+      mergeMap(data=> this.refreshProducts(data))
+    ).subscribe({
+      next: user=> {
+        if (user && user.user) {
           this.products = user.user.store?.product!
           this.store = user.user.store
         }
-      })
-      this.subscription.push(sub)
+      }
+    });
+    this.subscription.push(sub)
+  }
+
+  refreshProducts(confirm:string): Observable<UserResponse> {
+    if (confirm === 'Deletion successful') {
+      return this.userService.getUserByEmail(this.userEmail!)
     }
+    return new Observable()
   }
 
   openProduct(product:Product) {

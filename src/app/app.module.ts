@@ -20,8 +20,10 @@ import { NewProductModule } from './components/new-product/new-product.module';
 import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
 import { UserProductsModule } from './components/user-products/user-products.module';
 import { StoreCreationModule } from './components/store-creation/store-creation.module';
-import { ProductComponent } from './components/product/product.component';
 import { ProductModule } from './components/product/product.module';
+import { ModalsModule } from './components/modals/modals.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NotFoundModule } from './components/not-found/not-found.module';
 
 @NgModule({
   declarations: [
@@ -41,9 +43,12 @@ import { ProductModule } from './components/product/product.module';
     UserProductsModule,
     StoreCreationModule,
     ProductModule,
+    ModalsModule,
+    NotFoundModule,
     BrowserAnimationsModule,
     MatTooltipModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

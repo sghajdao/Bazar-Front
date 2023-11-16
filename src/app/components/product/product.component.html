@@ -7,32 +7,18 @@
 
   <br>
 
-  <div style="display: flex;">
-    <div>
-      <mat-card class="example-card">
-          <mat-card-header>
-            <div *ngIf="store?.image" [style]="'background-image: url(http://localhost:8080/api/image/' + store?.image + ');'" mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{store?.name}}</mat-card-title>
-            <mat-card-subtitle>{{store?.subtitle}}</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image *ngIf="product?.images![0]" [src]="'http://localhost:8080/api/image/' + product?.images![0]" alt="photo">
-      </mat-card>
+  <div class="cards">
+    <div class="imags">
+      <app-images [product]="product" [store]="store" [image]="image"></app-images>
     </div>
+    <br>
 
-    <div style="padding-left: 10px;padding-right: 10px;">
-      <mat-card class="description">
-        <mat-card-content>{{product?.description}}</mat-card-content>
-      </mat-card>
+    <div class="description">
+      <app-description [product]="product"></app-description>
     </div>
+    <br>
 
-    <div>
-      <mat-card class="numbers">
-        <mat-card-content>
-          <p style="font-size: 25px;">${{product?.price}}</p>
-          <p style="color: #007600;font-size: 20px;">Stock {{product?.stock}}</p>
-          <p style="font-size: 18px;">Push date: <span style="font-weight: bold;">{{pushDate}}</span></p>
-          <p style="font-size: 18px;">Visibility: <span style="font-weight: bold;">{{product?.visibility}}</span></p>
-        </mat-card-content>
-      </mat-card>
+    <div class="numbers">
+      <app-info [product]="product"></app-info>
     </div>
 </div>

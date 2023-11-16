@@ -41,7 +41,12 @@ const routes: Routes = [
   {
     path: "product",
     loadChildren:()=>import("./components/product/product.module").then(m=>m.ProductModule),
-  }
+    canActivate: [authGuard, merchantGuard],
+  },
+  {
+    path: '**',
+    loadChildren:()=>import("./components/not-found/not-found.module").then(m=>m.NotFoundModule),
+  },
 ];
 
 @NgModule({

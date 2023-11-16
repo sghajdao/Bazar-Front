@@ -4,7 +4,6 @@ import { mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
 import { ProductService } from 'src/app/services/product.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product',
@@ -22,7 +21,7 @@ export class ProductComponent implements OnInit {
   product?: Product
   store?: Store
 
-  pushDate: any
+  image: string | ArrayBuffer = ''
 
   ngOnInit(): void {
     this.activateRoute.params.pipe(
@@ -31,18 +30,9 @@ export class ProductComponent implements OnInit {
       next: data=> {
         this.product = data.product
         this.store = data.store
-        this.pushDate = this.getPushDate(this.product.pushDate!)
+        if (data.product.images)
+          this.image = data.product.images[0]
       }
     })
-  }
-
-  getPushDate(pushdate:Date) {
-    const date = new Date(pushdate)
-    const formattedDate = date.toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
-    return formattedDate
   }
 }

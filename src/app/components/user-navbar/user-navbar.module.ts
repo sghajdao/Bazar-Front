@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { UserNavbarComponent } from './user-navbar.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -16,7 +18,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule,
     CommonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatIconModule, MatButtonModule
   ]
 })
 export class UserNavbarModule { }

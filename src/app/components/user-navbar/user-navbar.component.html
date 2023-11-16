@@ -22,15 +22,18 @@
               <a class="nav-link disabled" aria-disabled="true">Disabled</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          <form class="d-flex search" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="searchButton" mat-fab extended color="primary">
+              <mat-icon>search</mat-icon>
+              Search
+            </button>
           </form>
 
-          <a class="navbar-brand">
+          <a class="navbar-brand" *ngIf="loggedInUser">
             <img src="./../../../assets/images.jpg" style="width:40px;cursor: pointer;" class="rounded-pill ms-3" mat-button [matMenuTriggerFor]="menu">
             <mat-menu #menu="matMenu">
-              <button class="custom-button" mat-menu-item disabled>{{loggedInUser?.firstname}}&nbsp;{{loggedInUser?.lastname}}</button>
+              <button class="custom-button" mat-menu-item disabled>{{loggedInUser.firstname}}&nbsp;{{loggedInUser.lastname}}</button>
               <hr>
               <button mat-menu-item>Settings</button>
               <button mat-menu-item (click)="logOut()">Logout</button>

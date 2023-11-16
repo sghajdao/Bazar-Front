@@ -1,1 +1,2 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!showOverlay"></router-outlet>
+<mat-spinner *ngIf="showOverlay" style="position: absolute;left: 45%;top: 40%;"></mat-spinner>
