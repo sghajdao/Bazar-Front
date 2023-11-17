@@ -1,3 +1,4 @@
+import { Follow } from "./follow.dto"
 import { Store } from "./store.dto"
 
 export interface User {
@@ -7,7 +8,8 @@ export interface User {
     email:string,
     password:string
     role: any,
-    store?: Store
+    store?: Store,
+    followers?:Follow[],
 }
 
 export interface UserLite {

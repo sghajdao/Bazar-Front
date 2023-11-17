@@ -1,5 +1,7 @@
 <app-user-navbar></app-user-navbar>
 
-<app-store *ngIf="!edit" (productToEdit)="editProduct($event)"></app-store>
+<app-my-store *ngIf="!edit && myStore" [user]="user" (productToEdit)="editProduct($event)"></app-my-store>
 
 <app-edit-product *ngIf="edit" [productToEdit]="productToEdit" (edited)="productEdited($event)"></app-edit-product>
+
+<app-visited-store *ngIf="!edit && !myStore" [user]="user"></app-visited-store>

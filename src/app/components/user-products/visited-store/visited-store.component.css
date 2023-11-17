@@ -1,0 +1,17 @@
+.example-card {
+    max-width: 250px;
+}
+
+.example-header-image {
+    background-size: cover;
+}
+
+.title {
+    padding-top: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: pre-wrap;
+    font-size: 19px;
+}

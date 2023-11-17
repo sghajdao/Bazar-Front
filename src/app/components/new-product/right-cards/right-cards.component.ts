@@ -70,8 +70,13 @@ export class RightCardsComponent implements OnInit, OnDestroy {
   minDate?: Date;
   maxDate?: Date;
   selectedDate?: Date;
+  filter:any
   
   ngOnInit(): void {
+    this.filter = (d: Date | null): boolean => {
+      const today = new Date();
+      return !d || d >= today;
+    };
   }
 
   removeKeyword(keyword: string) {

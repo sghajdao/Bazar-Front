@@ -1,26 +1,26 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, Subscription, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
-import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 import { ConfirmComponent } from '../../modals/confirm/confirm.component';
 import { UserResponse } from 'src/app/models/userResponse.dto';
+import { User } from 'src/app/models/user.model';
 
 @Component({
-  selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css']
+  selector: 'app-my-store',
+  templateUrl: './my-store.component.html',
+  styleUrls: ['./my-store.component.css']
 })
-export class StoreComponent implements OnInit, OnDestroy {
+export class MyStoreComponent implements OnInit, OnDestroy, OnChanges {
 
   @Output() productToEdit = new EventEmitter<Product>()
+  @Input() user?:User
+  
   constructor(
-    private activateRoute: ActivatedRoute,
     private userService: UserService,
-    private productService: ProductService,
     private router: Router,
     private dialog: MatDialog,
   ) {}
@@ -29,23 +29,13 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   products:Product[] = []
   store?:Store
-  userId?:number
-  userEmail?:string;
 
-  ngOnInit(): void {
-    this.userEmail = this.userService.getLogedInUser();
-    const sub:Subscription = this.activateRoute.params.subscribe(data=>{
-      this.userId = data['id']
-      this.userEmail = this.userService.getLogedInUser();
-      const sub2:Subscription = this.userService.getUserByEmail(this.userEmail!).subscribe({
-        next: user=> {
-          this.products = user.user.store?.product!
-          this.store = user.user.store
-        }
-      })
-      this.subscription.push(sub2)
-    })
-    this.subscription.push(sub)
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.store = this.user?.store
+    if (this.user?.store?.product)
+      this.products = this.user?.store?.product
   }
 
   editProduct(product:Product) {
@@ -70,7 +60,8 @@ export class StoreComponent implements OnInit, OnDestroy {
 
   refreshProducts(confirm:string): Observable<UserResponse> {
     if (confirm === 'Deletion successful') {
-      return this.userService.getUserByEmail(this.userEmail!)
+      const email = this.userService.getLogedInUser()
+      return this.userService.getUserByEmail(email)
     }
     return new Observable()
   }

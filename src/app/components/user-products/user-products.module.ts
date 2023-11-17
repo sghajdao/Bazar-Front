@@ -9,19 +9,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { EditProductComponent } from './edit-product/edit-product.component';
-import { StoreComponent } from './store/store.component';
+import { MyStoreComponent } from './my-store/my-store.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { VisitedStoreComponent } from './visited-store/visited-store.component';
 
 
 @NgModule({
   declarations: [
     UserProductsComponent,
     EditProductComponent,
-    StoreComponent
+    MyStoreComponent,
+    VisitedStoreComponent,
   ],
   imports: [
     CommonModule,

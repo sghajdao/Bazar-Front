@@ -24,7 +24,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(environment.urlRequest + 'api/v1/auth/login', user)
   }
 
-  getHeaders(){
+  private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };
     return {headers};
