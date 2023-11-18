@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Follow } from '../models/follow.dto';
 import { environment } from 'src/environments/environment';
+import { FollowResponse } from '../models/followResponse.dto';
+import { FollowRequest } from '../models/followRequest.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,12 @@ export class FollowService {
     private http: HttpClient,
   ) { }
 
-  followStore(follow:Follow) {
+  followStore(follow:FollowRequest) {
     return this.http.post<Follow>(environment.urlRequest + "api/follow/new", follow, this.getHeaders())
+  }
+
+  getFollowersByStoreId(id:number) {
+    return this.http.get<FollowResponse>(environment.urlRequest + 'api/follow/' + id, this.getHeaders());
   }
 
   private getHeaders(){

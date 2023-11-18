@@ -1,5 +1,6 @@
 <div style="padding-left: 50px;">
-    <button (click)="followStore()" mat-raised-button color="primary">Subscribe</button>
+    <button *ngIf="!followed" (click)="followStore()" mat-raised-button color="primary">Subscribe</button>
+    <button *ngIf="followed" mat-stroked-button color="primary">Followed</button>
 </div>
 
 <br>

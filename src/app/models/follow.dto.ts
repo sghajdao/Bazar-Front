@@ -3,6 +3,6 @@ import { User } from "./user.model";
 
 export interface Follow {
     id?:number,
-    user:User,
+    _user:User,
     store:Store,
 }
