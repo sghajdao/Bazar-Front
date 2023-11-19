@@ -10,7 +10,7 @@ export const merchantGuard: CanActivateFn = (route, state) => {
   const userEmail = userService.getLogedInUser();
   return userService.getUserByEmail(userEmail).pipe(
     map(user=> {
-      if (!user.user.store) {
+      if (!user.store) {
         router.navigateByUrl('/newStore')
         return false;
       }

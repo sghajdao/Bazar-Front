@@ -22,6 +22,10 @@ export class FollowService {
     return this.http.get<FollowResponse>(environment.urlRequest + 'api/follow/' + id, this.getHeaders());
   }
 
+  deleteFollow(id:number) {
+    return this.http.delete<boolean>(environment.urlRequest + 'api/follow/delete/' + id, this.getHeaders())
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

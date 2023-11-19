@@ -124,10 +124,10 @@ export class RightCardsComponent implements OnInit, OnDestroy {
           pushDate: this.selectedDate,
           visitors: 0,
           sales: 0,
-          store: user.user.store,
+          // store: user.store,
         }
         
-        const sub2:Subscription = this.productService.newProduct(data, user.user.store?.email!).subscribe(data=>{
+        const sub2:Subscription = this.productService.newProduct(data, user.store?.email!).subscribe(data=>{
           
           this.router.navigateByUrl('/profile')
         });

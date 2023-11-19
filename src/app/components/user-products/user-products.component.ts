@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
@@ -31,12 +31,12 @@ export class UserProductsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.email = this.userService.getLogedInUser()
     this.activateRoute.params.pipe(
+      // This id is the user id not store id
       mergeMap(res=> this.userService.getUserById(+res['id']))
     ).subscribe({
       next: data=> {
       this.user = data;
       if (data.email !== this.email)
-        // console.log("SAAD")
         this.myStore = false
       },
       error: ()=> {
@@ -51,14 +51,20 @@ export class UserProductsComponent implements OnInit, OnDestroy {
   }
 
   productEdited(edited:boolean) {
-    this.edit = edited
+    if (!edited) {
+      const sub: Subscription = this.userService.getUserByEmail(this.userService.getLogedInUser()).subscribe(data=> {
+        this.user = data
+        this.edit = edited
+      })
+      this.subscription.push(sub)
+    }
+  }
+
+  backToMyStore(back:boolean) {
+    this.myStore = back
   }
 
   ngOnDestroy(): void {
     this.subscription.forEach(sub=> sub.unsubscribe())
   }
 }
-function next(value: User): void {
-  throw new Error('Function not implemented.');
-}
-

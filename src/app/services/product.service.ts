@@ -31,7 +31,7 @@ export class ProductService {
   }
 
   deleteProduct(id:number) {
-    return this.http.delete<string>(environment.urlRequest + 'api/product/delete/' + id, this.getHeaders());
+    return this.http.delete<boolean>(environment.urlRequest + 'api/product/delete/' + id, this.getHeaders());
   }
 
   private getHeaders(){

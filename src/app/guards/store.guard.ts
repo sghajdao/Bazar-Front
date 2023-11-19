@@ -10,7 +10,7 @@ export const storeGuard: CanActivateFn = (route, state) => {
   const userEmail = userService.getLogedInUser();
   return userService.getUserByEmail(userEmail).pipe(
     map(user=> {
-      if (user.user.store) {
+      if (user.store) {
         router.navigateByUrl('/profile')
         return false;
       }

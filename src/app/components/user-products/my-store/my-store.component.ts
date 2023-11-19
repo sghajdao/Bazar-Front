@@ -6,7 +6,6 @@ import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
 import { UserService } from 'src/app/services/user.service';
 import { ConfirmComponent } from '../../modals/confirm/confirm.component';
-import { UserResponse } from 'src/app/models/userResponse.dto';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -49,16 +48,16 @@ export class MyStoreComponent implements OnInit, OnDestroy, OnChanges {
       mergeMap(data=> this.refreshProducts(data))
     ).subscribe({
       next: user=> {
-        if (user && user.user) {
-          this.products = user.user.store?.product!
-          this.store = user.user.store
+        if (user) {
+          this.products = user.store?.product!
+          this.store = user.store
         }
       }
     });
     this.subscription.push(sub)
   }
 
-  refreshProducts(confirm:string): Observable<UserResponse> {
+  refreshProducts(confirm:string): Observable<User> {
     if (confirm === 'Deletion successful') {
       const email = this.userService.getLogedInUser()
       return this.userService.getUserByEmail(email)

@@ -26,9 +26,9 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
     const email = this.userService.getLogedInUser()
     const sub:Subscription = this.userService.getUserByEmail(email).subscribe({
       next: user=> {
-        this.loggedInUser = user.user;
-        this.userId = user.user.id
-        if (!user.user.store)
+        this.loggedInUser = user;
+        this.userId = user.id
+        if (!user.store)
           this.storeExist = true
       }
     });

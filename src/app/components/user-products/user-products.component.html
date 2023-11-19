@@ -4,4 +4,4 @@
 
 <app-edit-product *ngIf="edit" [productToEdit]="productToEdit" (edited)="productEdited($event)"></app-edit-product>
 
-<app-visited-store *ngIf="!edit && !myStore" [user]="user"></app-visited-store>
+<app-visited-store *ngIf="!edit && !myStore" [user]="user" (back)="backToMyStore($event)"></app-visited-store>

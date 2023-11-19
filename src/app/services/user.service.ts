@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
-import { UserResponse } from '../models/userResponse.dto';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +25,7 @@ export class UserService {
   }
 
   getUserByEmail(email:string) {
-    return this.http.post<UserResponse>(environment.urlRequest + "api/user/email", email, this.getHeaders());
+    return this.http.post<User>(environment.urlRequest + "api/user/email", email, this.getHeaders());
   }
 
   getUserById(id:number) {

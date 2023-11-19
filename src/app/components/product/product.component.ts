@@ -29,7 +29,7 @@ export class ProductComponent implements OnInit {
     ).subscribe({
       next: data=> {
         this.product = data.product
-        this.store = data.store
+        this.store = data.product.store
         if (data.product.images)
           this.image = data.product.images[0]
       }
