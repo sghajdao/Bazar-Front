@@ -23,8 +23,15 @@
             </li>
           </ul>
           <form class="d-flex search" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="searchButton" mat-fab extended color="primary">
+            <input (ngModelChange)="searchQueryConvers()" [formControl]="myControl" [matAutocomplete]="auto" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <div *ngIf="myControl.value">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </div>
+            </mat-autocomplete>
+            <button (click)="search()" class="searchButton" mat-fab extended color="primary">
               <mat-icon>search</mat-icon>
               Search
             </button>

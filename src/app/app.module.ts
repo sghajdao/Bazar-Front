@@ -4,26 +4,28 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginModule } from './components/login/login.module';
-import { RegisterModule } from './components/register/register.module';
 
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import {
   GoogleLoginProvider
 } from '@abacritt/angularx-social-login';
-import { HomeModule } from './components/home/home.module';
-import { ProfileModule } from './components/profile/profile.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { NewProductModule } from './components/new-product/new-product.module';
-import { UserNavbarModule } from './components/user-navbar/user-navbar.module';
-import { UserProductsModule } from './components/user-products/user-products.module';
-import { StoreCreationModule } from './components/store-creation/store-creation.module';
-import { ProductModule } from './components/product/product.module';
 import { ModalsModule } from './components/modals/modals.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NotFoundModule } from './components/not-found/not-found.module';
+import { LoginModule } from './components/authentication/login/login.module';
+import { RegisterModule } from './components/authentication/register/register.module';
+import { HomeModule } from './components/visitor/home/home.module';
+import { ProfileModule } from './components/user/profile/profile.module';
+import { NewProductModule } from './components/user/new-product/new-product.module';
+import { UserNavbarModule } from './components/user/user-navbar/user-navbar.module';
+import { UserProductsModule } from './components/user/user-products/user-products.module';
+import { StoreCreationModule } from './components/user/store-creation/store-creation.module';
+import { ProductModule } from './components/user/product/product.module';
+import { ProductSearchModule } from './components/visitor/product-search/product-search.module';
+import { ProductVisitorModule } from './components/visitor/product-visitor/product-visitor.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { NotFoundModule } from './components/not-found/not-found.module';
     UserProductsModule,
     StoreCreationModule,
     ProductModule,
+    ProductSearchModule,
+    ProductVisitorModule,
     ModalsModule,
     NotFoundModule,
     BrowserAnimationsModule,

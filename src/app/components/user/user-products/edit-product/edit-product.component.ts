@@ -71,13 +71,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
             visitors: this.productToEdit.visitors,
             sales: this.productToEdit.sales,
           }
-      // let product: Product = this.productToEdit
-      // product.title = this.productInfo.value.title
-      // product.description = this.productInfo.value.description
-      // product.price = this.productInfo.value.price
-      // product.stock = this.productInfo.value.stock
-      // product.visibility = this.visibility
-      // product.pushDate = this.selectedDate
       const sub:Subscription = this.productService.updateProduct(product).subscribe({
         next: prod=> this.edited.emit(false)
       })

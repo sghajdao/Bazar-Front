@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import jwtDecode from 'jwt-decode';
 import { Subscription } from 'rxjs';
 import { UserLite } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';

@@ -5,8 +5,8 @@ import { Observable, Subscription, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
 import { UserService } from 'src/app/services/user.service';
-import { ConfirmComponent } from '../../modals/confirm/confirm.component';
 import { User } from 'src/app/models/user.model';
+import { ConfirmComponent } from 'src/app/components/modals/confirm/confirm.component';
 
 @Component({
   selector: 'app-my-store',

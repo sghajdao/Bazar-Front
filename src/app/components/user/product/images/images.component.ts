@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageComponent } from 'src/app/components/modals/images/image.component';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
-import { ImageComponent } from '../../modals/images/image.component';
 
 @Component({
   selector: 'app-images',
