@@ -69,6 +69,10 @@ export class MyStoreComponent implements OnInit, OnDestroy, OnChanges {
     this.router.navigateByUrl('/product/' + product.id)
   }
 
+  storeSettings() {
+    this.router.navigateByUrl('/settings/store')
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(sub=> sub.unsubscribe())
   }

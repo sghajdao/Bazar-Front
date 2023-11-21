@@ -1,0 +1,45 @@
+<app-user-navbar></app-user-navbar>
+
+<br>
+<div *ngIf="store" class="container">
+    <section class="mx-auto my-5" style="max-width: 23rem;">
+        
+        <div class="card testimonial-card mt-2 mb-3   shadow p-3 bg-body-tertiary rounded">
+            <!-- <div class="card-up aqua-gradient"></div> -->
+            <div class="avatar mx-auto white">
+                <label for="customFile1" style="cursor: pointer;">
+                    <img *ngIf="!selectedImage" [src]="'http://localhost:8080/api/image/' + store.image" style="width: 110px;height: 110px;" class="rounded-circle"
+                        alt="woman avatar">
+                    <img *ngIf="selectedImage" id="selectedImage" [src]="selectedImage"
+                        alt="example placeholder" style="width: 110px;height: 110px;" class="rounded-circle">
+                    <input type="file" class="form-control d-none" id="customFile1" (change)="onImageSelected($event)"/>
+                </label>
+            </div>
+            <div class="card-body text-center">
+                <form [formGroup]="form">
+                    <mat-form-field>
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="name" formControlName="name" required>
+                    </mat-form-field>
+                    <hr>
+                    <mat-form-field>
+                        <mat-label>Subtitle</mat-label>
+                        <input matInput placeholder="subtitle" formControlName="subtitle" required>
+                    </mat-form-field>
+                    <hr>
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="pat@example.com" formControlName="email" required>
+                    </mat-form-field>
+                    <hr>
+                    <mat-form-field>
+                        <mat-label>Phone</mat-label>
+                        <input matInput placeholder="phone number" formControlName="phone" required>
+                    </mat-form-field>
+                </form>
+            </div>
+            <button (click)="editStore()" mat-raised-button color="primary">Edit</button>
+        </div>
+    
+    </section>
+</div>

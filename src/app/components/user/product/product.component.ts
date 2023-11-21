@@ -26,6 +26,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   productId?:number
   product?: Product
   store?: Store
+  isUser: boolean = false
 
   image: string | ArrayBuffer = ''
 
@@ -40,6 +41,7 @@ export class ProductComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl('/product/visitor/' + data.product.id)
           return
         }
+        this.isUser = true
         this.product = data.product
         this.store = data.product.store
         if (data.product.images)

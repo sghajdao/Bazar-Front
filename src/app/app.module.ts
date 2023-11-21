@@ -26,6 +26,8 @@ import { StoreCreationModule } from './components/user/store-creation/store-crea
 import { ProductModule } from './components/user/product/product.module';
 import { ProductSearchModule } from './components/visitor/product-search/product-search.module';
 import { ProductVisitorModule } from './components/visitor/product-visitor/product-visitor.module';
+import { StoreSettingsComponent } from './components/user/store-settings/store-settings.component';
+import { StoreSettingsModule } from './components/user/store-settings/store-settings.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { ProductVisitorModule } from './components/visitor/product-visitor/produ
     ModalsModule,
     NotFoundModule,
     BrowserAnimationsModule,
+    StoreSettingsModule,
     MatTooltipModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule

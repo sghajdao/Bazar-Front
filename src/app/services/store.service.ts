@@ -25,6 +25,10 @@ export class StoreService {
     return this.http.post<Store>(environment.urlRequest + 'api/store/get', userEmail, this.getHeaders());
   }
 
+  updateStore(store: Store) {
+    return this.http.put<Store>(environment.urlRequest + 'api/store/update', store, this.getHeaders())
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

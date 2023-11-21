@@ -1,24 +1,26 @@
-<app-user-navbar></app-user-navbar>
-
-<div class="product">
-  <mat-card>
-    <mat-card-content class="title">{{product?.title}}</mat-card-content>
-  </mat-card>
-
-  <br>
-
-  <div class="cards">
-    <div class="imags">
-      <app-images [product]="product" [store]="store" [image]="image"></app-images>
-    </div>
+<div *ngIf="isUser">
+  <app-user-navbar></app-user-navbar>
+  
+  <div class="product">
+    <mat-card>
+      <mat-card-content class="title">{{product?.title}}</mat-card-content>
+    </mat-card>
+  
     <br>
-
-    <div class="description">
-      <app-description [product]="product"></app-description>
-    </div>
-    <br>
-
-    <div class="numbers">
-      <app-info [product]="product"></app-info>
-    </div>
+  
+    <div class="cards">
+      <div class="imags">
+        <app-images [product]="product" [store]="store" [image]="image"></app-images>
+      </div>
+      <br>
+    
+      <div class="description">
+        <app-description [product]="product"></app-description>
+      </div>
+      <br>
+    
+      <div class="numbers">
+        <app-info [product]="product"></app-info>
+      </div>
+  </div>
 </div>

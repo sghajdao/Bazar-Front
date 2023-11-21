@@ -77,6 +77,10 @@ export class EditProductComponent implements OnInit, OnDestroy {
     }
   }
 
+  backToStore() {
+    this.edited.emit(false)
+  }
+
   ngOnDestroy(): void {
     this.subscription.forEach(sub=> sub.unsubscribe())
   }

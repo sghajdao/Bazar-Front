@@ -41,7 +41,7 @@ const routes: Routes = [
   {
     path: "product",
     loadChildren:()=>import("./components/user/product/product.module").then(m=>m.ProductModule),
-    canActivate: [authGuard, merchantGuard],
+    canActivate: [authGuard],
   },
   {
     path: "products/search",
@@ -50,6 +50,11 @@ const routes: Routes = [
   {
     path: "product/visitor",
     loadChildren:()=>import("./components/visitor/product-visitor/product-visitor.module").then(m=>m.ProductVisitorModule),
+  },
+  {
+    path: "settings/store",
+    loadChildren:()=>import("./components/user/store-settings/store-settings.module").then(m=>m.StoreSettingsModule),
+    canActivate: [authGuard, merchantGuard],
   },
   {
     path: '**',
