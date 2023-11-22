@@ -1,0 +1,25 @@
+.custom-button {
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.custom-button:disabled {
+    opacity: 0.6;
+}
+
+.search {
+    padding-right: 20px;
+}
+
+.searchButton {
+    height: 40px;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

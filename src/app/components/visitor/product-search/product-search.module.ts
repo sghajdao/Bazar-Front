@@ -12,19 +12,27 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserNavbarModule } from '../../user/user-navbar/user-navbar.module';
+import { VisitorNavbarModule } from '../visitor-navbar/visitor-navbar.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
   declarations: [
-    ProductSearchComponent
+    ProductSearchComponent,
   ],
   imports: [
     CommonModule,
     ProductSearchRoutingModule,
     UserNavbarModule,
+    VisitorNavbarModule,
     MatCardModule, MatButtonModule, MatIconModule,
     MatMenuModule, MatFormFieldModule, MatInputModule,
-    MatRadioModule, MatDatepickerModule
+    MatRadioModule, MatDatepickerModule,
+    MatTooltipModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ProductSearchModule { }

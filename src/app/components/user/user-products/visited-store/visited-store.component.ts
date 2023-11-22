@@ -73,10 +73,10 @@ export class VisitedStoreComponent implements OnInit, OnDestroy, OnChanges {
         followId = follower.id
       }
     })
-    console.log(followId);
-    
-    if (followId)
-      this.followService.deleteFollow(followId).subscribe(data=> this.followed = false)
+    if (followId) {
+      const sub: Subscription = this.followService.deleteFollow(followId).subscribe(()=> this.followed = false)
+      this.subscriptions.push(sub)
+    }
   }
 
   backToMyStore() {

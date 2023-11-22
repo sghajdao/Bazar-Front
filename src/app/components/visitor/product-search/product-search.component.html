@@ -1,6 +1,11 @@
-<app-user-navbar></app-user-navbar>
+<app-user-navbar *ngIf="isUser"></app-user-navbar>
+<app-visitor-navbar *ngIf="isVisitor"></app-visitor-navbar>
 
-<div style="padding-left: 30px;padding-right: 30px;padding-bottom: 20px;display: flex;">
+<div *ngIf="!isUser && !isVisitor">
+  <mat-spinner style="position: absolute;left: 45%;top: 40%;"></mat-spinner>
+</div>
+
+<div *ngIf="isUser || isVisitor" style="padding-left: 30px;padding-right: 30px;padding-bottom: 20px;display: flex;">
     <div style="margin-left: 20px;" *ngFor="let item of products">
         <mat-card class="example-card" style="height: 430px;width: 250px;">
             <img style="cursor: pointer;" mat-card-image height="200" *ngIf="item" [src]="'http://localhost:8080/api/image/' + item.images![0]" alt="image">
@@ -12,7 +17,7 @@
               <h3>${{item.price}}</h3>
             </mat-card-content>
             <mat-card-header>
-              <div mat-card-avatar [style]="'background-image: url(http://localhost:8080/api/image/' + item.store?.image + ');'" class="example-header-image"></div>
+              <div mat-card-avatar (click)="goToStore(item)" [style]="'background-image: url(http://localhost:8080/api/image/' + item.store?.image + ');'" class="example-header-image"></div>
               <mat-card-title>{{item.store?.name}}</mat-card-title>
               <mat-card-subtitle>{{item.store?.subtitle}}</mat-card-subtitle>
             </mat-card-header>

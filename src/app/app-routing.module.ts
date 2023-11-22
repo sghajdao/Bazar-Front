@@ -57,6 +57,10 @@ const routes: Routes = [
     canActivate: [authGuard, merchantGuard],
   },
   {
+    path: "store/visitor",
+    loadChildren:()=>import("./components/visitor/store-visitor/store-visitor.module").then(m=>m.StoreVisitorModule),
+  },
+  {
     path: '**',
     loadChildren:()=>import("./components/not-found/not-found.module").then(m=>m.NotFoundModule),
   },

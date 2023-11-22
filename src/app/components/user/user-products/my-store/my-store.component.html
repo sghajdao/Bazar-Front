@@ -25,7 +25,7 @@
             </mat-card-content>
             <mat-card-header>
               <div (click)="storeSettings()" mat-card-avatar [style]="'background-image: url(http://localhost:8080/api/image/' + store?.image + ');'" class="example-header-image"></div>
-              <mat-card-title>{{store?.name}}</mat-card-title>
+              <mat-card-title (click)="storeSettings()">{{store?.name}}</mat-card-title>
               <mat-card-subtitle>{{store?.subtitle}}</mat-card-subtitle>
             </mat-card-header>
         </mat-card>

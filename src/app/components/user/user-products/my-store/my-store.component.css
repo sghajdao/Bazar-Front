@@ -4,6 +4,7 @@
 
 .example-header-image {
     background-size: cover;
+    cursor: pointer;
 }
 
 .title {
@@ -14,4 +15,13 @@
     -webkit-box-orient: vertical;
     white-space: pre-wrap;
     font-size: 19px;
+}
+
+mat-card-title {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+mat-card-title:hover{
+    color: rgba(0, 0, 0, 0.568);
 }

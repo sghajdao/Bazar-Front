@@ -27,7 +27,7 @@ export class ProductService {
   }
 
   searchQuery(query:string) {
-    return this.http.get<Product[]>(environment.urlRequest + 'api/product/search/' + query, this.getHeaders())
+    return this.http.get<Product[]>(environment.urlRequest + 'api/product/search/' + query)
   }
 
   updateProduct(product:Product) {

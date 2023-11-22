@@ -4,7 +4,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand text-primary" href="#">Bazar</a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <div *ngIf="loggedInUser" class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
@@ -13,7 +13,7 @@
               <a class="nav-link" routerLink="/new-product">New Product</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/store/' + userId">My Store</a>
+              <a class="nav-link" [routerLink]="'/store/' + loggedInUser.id">My Store</a>
             </li>
             <li class="nav-item" *ngIf="storeExist">
               <a class="nav-link" routerLink="/newStore">New Store</a>
@@ -42,7 +42,7 @@
             <mat-menu #menu="matMenu">
               <button class="custom-button" mat-menu-item disabled>{{loggedInUser.firstname}}&nbsp;{{loggedInUser.lastname}}</button>
               <hr>
-              <button mat-menu-item>Settings</button>
+              <button *ngIf="loggedInUser.store" (click)="storeSettings()" mat-menu-item>Settings</button>
               <button mat-menu-item (click)="logOut()">Logout</button>
             </mat-menu>
           </a>

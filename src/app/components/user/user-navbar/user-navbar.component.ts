@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription, map, startWith } from 'rxjs';
-import { UserLite } from 'src/app/models/user.model';
+import { User } from 'src/app/models/user.model';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -21,9 +21,8 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
 
   subscription: Subscription[] = []
 
-  loggedInUser?:UserLite;
+  loggedInUser?:User;
   storeExist:boolean = false
-  userId?:number
 
   myControl = new FormControl('');
   options: string[] = [];
@@ -34,7 +33,6 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
     const sub:Subscription = this.userService.getUserByEmail(email).subscribe({
       next: user=> {
         this.loggedInUser = user;
-        this.userId = user.id
         if (!user.store)
           this.storeExist = true
       }
@@ -68,6 +66,10 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
   search() {
     if (this.myControl.value)
       this.router.navigateByUrl('/products/search/' + this.myControl.value)
+  }
+
+  storeSettings() {
+    this.router.navigateByUrl('/settings/store')
   }
 
   logOut() {
