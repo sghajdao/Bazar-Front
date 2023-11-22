@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Observable, Subscription, mergeMap } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, Subscription, mergeMap, of } from 'rxjs';
 import { ImageResponse } from 'src/app/models/ImageResponse.dto';
 import { Store } from 'src/app/models/store.dto';
 import { ImagesService } from 'src/app/services/images.service';
@@ -18,7 +19,8 @@ export class StoreSettingsComponent implements OnInit {
     private userService: UserService,
     private imageService:  ImagesService,
     private storeService: StoreService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
   ) {}
 
   store?: Store
@@ -61,7 +63,11 @@ export class StoreSettingsComponent implements OnInit {
       formData.append('image', this.selectedFile);
       return this.imageService.uploadImage(formData)
     }
-    return new Observable();
+    else if(this.store) {
+      const image: ImageResponse[] = [{name: this.store.image.toString()}]
+      return of(image);
+    }
+    return new Observable()
   }
 
   editStore() {
@@ -69,11 +75,11 @@ export class StoreSettingsComponent implements OnInit {
         && this.form.value.phone && this.form.value.subtitle) {
       const sub:Subscription =  this.uploadImage().pipe(
         mergeMap(res=> this.update(res))
-      ).subscribe(data=> console.log(data))
+      ).subscribe(()=> this.router.navigateByUrl('/profile'))
     }
   }
 
-  update(image: any) {
+  update(image: ImageResponse[]): Observable<Store> {
     const store: Store = {
       country: this.form.value.country,
       email: this.form.value.email,
@@ -84,7 +90,6 @@ export class StoreSettingsComponent implements OnInit {
       followers: this.store?.followers,
       id: this.store?.id,
       product: this.store?.product,
-      seller: this.store?.seller
     }
     return this.storeService.updateStore(store)
   }
