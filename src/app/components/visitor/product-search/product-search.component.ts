@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { mergeMap } from 'rxjs';
+import { Subscription, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './product-search.component.html',
   styleUrls: ['./product-search.component.css']
 })
-export class ProductSearchComponent implements OnInit {
+export class ProductSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -19,12 +19,14 @@ export class ProductSearchComponent implements OnInit {
     private userService: UserService,
   ) {}
 
+  subscriptions: Subscription[] = []
+
   products: Product[] = []
   isUser:boolean = false;
   isVisitor:boolean = false
 
   ngOnInit(): void {
-    this.activateRoute.params.pipe(
+    const sub: Subscription = this.activateRoute.params.pipe(
       mergeMap(res=> this.productService.searchQuery(res['title']))
     ).subscribe({
       next: data=> {
@@ -35,12 +37,13 @@ export class ProductSearchComponent implements OnInit {
       },
       error: ()=> this.router.navigateByUrl('/not-found')
     })
+    this.subscriptions.push(sub)
   }
 
   visitorType() {
     const email:string = this.userService.getLogedInUser();
     if (email) {
-      this.userService.getUserByEmail(email).subscribe({
+      const sub: Subscription = this.userService.getUserByEmail(email).subscribe({
         next: data=>{
           if (data)
             this.isUser = true
@@ -49,12 +52,27 @@ export class ProductSearchComponent implements OnInit {
         },
         error: ()=> this.router.navigateByUrl('/login')
       })
+      this.subscriptions.push(sub)
     }
     else
       this.isVisitor = true
   }
 
   goToStore(product:Product) {
-    this.router.navigateByUrl('/store/visitor/' + product.store?.id)
+    if (product.store && product.store.id) {
+      const sub: Subscription = this.userService.isStoreOwner(product.store.id).subscribe({
+        next: data=> {
+          if (data && product.store)
+            this.router.navigateByUrl('/store/' + product.store.seller?.id)
+          else if (!data && product.store)
+            this.router.navigateByUrl('/store/visitor/' + product.store.seller?.id)
+        }
+      })
+      this.subscriptions.push(sub)
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub=> sub.unsubscribe())
   }
 }

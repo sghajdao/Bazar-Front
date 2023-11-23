@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import { Observable, map, of } from 'rxjs';
+import { Store } from '../models/store.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,22 @@ export class UserService {
       return data.sub;
     }
     return null;
+  }
+
+  isStoreOwner(storeId:number) {
+    const email:string = this.getLogedInUser();
+    if (email) {
+      return this.getUserByEmail(email).pipe(
+        map(user=> {
+          if (user.store && user.store?.id === storeId) {
+            return true;
+          }
+          else
+            return false
+        })
+      )
+    }
+    return of(false)
   }
 
   getUserByEmail(email:string) {
