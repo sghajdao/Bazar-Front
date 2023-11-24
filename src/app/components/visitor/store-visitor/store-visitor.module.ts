@@ -7,6 +7,9 @@ import { VisitorNavbarModule } from '../visitor-navbar/visitor-navbar.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { UserNavbarModule } from '../../user/user-navbar/user-navbar.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     StoreVisitorRoutingModule,
     VisitorNavbarModule,
-    MatCardModule, MatButtonModule, MatIconModule
+    UserNavbarModule,
+    MatCardModule, MatButtonModule, MatIconModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ]
 })
 export class StoreVisitorModule { }

@@ -29,6 +29,8 @@ export class StoreVisitorComponent implements OnInit, OnDestroy {
   me?:User
   user?:User
   followed:boolean = false
+  isUser:boolean = false;
+  isVisitor:boolean = false
 
   ngOnInit(): void {
     const sub: Subscription = this.activateRoute.params.pipe(
@@ -39,22 +41,26 @@ export class StoreVisitorComponent implements OnInit, OnDestroy {
         this.store = data.store
         if (data.store?.product)
           this.products = data.store?.product
-          data.store?.followers?.forEach(follower=> {
-          if (follower._user.id === this.me?.id)
-            this.followed = true
+        data.store?.followers?.forEach(follower=> {
+          (follower._user.id === this.me?.id)? this.followed = true : this.followed = false
         })
+        this.me? this.isUser = true : this.isVisitor = true
       }, error: ()=> this.router.navigateByUrl('/login')
     })
     this.subscriptions.push(sub)
   }
 
   getMeAndUser(userId: number): Observable<User> {
-    return this.userService.getUserByEmail(this.userService.getLogedInUser()).pipe(
-      switchMap(meData => {
-        this.me = meData;
-        return this.userService.getUserById(userId);
-      })
-    );
+    const email:string = this.userService.getLogedInUser()
+    if (email) {
+      return this.userService.getUserByEmail(email).pipe(
+        switchMap(meData => {
+          this.me = meData;
+          return this.userService.getUserById(userId);
+        })
+      );
+    }
+    return new Observable()
   }
 
   followStore() {
@@ -75,13 +81,9 @@ export class StoreVisitorComponent implements OnInit, OnDestroy {
 
   unfollowStore() {
     let followId;
-    this.store?.followers?.forEach(follower=> {
-      if (follower._user.id === this.me?.id) {
-        followId = follower.id
-      }
-    })
+    this.store?.followers?.forEach(follower=>(follower._user.id === this.me?.id)? followId = follower.id : null)
     if (followId) {
-      const sub: Subscription = this.followService.deleteFollow(followId).subscribe(()=> this.followed = false)
+      const sub:Subscription = this.followService.deleteFollow(followId).subscribe(()=> this.followed = false)
       this.subscriptions.push(sub)
     }
   }
