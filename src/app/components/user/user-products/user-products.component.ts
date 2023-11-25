@@ -23,26 +23,30 @@ export class UserProductsComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = []
 
   user?: User
-  email?: string
-  myStore:boolean = true
+  myStore:boolean = false
   productToEdit?: Product
   edit: boolean = false
+  userId?:number
 
   ngOnInit(): void {
-    this.email = this.userService.getLogedInUser()
+    const email = this.userService.getLogedInUser()
     this.activateRoute.params.pipe(
       // This id is the user id not store id
-      mergeMap(res=> this.userService.getUserById(+res['id']))
+      mergeMap(res=> this.getUserById(+res['id']))
     ).subscribe({
       next: data=> {
-      this.user = data;
-      if (data.email !== this.email)
-        this.myStore = false
+        this.user = data;
+        (data.email !== email)? this.router.navigateByUrl('/store/visitor/' + this.userId) : this.myStore = true
       },
       error: ()=> {
         this.router.navigateByUrl('/not-found')
       }
     },)
+  }
+
+  getUserById(id:number) {
+    this.userId = id
+    return this.userService.getUserById(id)
   }
 
   editProduct(product:Product) {
