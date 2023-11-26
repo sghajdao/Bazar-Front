@@ -15,7 +15,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { VisitedStoreComponent } from './visited-store/visited-store.component';
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import { VisitedStoreComponent } from './visited-store/visited-store.component';
     UserProductsComponent,
     EditProductComponent,
     MyStoreComponent,
-    VisitedStoreComponent,
   ],
   imports: [
     CommonModule,
