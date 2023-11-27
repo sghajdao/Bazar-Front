@@ -3,7 +3,7 @@
         <mat-card class="example-card" style="height: 430px;width: 250px;">
             <img style="cursor: pointer;" (click)="openProduct(item)" mat-card-image height="200" *ngIf="item" [src]="'http://localhost:8080/api/image/' + item.images![0]" alt="image">
             
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" style="position: absolute;">
+            <button *ngIf="myStore" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" style="position: absolute;">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
@@ -24,8 +24,10 @@
               <h3>${{item.price}}</h3>
             </mat-card-content>
             <mat-card-header>
-              <div (click)="storeSettings()" mat-card-avatar [style]="'background-image: url(http://localhost:8080/api/image/' + store?.image + ');'" class="example-header-image"></div>
-              <mat-card-title (click)="storeSettings()">{{store?.name}}</mat-card-title>
+              <div *ngIf="!myStore" mat-card-avatar [style]="'background-image: url(http://localhost:8080/api/image/' + store?.image + ');'" class="example-header-image"></div>
+              <div *ngIf="myStore" (click)="storeSettings()" mat-card-avatar [style]="'background-image: url(http://localhost:8080/api/image/' + store?.image + ');'" class="example-header-image"></div>
+              <mat-card-title *ngIf="!myStore">{{store?.name}}</mat-card-title>
+              <mat-card-title *ngIf="myStore" (click)="storeSettings()">{{store?.name}}</mat-card-title>
               <mat-card-subtitle>{{store?.subtitle}}</mat-card-subtitle>
             </mat-card-header>
         </mat-card>

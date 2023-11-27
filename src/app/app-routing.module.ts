@@ -8,7 +8,6 @@ const routes: Routes = [
   {
     path: "",
     loadChildren:()=>import("./components/visitor/home/home.module").then(m=>m.HomeModule),
-    // canActivate: [authGuard],
   },
   {
     path: "login",
@@ -31,7 +30,7 @@ const routes: Routes = [
   {
     path: "store",
     loadChildren:()=>import("./components/user/user-products/user-products.module").then(m=>m.UserProductsModule),
-    canActivate: [authGuard, merchantGuard],
+    canActivate: [authGuard],
   },
   {
     path: "newStore",
@@ -55,10 +54,6 @@ const routes: Routes = [
     path: "settings/store",
     loadChildren:()=>import("./components/user/store-settings/store-settings.module").then(m=>m.StoreSettingsModule),
     canActivate: [authGuard, merchantGuard],
-  },
-  {
-    path: "store/visitor",
-    loadChildren:()=>import("./components/visitor/store-visitor/store-visitor.module").then(m=>m.StoreVisitorModule),
   },
   {
     path: '**',

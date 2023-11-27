@@ -28,8 +28,6 @@ import { ProductSearchModule } from './components/visitor/product-search/product
 import { ProductVisitorModule } from './components/visitor/product-visitor/product-visitor.module';
 import { StoreSettingsModule } from './components/user/store-settings/store-settings.module';
 import { VisitorNavbarModule } from './components/visitor/visitor-navbar/visitor-navbar.module';
-import { StoreVisitorComponent } from './components/visitor/store-visitor/store-visitor.component';
-import { StoreVisitorModule } from './components/visitor/store-visitor/store-visitor.module';
 
 @NgModule({
   declarations: [
@@ -56,7 +54,6 @@ import { StoreVisitorModule } from './components/visitor/store-visitor/store-vis
     BrowserAnimationsModule,
     StoreSettingsModule,
     VisitorNavbarModule,
-    StoreVisitorModule,
     MatTooltipModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule

@@ -9,11 +9,11 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" routerLink="/profile">Profile</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="loggedInUser.store">
               <a class="nav-link" routerLink="/new-product">New Product</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="'/store/' + loggedInUser.id">My Store</a>
+            <li class="nav-item" *ngIf="loggedInUser.store">
+              <a class="nav-link" [routerLink]="'/store/' + loggedInUser.store.id">My Store</a>
             </li>
             <li class="nav-item" *ngIf="storeExist">
               <a class="nav-link" routerLink="/newStore">New Store</a>

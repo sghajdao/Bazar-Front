@@ -22,7 +22,11 @@ export class StoreService {
 
   getStoreByUserEmail() {
     const userEmail = this.userService.getLogedInUser();
-    return this.http.post<Store>(environment.urlRequest + 'api/store/get', userEmail, this.getHeaders());
+    return this.http.post<Store>(environment.urlRequest + 'api/store/get/selleremail', userEmail);
+  }
+
+  getStoreById(id:number) {
+    return this.http.get<Store>(environment.urlRequest + 'api/store/get/' + id)
   }
 
   updateStore(store: Store) {

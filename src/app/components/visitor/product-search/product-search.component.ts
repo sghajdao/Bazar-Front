@@ -59,17 +59,8 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
   }
 
   goToStore(product:Product) {
-    if (product.store && product.store.id) {
-      const sub: Subscription = this.userService.isStoreOwner(product.store.id).subscribe({
-        next: data=> {
-          if (data && product.store)
-            this.router.navigateByUrl('/store/' + product.store.seller?.id)
-          else if (!data && product.store)
-            this.router.navigateByUrl('/store/visitor/' + product.store.seller?.id)
-        }
-      })
-      this.subscriptions.push(sub)
-    }
+    if (product.store && product.store.id)
+      this.router.navigateByUrl('/store/' + product.store.id)
   }
 
   ngOnDestroy(): void {

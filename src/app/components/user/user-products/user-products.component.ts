@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, mergeMap } from 'rxjs';
+import { Subscription, map, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
 import { User } from 'src/app/models/user.model';
+import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,27 +17,26 @@ export class UserProductsComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private activateRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private storeService: StoreService,
   ) {
   }
 
   subscription: Subscription[] = []
 
-  user?: User
-  myStore:boolean = false
+  store?: Store
   productToEdit?: Product
   edit: boolean = false
-  userId?:number
+  isUser: boolean = false
+  isVisitor: boolean = false
 
   ngOnInit(): void {
-    const email = this.userService.getLogedInUser()
     this.activateRoute.params.pipe(
-      // This id is the user id not store id
-      mergeMap(res=> this.getUserById(+res['id']))
+      // this id is the store id
+      mergeMap(res=> this.getStore(+res['id']))
     ).subscribe({
       next: data=> {
-        this.user = data;
-        (data.email !== email)? this.router.navigateByUrl('/store/visitor/' + this.userId) : this.myStore = true
+        this.store = data;
       },
       error: ()=> {
         this.router.navigateByUrl('/not-found')
@@ -44,9 +44,10 @@ export class UserProductsComponent implements OnInit, OnDestroy {
     },)
   }
 
-  getUserById(id:number) {
-    this.userId = id
-    return this.userService.getUserById(id)
+  getStore(id:number) {
+    const email:string = this.userService.getLogedInUser()
+    email? this.isUser = true : this.isVisitor = true
+    return this.storeService.getStoreById(id)
   }
 
   editProduct(product:Product) {
@@ -57,15 +58,11 @@ export class UserProductsComponent implements OnInit, OnDestroy {
   productEdited(edited:boolean) {
     if (!edited) {
       const sub: Subscription = this.userService.getUserByEmail(this.userService.getLogedInUser()).subscribe(data=> {
-        this.user = data
+        this.store = data.store
         this.edit = edited
       })
       this.subscription.push(sub)
     }
-  }
-
-  backToMyStore(back:boolean) {
-    this.myStore = back
   }
 
   ngOnDestroy(): void {

@@ -16,7 +16,7 @@ import { ConfirmComponent } from 'src/app/components/modals/confirm/confirm.comp
 export class MyStoreComponent implements OnInit, OnDestroy, OnChanges {
 
   @Output() productToEdit = new EventEmitter<Product>()
-  @Input() user?:User
+  @Input() store?:Store
   
   constructor(
     private userService: UserService,
@@ -27,14 +27,16 @@ export class MyStoreComponent implements OnInit, OnDestroy, OnChanges {
   subscription: Subscription[] = []
 
   products:Product[] = []
-  store?:Store
+  myStore: boolean = false
 
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.store = this.user?.store
-    if (this.user?.store?.product)
-      this.products = this.user?.store?.product
+    const email:string = this.userService.getLogedInUser()
+    if (this.store?.seller?.email === email)
+      this.myStore = true
+    if (this.store?.product)
+      this.products = this.store.product
   }
 
   editProduct(product:Product) {

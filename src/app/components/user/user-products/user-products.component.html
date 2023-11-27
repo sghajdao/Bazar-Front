@@ -1,7 +1,8 @@
-<app-user-navbar *ngIf="myStore"></app-user-navbar>
+<app-user-navbar *ngIf="isUser"></app-user-navbar>
+<app-visitor-navbar *ngIf="isVisitor"></app-visitor-navbar>
 
-<app-my-store *ngIf="!edit && myStore" [user]="user" (productToEdit)="editProduct($event)"></app-my-store>
+<app-my-store *ngIf="!edit" [store]="store" (productToEdit)="editProduct($event)"></app-my-store>
 
 <app-edit-product *ngIf="edit" [productToEdit]="productToEdit" (edited)="productEdited($event)"></app-edit-product>
 
-<!-- <app-visited-store *ngIf="!edit && !myStore" [user]="user" (back)="backToMyStore($event)"></app-visited-store> -->
+<!-- <app-visited-store *ngIf="!edit" [user]="user" (back)="backToMyStore($event)"></app-visited-store> -->

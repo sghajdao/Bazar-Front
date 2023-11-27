@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { VisitorNavbarModule } from '../../visitor/visitor-navbar/visitor-navbar.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     CommonModule,
     UserProductsRoutingModule,
     UserNavbarModule,
+    VisitorNavbarModule,
     FormsModule,
     ReactiveFormsModule,
     MatCardModule, MatButtonModule, MatIconModule,
