@@ -1,0 +1,16 @@
+<div *ngIf="store && store.image && me" class="container pb-5">
+    <div class="card" style="width: 18rem;">
+        <img [src]="'http://localhost:8080/api/image/' + store.image" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{store.name}}</h5>
+            <p class="card-text">{{store.subtitle}}</p>
+            <div style="display: flex;">
+                <mat-icon style="color: rgba(0, 0, 0, 0.705);">supervisor_account</mat-icon>
+                <p style="padding-left: 5px;color: rgba(0, 0, 0, 0.644);">{{store.followers?.length}} follower</p>
+            </div>
+            <button *ngIf="me.id !== store.seller?.id && !followed" (click)="followStore()" mat-raised-button color="primary" style="width: 100%;">Follow</button>
+            <button *ngIf="me.id !== store.seller?.id && followed" (click)="unfollowStore()" mat-stroked-button color="primary" style="width: 100%;">Unfollow</button>
+            <button *ngIf="me.id === store.seller?.id" (click)="storeSettings()" mat-raised-button color="primary" style="width: 100%;">Edit</button>
+        </div>
+    </div>
+</div>

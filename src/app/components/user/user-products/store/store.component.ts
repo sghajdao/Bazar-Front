@@ -9,11 +9,11 @@ import { User } from 'src/app/models/user.model';
 import { ConfirmComponent } from 'src/app/components/modals/confirm/confirm.component';
 
 @Component({
-  selector: 'app-my-store',
-  templateUrl: './my-store.component.html',
-  styleUrls: ['./my-store.component.css']
+  selector: 'app-store',
+  templateUrl: './store.component.html',
+  styleUrls: ['./store.component.css']
 })
-export class MyStoreComponent implements OnInit, OnDestroy, OnChanges {
+export class StoreComponent implements OnInit, OnDestroy, OnChanges {
 
   @Output() productToEdit = new EventEmitter<Product>()
   @Input() store?:Store
@@ -69,10 +69,6 @@ export class MyStoreComponent implements OnInit, OnDestroy, OnChanges {
 
   openProduct(product:Product) {
     this.router.navigateByUrl('/product/' + product.id)
-  }
-
-  storeSettings() {
-    this.router.navigateByUrl('/settings/store')
   }
 
   ngOnDestroy(): void {

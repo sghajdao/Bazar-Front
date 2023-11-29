@@ -19,8 +19,7 @@ export class UserProductsComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private router: Router,
     private storeService: StoreService,
-  ) {
-  }
+  ) {}
 
   subscription: Subscription[] = []
 
@@ -29,6 +28,7 @@ export class UserProductsComponent implements OnInit, OnDestroy {
   edit: boolean = false
   isUser: boolean = false
   isVisitor: boolean = false
+  me?: User
 
   ngOnInit(): void {
     this.activateRoute.params.pipe(
@@ -42,6 +42,14 @@ export class UserProductsComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/not-found')
       }
     },)
+
+    const email:string = this.userService.getLogedInUser();
+    if (email) {
+      this.userService.getUserByEmail(email).subscribe({
+        next: data=> this.me = data,
+        error: ()=> this.router.navigateByUrl('/login')
+      })
+    }
   }
 
   getStore(id:number) {
