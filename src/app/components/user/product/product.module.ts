@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ImagesComponent } from './images/images.component';
 import { DescriptionComponent } from './description/description.component';
 import { InfoComponent } from './info/info.component';
+import { BuyComponent } from './buy/buy.component';
+import { VisitorNavbarModule } from '../../visitor/visitor-navbar/visitor-navbar.module';
 
 
 @NgModule({
@@ -17,12 +19,14 @@ import { InfoComponent } from './info/info.component';
     ProductComponent,
     ImagesComponent,
     DescriptionComponent,
-    InfoComponent
+    InfoComponent,
+    BuyComponent
   ],
   imports: [
     CommonModule,
     ProductRoutingModule,
     UserNavbarModule,
+    VisitorNavbarModule,
     MatCardModule, MatButtonModule, MatIconModule,
   ]
 })

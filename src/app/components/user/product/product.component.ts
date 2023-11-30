@@ -4,7 +4,6 @@ import { Subscription, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
 import { ProductService } from 'src/app/services/product.service';
-import jwtDecode from 'jwt-decode';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,10 +22,11 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = []
 
-  productId?:number
   product?: Product
   store?: Store
   isUser: boolean = false
+  isVisitor: boolean = false
+  isOwner?: boolean
 
   image: string | ArrayBuffer = ''
 
@@ -37,16 +37,13 @@ export class ProductComponent implements OnInit, OnDestroy {
       mergeMap(res1=> this.productService.getProductById(res1['id']))
     ).subscribe({
       next: data=> {
-        if (!email || email !== data.product.store?.seller?.email) {
-          this.router.navigateByUrl('/product/visitor/' + data.product.id)
-          return
-        }
+        (data.product.store?.seller?.email === email)? this.isOwner = true : this.isOwner = false
         this.isUser = true
         this.product = data.product
         this.store = data.product.store
         if (data.product.images)
           this.image = data.product.images[0]
-      }
+      },error: ()=> this.isVisitor = true
     })
     this.subscriptions.push(sub)
   }

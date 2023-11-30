@@ -4,7 +4,7 @@ import { ProductSearchComponent } from './product-search.component';
 
 const routes: Routes = [
   {
-    path: ':title',
+    path: ':keyword',
     component: ProductSearchComponent
   }
 ];

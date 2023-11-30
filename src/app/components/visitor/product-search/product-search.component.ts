@@ -27,7 +27,7 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const sub: Subscription = this.activateRoute.params.pipe(
-      mergeMap(res=> this.productService.searchQuery(res['title']))
+      mergeMap(res=> this.productService.searchQuery(res['keyword']))
     ).subscribe({
       next: data=> {
         if (data[0]) {

@@ -1,0 +1,10 @@
+<mat-card class="numbers">
+    <mat-card-content *ngIf="product">
+      <p style="font-size: 25px;">${{product.price}}</p>
+      <p [style]="(product.stock > 0)? 'color: #007600;font-size: 20px;' : 'color: red;font-size: 20px;'">Stock {{product.stock}}</p>
+      <!-- <p style="font-size: 18px;"><span class="variable">Push date: </span><span class="value">{{pushDate}}</span></p> -->
+      <p style="font-size: 18px;"><span class="variable">Visibility: </span><span class="value">{{product.visibility}}</span></p>
+      <p style="font-size: 18px;"><span class="variable">Visitors: </span><span class="value">{{product.visitors}}</span></p>
+      <p style="font-size: 18px;"><span class="variable">Sales: </span><span class="value">{{product.sales}}</span></p>
+    </mat-card-content>
+</mat-card>

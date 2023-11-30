@@ -1,5 +1,6 @@
-<div *ngIf="isUser">
-  <app-user-navbar></app-user-navbar>
+<div>
+  <app-user-navbar *ngIf="isUser"></app-user-navbar>
+  <app-visitor-navbar *ngIf="isVisitor"></app-visitor-navbar>
   
   <div class="product">
     <mat-card>
@@ -20,7 +21,8 @@
       <br>
     
       <div class="numbers">
-        <app-info [product]="product"></app-info>
+        <app-info *ngIf="isOwner === true" [product]="product"></app-info>
+        <app-buy *ngIf="isOwner === false" [product]="product"></app-buy>
       </div>
   </div>
 </div>
