@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
+import { ProductResponseDto } from 'src/app/models/productRsponse.dto';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -21,7 +22,7 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
 
   subscriptions: Subscription[] = []
 
-  products: Product[] = []
+  products: ProductResponseDto[] = []
   isUser:boolean = false;
   isVisitor:boolean = false
 
@@ -30,6 +31,7 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
       mergeMap(res=> this.productService.searchQuery(res['keyword']))
     ).subscribe({
       next: data=> {
+        console.log(data)
         if (data[0]) {
           this.visitorType()
           this.products = data
@@ -58,7 +60,7 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
       this.isVisitor = true
   }
 
-  goToStore(product:Product) {
+  goToStore(product:ProductResponseDto) {
     if (product.store && product.store.id)
       this.router.navigateByUrl('/store/' + product.store.id)
   }

@@ -4,7 +4,7 @@
 <div style="display: flex;">
     <app-store-data [store]="store" [me]="me"></app-store-data>
 
-    <app-store *ngIf="!edit" [store]="store" (productToEdit)="editProduct($event)"></app-store>
+    <app-store *ngIf="!edit" [store]="store" [seller]="seller" (productToEdit)="editProduct($event)"></app-store>
 </div>
 
 <app-edit-product *ngIf="edit" [productToEdit]="productToEdit" (edited)="productEdited($event)"></app-edit-product>

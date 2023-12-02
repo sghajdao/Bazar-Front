@@ -15,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class StoreDataComponent implements OnInit, OnChanges {
 
   @Input() store?:Store
+  @Input() seller?: User
   @Input() me?:User
 
   constructor(
@@ -42,10 +43,10 @@ export class StoreDataComponent implements OnInit, OnChanges {
   }
 
   followStore() {
-    if (this.store?.seller && this.me) {
+    if (this.seller && this.me) {
       let follow: FollowRequest = {
         me: this.me.id,
-        followed: this.store.seller.id,
+        followed: this.seller.id,
       }
       const sub:Subscription = this.followService.followStore(follow).subscribe({
         next: data=> {

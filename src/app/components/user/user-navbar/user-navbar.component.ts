@@ -50,8 +50,8 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
       const sub: Subscription = this.productService.searchQuery(this.myControl.value).subscribe(products=> {
         this.options = []
         products.forEach(product=> {
-          if (product.keywords) {
-            this.options = this.options.concat(product.keywords)
+          if (product.product.keywords) {
+            this.options = this.options.concat(product.product.keywords)
             this.options = this.options.filter(word=> word.includes(this.myControl.value!))
           }
         })

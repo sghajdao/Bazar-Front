@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, map, mergeMap } from 'rxjs';
 import { Product } from 'src/app/models/product.dto';
 import { Store } from 'src/app/models/store.dto';
+import { StoreResponse } from 'src/app/models/storeResponse.dto';
 import { User } from 'src/app/models/user.model';
 import { StoreService } from 'src/app/services/store.service';
 import { UserService } from 'src/app/services/user.service';
@@ -24,6 +25,7 @@ export class UserProductsComponent implements OnInit, OnDestroy {
   subscription: Subscription[] = []
 
   store?: Store
+  seller?: User
   productToEdit?: Product
   edit: boolean = false
   isUser: boolean = false
@@ -36,7 +38,9 @@ export class UserProductsComponent implements OnInit, OnDestroy {
       mergeMap(res=> this.getStore(+res['id']))
     ).subscribe({
       next: data=> {
-        this.store = data;
+        console.log(data)
+        this.store = data.store;
+        this.seller = data.seller;
       },
       error: ()=> {
         this.router.navigateByUrl('/not-found')

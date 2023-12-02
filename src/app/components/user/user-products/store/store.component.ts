@@ -17,6 +17,7 @@ export class StoreComponent implements OnInit, OnDestroy, OnChanges {
 
   @Output() productToEdit = new EventEmitter<Product>()
   @Input() store?:Store
+  @Input() seller?: User
   
   constructor(
     private userService: UserService,
@@ -33,7 +34,7 @@ export class StoreComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const email:string = this.userService.getLogedInUser()
-    if (this.store?.seller?.email === email)
+    if (this.seller?.email === email)
       this.myStore = true
     if (this.store?.product)
       this.products = this.store.product
