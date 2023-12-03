@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit, OnDestroy {
         (data.product.store?.seller?.email === email)? this.isOwner = true : this.isOwner = false
         this.isUser = true
         this.product = data.product
-        this.store = data.product.store
+        this.store = data.store
         if (data.product.images)
           this.image = data.product.images[0]
       },error: ()=> this.isVisitor = true

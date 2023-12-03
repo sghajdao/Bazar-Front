@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Product } from 'src/app/models/product.dto';
+import { Store } from 'src/app/models/store.dto';
 
 @Component({
   selector: 'app-info',
@@ -9,6 +10,7 @@ import { Product } from 'src/app/models/product.dto';
 export class InfoComponent implements OnInit, OnChanges {
 
   @Input() product?:Product
+  @Input() store?: Store
 
   constructor() {}
 

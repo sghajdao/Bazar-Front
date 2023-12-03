@@ -21,7 +21,7 @@
       <br>
     
       <div class="numbers">
-        <app-info *ngIf="isOwner === true" [product]="product"></app-info>
+        <app-info *ngIf="isOwner === true" [product]="product" [store]="store"></app-info>
         <app-buy *ngIf="isOwner === false" [product]="product"></app-buy>
       </div>
   </div>

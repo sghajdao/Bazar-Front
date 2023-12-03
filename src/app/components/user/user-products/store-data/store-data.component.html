@@ -8,9 +8,9 @@
                 <mat-icon style="color: rgba(0, 0, 0, 0.705);">supervisor_account</mat-icon>
                 <p style="padding-left: 5px;color: rgba(0, 0, 0, 0.644);">{{store.followers?.length}} follower</p>
             </div>
-            <button *ngIf="me.id !== store.seller?.id && !followed" (click)="followStore()" mat-raised-button color="primary" style="width: 100%;">Follow</button>
-            <button *ngIf="me.id !== store.seller?.id && followed" (click)="unfollowStore()" mat-stroked-button color="primary" style="width: 100%;">Unfollow</button>
-            <button *ngIf="me.id === store.seller?.id" (click)="storeSettings()" mat-raised-button color="primary" style="width: 100%;">Edit</button>
+            <button *ngIf="me.id !== seller?.id && !followed" (click)="followStore()" mat-raised-button color="primary" style="width: 100%;">Follow</button>
+            <button *ngIf="me.id !== seller?.id && followed" (click)="unfollowStore()" mat-stroked-button color="primary" style="width: 100%;">Unfollow</button>
+            <button *ngIf="me.id === seller?.id" (click)="storeSettings()" mat-raised-button color="primary" style="width: 100%;">Edit</button>
         </div>
     </div>
 </div>

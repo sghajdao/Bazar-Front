@@ -38,7 +38,6 @@ export class UserProductsComponent implements OnInit, OnDestroy {
       mergeMap(res=> this.getStore(+res['id']))
     ).subscribe({
       next: data=> {
-        console.log(data)
         this.store = data.store;
         this.seller = data.seller;
       },

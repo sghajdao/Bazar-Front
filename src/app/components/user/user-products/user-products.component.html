@@ -1,10 +1,10 @@
 <app-user-navbar *ngIf="isUser"></app-user-navbar>
 <app-visitor-navbar *ngIf="isVisitor"></app-visitor-navbar>
 
-<div style="display: flex;">
-    <app-store-data [store]="store" [me]="me"></app-store-data>
+<div *ngIf="!edit" style="display: flex;">
+    <app-store-data [store]="store" [me]="me" [seller]="seller"></app-store-data>
 
-    <app-store *ngIf="!edit" [store]="store" [seller]="seller" (productToEdit)="editProduct($event)"></app-store>
+    <app-store [store]="store" [seller]="seller" (productToEdit)="editProduct($event)"></app-store>
 </div>
 
 <app-edit-product *ngIf="edit" [productToEdit]="productToEdit" (edited)="productEdited($event)"></app-edit-product>
