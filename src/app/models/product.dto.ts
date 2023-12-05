@@ -1,3 +1,4 @@
+import { Keywords } from "./keywords.dto";
 import { Store } from "./store.dto"
 
 export interface Product {
@@ -10,7 +11,7 @@ export interface Product {
     category:Category,
     brand:string,
     collection:Collection[],
-    keywords?:string[],
+    keywords?:Keywords[],
     visibility:string,
     pushDate?:Date,
     visitors?:number,

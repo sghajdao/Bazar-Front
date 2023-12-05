@@ -16,7 +16,8 @@ export class InfoComponent implements OnInit, OnChanges {
 
   pushDate: string = ''
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.product && this.product.pushDate)

@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   isUser: boolean = false
   isVisitor: boolean = false
   isOwner?: boolean
+  productId?: number
 
   image: string | ArrayBuffer = ''
 
@@ -34,18 +35,23 @@ export class ProductComponent implements OnInit, OnDestroy {
     const email = this.userService.getLogedInUser()
 
     const sub:Subscription = this.activateRoute.params.pipe(
-      mergeMap(res1=> this.productService.getProductById(res1['id']))
+      mergeMap(res1=> this.getSeller(res1['id']))
     ).subscribe({
-      next: data=> {
-        (data.product.store?.seller?.email === email)? this.isOwner = true : this.isOwner = false
+      next: seller=> {
+        (seller.email === email)? this.isOwner = true : this.isOwner = false
         this.isUser = true
-        this.product = data.product
-        this.store = data.store
-        if (data.product.images)
-          this.image = data.product.images[0]
+        this.product = seller.store?.product?.filter(item => item.id !== this.productId).at(0)
+        this.store = seller.store
+        if (this.product?.images)
+          this.image = this.product.images[0]
       },error: ()=> this.isVisitor = true
     })
     this.subscriptions.push(sub)
+  }
+
+  getSeller(id:number) {
+    this.productId = id
+    return this.productService.getSellerByProdId(id)
   }
 
   ngOnDestroy(): void {

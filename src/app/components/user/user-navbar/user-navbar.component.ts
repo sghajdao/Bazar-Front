@@ -51,8 +51,8 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
         this.options = []
         products.forEach(product=> {
           if (product.product.keywords) {
-            this.options = this.options.concat(product.product.keywords)
-            this.options = this.options.filter(word=> word.includes(this.myControl.value!))
+            // this.options = this.options.concat(product.product.keywords)
+            // this.options = this.options.filter(word=> word.includes(this.myControl.value!))
           }
         })
 
