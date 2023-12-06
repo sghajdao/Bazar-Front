@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription, map, startWith } from 'rxjs';
 import { User } from 'src/app/models/user.model';
-import { ProductService } from 'src/app/services/product.service';
+import { KeywordsService } from 'src/app/services/keywords.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private userService:UserService,
-    private productService: ProductService,
+    private keywordsService: KeywordsService,
   ) {}
 
   subscription: Subscription[] = []
@@ -47,15 +47,9 @@ export class UserNavbarComponent implements OnInit, OnDestroy {
 
   searchQueryConvers() {
     if (this.myControl.value) {
-      const sub: Subscription = this.productService.searchQuery(this.myControl.value).subscribe(products=> {
+      const sub: Subscription = this.keywordsService.getKeywords(this.myControl.value).subscribe(keywords=> {
         this.options = []
-        products.forEach(product=> {
-          if (product.product.keywords) {
-            // this.options = this.options.concat(product.product.keywords)
-            // this.options = this.options.filter(word=> word.includes(this.myControl.value!))
-          }
-        })
-
+        keywords.forEach(key=> this.options.push(key.keyword))
         this.filteredOptions = this.myControl.valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value || '')),
