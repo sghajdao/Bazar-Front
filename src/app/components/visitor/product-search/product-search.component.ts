@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, mergeMap } from 'rxjs';
+import { Observable, Subscription, map, mergeMap, switchMap } from 'rxjs';
+import { Keywords } from 'src/app/models/keywords.dto';
 import { Product } from 'src/app/models/product.dto';
 import { ProductResponseDto } from 'src/app/models/productRsponse.dto';
+import { KeywordsService } from 'src/app/services/keywords.service';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,6 +20,7 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private router: Router,
     private userService: UserService,
+    private keywordsService: KeywordsService,
   ) {}
 
   subscriptions: Subscription[] = []
@@ -25,12 +28,13 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
   products: ProductResponseDto[] = []
   isUser:boolean = false;
   isVisitor:boolean = false
+  keyword?: Keywords
 
   ngOnInit(): void {
     const sub: Subscription = this.activateRoute.params.pipe(
-      mergeMap(res=> this.productService.searchQuery(res['keyword']))
+      mergeMap(res => this.search(res['keyword']))
     ).subscribe({
-      next: data=> {
+      next: async data=> {
         console.log(data)
         if (data[0]) {
           this.visitorType()
@@ -40,6 +44,15 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
       error: ()=> this.router.navigateByUrl('/not-found')
     })
     this.subscriptions.push(sub)
+  }
+
+  search(keyword:string): Observable<ProductResponseDto[]> {
+    this.keywordsService.getKeywords(keyword).pipe(
+      switchMap(keywords=> {
+        return this.productService.searchQuery(keywords[0])
+      })
+    )
+    return new Observable()
   }
 
   visitorType() {

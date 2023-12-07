@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductResponseDto } from '../models/productRsponse.dto';
 import { User } from '../models/user.model';
+import { Keywords } from '../models/keywords.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,8 @@ export class ProductService {
     return this.http.get<User>(environment.urlRequest + 'api/product/' + id, this.getHeaders())
   }
 
-  searchQuery(query:string) {
-    return this.http.get<ProductResponseDto[]>(environment.urlRequest + 'api/product/search/' + query)
+  searchQuery(keyword:Keywords) {
+    return this.http.post<ProductResponseDto[]>(environment.urlRequest + 'api/product/search' , keyword)
   }
 
   updateProduct(product:Product) {
