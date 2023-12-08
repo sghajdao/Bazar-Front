@@ -132,7 +132,6 @@ export class RightCardsComponent implements OnInit, OnDestroy {
           words.push({keyword:key})
         })
         data.keywords = words
-        
         const sub2:Subscription = this.productService.newProduct(data, user.store?.email!).subscribe(data=>{
           
           this.router.navigateByUrl('/profile')

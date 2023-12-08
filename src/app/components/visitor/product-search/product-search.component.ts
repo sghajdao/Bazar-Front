@@ -34,7 +34,7 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
     const sub: Subscription = this.activateRoute.params.pipe(
       mergeMap(res => this.search(res['keyword']))
     ).subscribe({
-      next: async data=> {
+      next: data=> {
         console.log(data)
         if (data[0]) {
           this.visitorType()
@@ -47,12 +47,11 @@ export class ProductSearchComponent implements OnInit, OnDestroy {
   }
 
   search(keyword:string): Observable<ProductResponseDto[]> {
-    this.keywordsService.getKeywords(keyword).pipe(
+    return this.keywordsService.getKeywords(keyword).pipe(
       switchMap(keywords=> {
         return this.productService.searchQuery(keywords[0])
       })
     )
-    return new Observable()
   }
 
   visitorType() {
