@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ProductResponseDto } from '../models/productRsponse.dto';
 import { User } from '../models/user.model';
 import { Keywords } from '../models/keywords.dto';
+import { NewProduct } from '../models/newProduct.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,9 @@ export class ProductService {
     private http:HttpClient,
   ) { }
 
-  newProduct(product:Product, email:string) {
-    const data:{product:Product, storeEmail:string} = {product:product, storeEmail:email}
-    return this.http.post<Product>(environment.urlRequest + "api/product/new", data, this.getHeaders());
+  newProduct(product:NewProduct) {
+    // const data:{product:Product, storeEmail:string} = {product:product, storeEmail:email}
+    return this.http.post<Product>(environment.urlRequest + "api/product/new", product, this.getHeaders());
   }
 
   getUserProducts(id:number) {

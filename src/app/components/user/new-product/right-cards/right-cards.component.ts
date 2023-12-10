@@ -5,6 +5,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Keywords } from 'src/app/models/keywords.dto';
+import { NewProduct } from 'src/app/models/newProduct.dto';
 import { Category, Collection, Product } from 'src/app/models/product.dto';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
@@ -127,12 +128,8 @@ export class RightCardsComponent implements OnInit, OnDestroy {
           sales: 0,
           // store: user.store,
         }
-        let words: Keywords[] = []
-        this.keywords.forEach(key=> {
-          words.push({keyword:key})
-        })
-        data.keywords = words
-        const sub2:Subscription = this.productService.newProduct(data, user.store?.email!).subscribe(data=>{
+        const request: NewProduct = {product: data, keywords: this.keywords, storeEmail: user.store?.email!}
+        const sub2:Subscription = this.productService.newProduct(request).subscribe(data=>{
           
           this.router.navigateByUrl('/profile')
         });
