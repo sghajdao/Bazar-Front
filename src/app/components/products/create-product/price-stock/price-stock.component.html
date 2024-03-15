@@ -1,0 +1,28 @@
+<div class="example-card container">
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-subtitle>PRICES & STOCK</mat-card-subtitle>
+    </mat-card-header>
+    <hr>
+    <mat-card-content [formGroup]="priceAndStock">
+        <mat-form-field floatLabel="always" width="100%">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName="price" placeholder="0" min="0" step="0.01">
+            <span matTextPrefix>$&nbsp;</span>
+        </mat-form-field>
+        <mat-form-field style="padding-left: 20px;">
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" class="example-right-align" formControlName="stock" placeholder="0" min="0">
+        </mat-form-field>
+    </mat-card-content>
+</mat-card>
+
+<div style="padding-top: 10px;display: flex;">
+    <div style="padding-right: 5px;">
+        <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+    </div>
+    <div style="padding-left: 5px;">
+        <button mat-raised-button color="primary" (click)="next()" matStepperNext>Next</button>
+    </div>
+</div>
+</div>

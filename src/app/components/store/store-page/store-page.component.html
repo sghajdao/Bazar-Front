@@ -1,0 +1,39 @@
+<app-navbar-user></app-navbar-user>
+
+<div *ngIf="seller && seller.store" class="container outside">
+    <div class="card" style="width: 100%;">
+        <div *ngIf="myStore" class="example-button-container">
+            <button [routerLink]="'/edit-store/' + seller.store.id" mat-icon-button matTooltip="Edit" color="primary" aria-label="Example icon button with a home icon">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+
+        <div *ngIf="!myStore" class="example-button-container">
+            <button *ngIf="!myStore" mat-icon-button [matMenuTriggerFor]="menu" color="primary" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openDialog()">
+                    <mat-icon>info</mat-icon>
+                    <span>info</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>star</mat-icon>
+                    <span>star</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>person_add</mat-icon>
+                    <span>follow</span>
+                </button>
+            </mat-menu>
+        </div>
+
+        <img [src]="'http://localhost:8181/api/image/'+ seller.store.image" class="card-img-top image" alt="store image">
+        <div class="card-body">
+            <h3>{{seller.store.name}}</h3>
+            <p class="subtitle">{{seller.store.subtitle}}</p>
+        </div>
+    </div>
+</div>
+
+<mat-spinner *ngIf="!seller || !seller.store" style="position: absolute;left: 45%;top: 40%;"></mat-spinner>

@@ -1,0 +1,33 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="container">
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Main info</ng-template>
+        <app-main-info (mainInfon)="getMainInfo($event)"></app-main-info>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Prices & Stock">
+      <form>
+        <app-price-stock (priceStock)="getPrice($event)"></app-price-stock>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="thirdFormGroup" label="Images">
+      <form>
+        <app-images (images)="getImages($event)"></app-images>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

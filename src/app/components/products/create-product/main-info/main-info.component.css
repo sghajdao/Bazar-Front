@@ -1,0 +1,17 @@
+.images {
+    display: flex;
+}
+
+img {
+    width: 245px;
+    height: 180px;
+    border-radius: 10px;
+}
+
+.example-button-container {
+    position: absolute;
+    /* margin-right: 40%; */
+    cursor: pointer;
+    transition: 0.4s;
+    
+}

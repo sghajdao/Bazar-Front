@@ -1,0 +1,14 @@
+.form {
+    padding-bottom: 20px;
+}
+
+.example-card {
+    max-width: 500px;
+    margin: auto;
+}
+
+img {
+    height: 250px;
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+}

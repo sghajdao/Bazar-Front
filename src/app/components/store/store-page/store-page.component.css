@@ -1,0 +1,17 @@
+.outside {
+    padding-bottom: 20px;
+}
+
+.image {
+    max-height: 500px;
+}
+
+.example-button-container {
+    position: absolute;
+    padding: 10px;
+}
+
+h3, .subtitle {
+    text-align: center;
+    font-family: monospace;
+}

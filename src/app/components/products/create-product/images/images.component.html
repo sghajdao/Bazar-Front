@@ -1,0 +1,78 @@
+<div class="example-card container">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-subtitle>IMAGES</mat-card-subtitle>
+            </mat-card-title-group>
+        </mat-card-header>
+        <hr>
+        <mat-card-content>
+            <div class="images">
+                <div class="mb-4 d-flex justify-content-center">
+                    <div class="example-button-container" *ngIf="selectedImage[0]" (click)="onRemoveImage(0)">
+                        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon style="display: flex;justify-content: center;align-items: center;">clear</mat-icon>
+                        </button>
+                    </div>
+                    <label for="customFile1" style="cursor: pointer;">
+                        <img id="selectedImage" [src]="selectedImage[0]"
+                        alt="example placeholder"
+                        onerror="this.src='./../../../../../assets/images/placeholder.jpg'"/>
+                        <input type="file" class="form-control d-none" id="customFile1" (change)="onImageSelected($event, 0)"/>
+                    </label>
+                </div>
+
+                <div *ngIf="selectedImage[0]" class="mb-4 ms-2 d-flex justify-content-center">
+                    <div class="example-button-container" *ngIf="selectedImage[1]" (click)="onRemoveImage(1)">
+                        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon style="display: flex;justify-content: center;align-items: center;">clear</mat-icon>
+                        </button>
+                    </div>
+                    <label for="customFile2" style="cursor: pointer;">
+                        <img id="selectedImage" [src]="selectedImage[1]"
+                        alt="example placeholder"
+                        onerror="this.src='./../../../../../assets/images/placeholder.jpg'"/>
+                        <input type="file" class="form-control d-none" id="customFile2" (change)="onImageSelected($event, 1)"/>
+                    </label>
+                </div>
+
+                <div *ngIf="selectedImage[1]" class="mb-4 ms-2 d-flex justify-content-center">
+                    <div class="example-button-container" *ngIf="selectedImage[2]" (click)="onRemoveImage(2)">
+                        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon style="display: flex;justify-content: center;align-items: center;">clear</mat-icon>
+                        </button>
+                    </div>
+                    <label for="customFile3" style="cursor: pointer;">
+                        <img id="selectedImage" [src]="selectedImage[2]"
+                        alt="example placeholder"
+                        onerror="this.src='./../../../../../assets/images/placeholder.jpg'"/>
+                        <input type="file" class="form-control d-none" id="customFile3" (change)="onImageSelected($event, 2)"/>
+                    </label>
+                </div>
+
+                <div *ngIf="selectedImage[2]" class="mb-4 ms-2 d-flex justify-content-center">
+                    <div class="example-button-container" *ngIf="selectedImage[3]" (click)="onRemoveImage(3)">
+                        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                            <mat-icon style="display: flex;justify-content: center;align-items: center;">clear</mat-icon>
+                        </button>
+                    </div>
+                    <label for="customFile4" style="cursor: pointer;">
+                        <img id="selectedImage" [src]="selectedImage[3]"
+                        alt="example placeholder"
+                        onerror="this.src='./../../../../../assets/images/placeholder.jpg'"/>
+                        <input type="file" class="form-control d-none" id="customFile4" (change)="onImageSelected($event, 3)"/>
+                    </label>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <div style="padding-top: 10px;display: flex;">
+        <div style="padding-right: 5px;">
+            <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+        </div>
+        <div style="padding-left: 5px;">
+            <button mat-raised-button color="primary" (click)="next()" matStepperNext>Next</button>
+        </div>
+    </div>
+</div>
