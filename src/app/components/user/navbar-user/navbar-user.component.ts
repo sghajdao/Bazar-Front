@@ -24,9 +24,8 @@ export class NavbarUserComponent implements OnInit{
   ngOnInit(): void {
     this.authenticated = this.authService.isAuthenticated()
     this.authService.sessionsExpired()
-    const token = localStorage.getItem('token')
-    if (token) {
-      const email: string = jwtDecode(token).sub!
+    const email = this.userService.getEmail()
+    if (email) {
       this.userService.getUserByEmail(email).subscribe({
         next: user=> {
           if (user.store)
@@ -34,6 +33,8 @@ export class NavbarUserComponent implements OnInit{
         }
       })
     }
+    else
+      this.router.navigateByUrl('/auth/login')
   }
 
   onLogOut() {

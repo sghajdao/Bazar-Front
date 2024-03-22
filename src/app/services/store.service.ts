@@ -19,8 +19,8 @@ export class StoreService {
   createStore(store: Store, sellerEmail: string) {
     const request = {store, sellerEmail}
     if (!this.authService.isAuthenticated())
-      return new Observable<string>()
-    return this.http.post<string>(environment.urlRequest + 'store/create', request, this.getHeaders())
+      return new Observable<Store>()
+    return this.http.post<Store>(environment.urlRequest + 'store/create', request, this.getHeaders())
   }
 
   getSellerByStoreId(id: number) {

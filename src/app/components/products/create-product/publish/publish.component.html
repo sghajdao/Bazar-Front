@@ -1,0 +1,42 @@
+<div class="example-card container">
+    <mat-card class="example-card container">
+        <mat-card-header>
+            <mat-card-subtitle>PUBLISH</mat-card-subtitle>
+        </mat-card-header>
+        <hr>
+        <mat-card-content [formGroup]="form">
+            <label id="example-radio-group-label">Visibility: {{visibility}}</label>
+            <button mat-button color="primary" class="ms-2" (click)="onEditVisibility()">Edit</button>
+            <mat-radio-group
+              *ngIf="editVisibility"
+              aria-labelledby="example-radio-group-label"
+              class="example-radio-group"
+              formControlName="visible">
+                <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                    {{season}}
+                </mat-radio-button>
+            </mat-radio-group>
+
+            <br>
+            <label id="example-radio-group-label">Publish {{selectedDate? selectedDate.toLocaleString() : 'immediately'}}</label>
+            <button mat-button color="primary" class="ms-2" (click)="onEditPublishTime()">Edit</button>
+            <br>
+            <mat-form-field class="example-full-width" *ngIf="editPublishTime">
+                <mat-label>Choose a date</mat-label>
+                <input [matDatepickerFilter]="filter" matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="date">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+    <div style="padding-top: 10px;display: flex;">
+        <div style="padding-right: 5px;">
+            <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+        </div>
+        <div style="padding-left: 5px;">
+            <button mat-raised-button color="primary" (click)="onPublish()" matStepperNext>Publish</button>
+        </div>
+    </div>
+</div>

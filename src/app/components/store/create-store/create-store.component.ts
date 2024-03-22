@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, mergeMap } from 'rxjs';
 import { ImageResponse } from 'src/app/models/image-response';
 import { Store } from 'src/app/models/store';
@@ -18,7 +19,8 @@ export class CreateStoreComponent {
     private fb: FormBuilder,
     private imageService: ImageService,
     private storeService: StoreService,
-    private userService:UserService
+    private userService:UserService,
+    private router: Router
   ) {}
 
   selectedFile?: File
@@ -54,11 +56,13 @@ export class CreateStoreComponent {
 
   createStore() {
     if (this.selectedImage) {
-      this.uploadImage().pipe(mergeMap(res=> this.create(res[0].name))).subscribe(data=>console.log(data))
+      this.uploadImage().pipe(mergeMap(res=> this.create(res[0].name))).subscribe({
+        next: data => this.router.navigateByUrl('/store/' + data.id)
+      })
     }
   }
 
-  create(image: string): Observable<string> {
+  create(image: string): Observable<Store> {
     if (this.form.value.country && this.form.value.email && this.form.value.name
       && this.form.value.phone && this.form.value.subtitle) {
         const store:Store = {

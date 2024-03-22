@@ -1,0 +1,63 @@
+<div class="example-card container">
+    <mat-card class="example-card container">
+        <mat-card-header>
+          <mat-card-subtitle>CATEGORIZATION</mat-card-subtitle>
+        </mat-card-header>
+        <hr>
+        <mat-card-content>
+
+            <div style="display: flex;">
+                <mat-form-field style="width: 49%;" [formGroup]="form">
+                    <mat-label>Choose a category</mat-label>
+                    <mat-select formControlName="category">
+                        <mat-option [value]="item" *ngFor="let item of categories">{{item}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field style="padding-left: 2%;width: 49%;" [formGroup]="form">
+                    <mat-label>Brand</mat-label>
+                    <input matInput type="text" formControlName="brand">
+                </mat-form-field>
+            </div>
+
+            <div style="display: flex;">
+                <mat-form-field style="width: 49%;" [formGroup]="form">
+                    <mat-label>Collections</mat-label>
+                    <mat-select formControlName="collection" multiple>
+                      <mat-select-trigger>
+                        {{form.value.collection![0] || ''}}
+                        <span *ngIf="(form.value.collection?.length || 0) > 1" class="example-additional-selection">
+                          (+{{(form.value.collection?.length || 0) - 1}} {{form.value.collection?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                      </mat-select-trigger>
+                      <mat-option *ngFor="let item of collections" [value]="item">{{item}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field" style="padding-left: 2%;width: 49%;" [formGroup]="form">
+                    <mat-label>Keywords</mat-label>
+                    <mat-chip-grid #chipGrid aria-label="Enter keywords" formControlName="keyword" >
+                        <mat-chip-row *ngFor="let keyword of keywords" (removed)="removeKeyword(keyword)">
+                            {{keyword}}
+                            <button matChipRemove aria-label="'remove ' + keyword">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    </mat-chip-grid>
+                    <input placeholder="New keyword..."
+                            [matChipInputFor]="chipGrid"
+                            (matChipInputTokenEnd)="add($event)"/>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <div style="padding-top: 10px;display: flex;">
+        <div style="padding-right: 5px;">
+            <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+        </div>
+        <div style="padding-left: 5px;">
+            <button mat-raised-button color="primary" (click)="next()" matStepperNext>Next</button>
+        </div>
+    </div>
+</div>

@@ -21,13 +21,21 @@
       </form>
     </mat-step>
 
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
+    <mat-step [stepControl]="fourthFormGroup" label="Categorization">
+      <form>
+        <app-categorization (categorization)="getCategorization($event)"></app-categorization>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="fifthFormGroup" label="Publish">
+      <form>
+        <app-publish (publish)="publish($event)"></app-publish>
+      </form>
     </mat-step>
   </mat-stepper>
+
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+    You should fill <strong>all</strong> the previous fields
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
 </div>

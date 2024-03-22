@@ -14,6 +14,13 @@ import { MainInfoComponent } from './main-info/main-info.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PriceStockComponent } from './price-stock/price-stock.component';
 import { ImagesComponent } from './images/images.component';
+import { CategorizationComponent } from './categorization/categorization.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatSelectModule} from '@angular/material/select';
+import { PublishComponent } from './publish/publish.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatRadioModule} from '@angular/material/radio';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -21,7 +28,9 @@ import { ImagesComponent } from './images/images.component';
     CreateProductComponent,
     MainInfoComponent,
     PriceStockComponent,
-    ImagesComponent
+    ImagesComponent,
+    CategorizationComponent,
+    PublishComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +41,9 @@ import { ImagesComponent } from './images/images.component';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule, MatCardModule, MatIconModule
+    MatInputModule, MatCardModule, MatIconModule,
+    MatChipsModule, MatSelectModule, MatDatepickerModule,
+    MatRadioModule, MatNativeDateModule
   ]
 })
 export class CreateProductModule { }

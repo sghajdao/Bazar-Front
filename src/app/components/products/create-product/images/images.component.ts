@@ -15,7 +15,7 @@ export class ImagesComponent {
     private imageService: ImageService,
   ) {}
 
-  @Output() images = new EventEmitter<File[]>()
+  @Output() images = new EventEmitter<{selectedFile:File[], selectedImage:(string | ArrayBuffer)[]}>()
 
   selectedFile: File[] = [new File([], ''), new File([], ''), new File([], ''), new File([], '')]
   selectedImage: (string | ArrayBuffer)[] = ['','','',''];
@@ -37,6 +37,6 @@ export class ImagesComponent {
   }
 
   next() {
-    this.images.emit(this.selectedFile);
+    this.images.emit({selectedFile: this.selectedFile, selectedImage: this.selectedImage});
   }
 }
