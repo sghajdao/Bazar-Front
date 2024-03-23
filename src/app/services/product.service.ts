@@ -16,6 +16,10 @@ export class ProductService {
     return this.http.post<Product>(environment.urlRequest + 'product/create', product, this.getHeaders())
   }
 
+  deleteProduct(id: number) {
+    return this.http.delete<boolean>(environment.urlRequest + 'product/delete/' + id, this.getHeaders())
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

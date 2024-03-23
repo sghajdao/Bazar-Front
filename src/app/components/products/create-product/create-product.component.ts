@@ -113,7 +113,7 @@ export class CreateProductComponent implements OnInit {
       && this.categorization?.valid && event.valid) {
         this.error = false
       this.uploadImages().pipe(mergeMap(res => this.create(event, res))).subscribe({
-        next: data => console.log(data)
+        next: data => this.router.navigateByUrl('/store/' + this.seller?.store?.id)
       })
     }
     else

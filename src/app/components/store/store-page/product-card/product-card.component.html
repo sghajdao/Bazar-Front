@@ -1,4 +1,17 @@
 <div *ngIf="product" class="card" style="width: 18rem;">
+    <button style="position: absolute;margin: 5px;" [matMenuTriggerFor]="menu" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>edit</span>
+        </button>
+        <button mat-menu-item (click)="deleteProduct()">
+            <mat-icon>delete</mat-icon>
+            <span>delete</span>
+        </button>
+    </mat-menu>
     <img [src]="'http://localhost:8181/api/image/' + product.images![0]" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">{{product.title}}</h5>

@@ -5,13 +5,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { StoreInfoComponent } from './store-info/store-info.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SessionExpiredComponent } from './session-expired/session-expired.component';
+import { DeleteProductComponent } from './delete-product/delete-product.component';
 
 
 
 @NgModule({
   declarations: [
     StoreInfoComponent,
-    SessionExpiredComponent
+    SessionExpiredComponent,
+    DeleteProductComponent
   ],
   imports: [
     CommonModule,

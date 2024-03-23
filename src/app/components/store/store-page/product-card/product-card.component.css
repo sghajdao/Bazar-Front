@@ -1,10 +1,10 @@
 .card {
     cursor: pointer;
     transition: 0.5s;
-    
-    &:hover {
-      box-shadow: 2px 6px 10px rgba(38, 38, 38, 0.2);
-    }
+}
+
+.card:hover {
+    box-shadow: 2px 6px 10px rgba(89, 119, 255, 0.603);
 }
 
 img {

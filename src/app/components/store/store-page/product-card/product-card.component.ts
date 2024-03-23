@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteProductComponent } from 'src/app/components/modals/delete-product/delete-product.component';
 import { Product } from 'src/app/models/product';
 
 @Component({
@@ -8,7 +10,13 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductCardComponent {
 
-  constructor() {}
+  constructor(
+    private modal: MatDialog,
+  ) {}
 
   @Input() product?: Product
+
+  deleteProduct() {
+    this.modal.open(DeleteProductComponent, {data: this.product})
+  }
 }
