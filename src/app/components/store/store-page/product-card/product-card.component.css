@@ -1,0 +1,17 @@
+.card {
+    cursor: pointer;
+    transition: 0.5s;
+    
+    &:hover {
+      box-shadow: 2px 6px 10px rgba(38, 38, 38, 0.2);
+    }
+}
+
+img {
+    background-size: cover;
+    height: 200px;
+}
+
+.card-title, .card-text {
+    font-family: monospace;
+}

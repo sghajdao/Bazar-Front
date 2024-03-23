@@ -15,3 +15,7 @@ h3, .subtitle {
     text-align: center;
     font-family: monospace;
 }
+
+.product {
+    padding-bottom: 10px;
+}

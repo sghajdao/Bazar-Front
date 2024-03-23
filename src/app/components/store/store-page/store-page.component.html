@@ -32,6 +32,19 @@
         <div class="card-body">
             <h3>{{seller.store.name}}</h3>
             <p class="subtitle">{{seller.store.subtitle}}</p>
+            <button mat-fab extended disabled>
+                <mat-icon>group</mat-icon>
+                Followers
+            </button>
+
+            <button style="float: right;" mat-fab extended disabled>
+                <mat-icon>shopping_cart</mat-icon>
+                Products {{seller.store.products?.length}}
+            </button>
+        </div>
+
+        <div *ngFor="let product of seller.store.products" class="container product">
+            <app-product-card [product]="product"></app-product-card>
         </div>
     </div>
 </div>

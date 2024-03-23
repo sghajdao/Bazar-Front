@@ -9,11 +9,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 
 @NgModule({
   declarations: [
-    StorePageComponent
+    StorePageComponent,
+    ProductCardComponent
   ],
   imports: [
     CommonModule,

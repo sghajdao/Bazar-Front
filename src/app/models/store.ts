@@ -1,3 +1,4 @@
+import { Product } from "./product"
 import { User } from "./user"
 
 export interface Store {
@@ -9,4 +10,5 @@ export interface Store {
     country: string,
     phone: string
     seller?: User,
+    products?: Product[]
 }
