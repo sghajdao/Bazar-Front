@@ -13,6 +13,7 @@ import { StorePageModule } from './components/store/store-page/store-page.module
 import { EditStoreModule } from './components/store/edit-store/edit-store.module';
 import { ModalsModule } from './components/modals/modals.module';
 import { CreateProductModule } from './components/products/create-product/create-product.module';
+import { ProductPageModule } from './components/products/product-page/product-page.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CreateProductModule } from './components/products/create-product/create
     StorePageModule,
     EditStoreModule,
     ModalsModule,
-    CreateProductModule
+    CreateProductModule,
+    ProductPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

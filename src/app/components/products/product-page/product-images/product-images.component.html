@@ -1,0 +1,13 @@
+<div *ngIf="product" class="card" style="width: 18rem;">
+    <button (click)="nextImage(-1)" class="position-absolute top-50 start-0 translate-middle-y" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+        <mat-icon class="icon">chevron_left</mat-icon>
+    </button>
+    <button (click)="nextImage(1)" class="position-absolute top-50 end-0 translate-middle-y" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+        <mat-icon class="icon">chevron_right</mat-icon>
+    </button>
+    <img (click)="selectImage()" [src]="'http://localhost:8181/api/image/' + product.images![index]" class="card-img-top" alt="...">
+</div>
+
+<div *ngIf="!product" class="position-absolute top-50 start-50 translate-middle">
+    <mat-spinner></mat-spinner>
+</div>

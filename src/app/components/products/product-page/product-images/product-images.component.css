@@ -1,0 +1,11 @@
+.card-img-top {
+    padding: 20px;
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 32px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

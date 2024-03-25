@@ -1,0 +1,9 @@
+<app-navbar-user></app-navbar-user>
+
+<div *ngIf="product" class="container">
+    <app-product-images [product]="product"></app-product-images>
+</div>
+
+<div *ngIf="!product" class="position-absolute top-50 start-50 translate-middle">
+    <mat-spinner></mat-spinner>
+</div>

@@ -6,6 +6,7 @@ import { StoreInfoComponent } from './store-info/store-info.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SessionExpiredComponent } from './session-expired/session-expired.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
+import { ImageClickedComponent } from './image-clicked/image-clicked.component';
 
 
 
@@ -13,7 +14,8 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
   declarations: [
     StoreInfoComponent,
     SessionExpiredComponent,
-    DeleteProductComponent
+    DeleteProductComponent,
+    ImageClickedComponent
   ],
   imports: [
     CommonModule,
