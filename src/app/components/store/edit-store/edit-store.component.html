@@ -276,7 +276,10 @@
                 </mat-form-field>
             </mat-card-content>
             <mat-card-actions>
-                <div style="padding-left: 20px;">
+                <div style="padding-left: 10px;">
+                    <button mat-stroked-button color="primary" [routerLink]="'/store/' + store?.id">Cancel</button>
+                </div>
+                <div style="padding-left: 10px;">
                     <button (click)="editStore()" mat-raised-button color="primary">Edit</button>
                 </div>
             </mat-card-actions>

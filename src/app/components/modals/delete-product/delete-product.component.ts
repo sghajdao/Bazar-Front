@@ -12,12 +12,12 @@ export class DeleteProductComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Product,
-    private productService: ProductService
+    private productService: ProductService,
   ) {}
 
   deleteProduct() {
     this.productService.deleteProduct(this.data.id!).subscribe({
-      next: res => console.log(res)
+      next: res => window.location.reload()
     });
   }
 }

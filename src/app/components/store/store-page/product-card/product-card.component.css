@@ -1,6 +1,6 @@
 .card {
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
 .card:hover {
@@ -12,6 +12,20 @@ img {
     height: 200px;
 }
 
-.card-title, .card-text {
+.card-title {
     font-family: monospace;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: pre-wrap;
+}
+
+.card-text {
+    font-family: monospace;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: pre-wrap;
 }

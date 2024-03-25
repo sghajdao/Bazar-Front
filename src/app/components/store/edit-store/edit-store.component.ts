@@ -89,7 +89,7 @@ export class EditStoreComponent implements OnInit{
           phone: this.form.value.phone,
           image: image,
         }
-          return this.storeService.updateStore(store);
+        return this.storeService.updateStore(store);
     }
     return new Observable()
   }

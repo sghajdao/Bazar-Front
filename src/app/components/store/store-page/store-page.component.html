@@ -3,7 +3,7 @@
 <div *ngIf="seller && seller.store" class="container outside">
     <div class="card" style="width: 100%;">
         <div *ngIf="myStore" class="example-button-container">
-            <button [routerLink]="'/edit-store/' + seller.store.id" mat-icon-button matTooltip="Edit" color="primary" aria-label="Example icon button with a home icon">
+            <button [routerLink]="'/edit-store/' + seller.store.id" mat-mini-fab matTooltip="Edit" color="primary" aria-label="Example icon button with a menu icon">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
@@ -43,8 +43,10 @@
             </button>
         </div>
 
-        <div *ngFor="let product of seller.store.products" class="container product">
-            <app-product-card [product]="product"></app-product-card>
+        <div style="display: flex;" class="container">
+            <div *ngFor="let product of seller.store.products" class="product">
+                <app-product-card [product]="product"></app-product-card>
+            </div>
         </div>
     </div>
 </div>
