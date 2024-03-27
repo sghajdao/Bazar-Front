@@ -7,15 +7,15 @@
 
 <div *ngIf="product" style="display: flex;" class="container">
     <div>
-        <app-product-images [product]="product"></app-product-images>
+        <app-product-images [product]="product.product"></app-product-images>
     </div>
 
     <div style="padding-left: 20px;">
-        <app-product-description [product]="product"></app-product-description>
+        <app-product-description [response]="product"></app-product-description>
     </div>
 
     <div style="padding-left: 20px;">
-        <app-product-price [product]="product" (aler)="showAlert($event)"></app-product-price>
+        <app-product-price [product]="product.product" (aler)="showAlert($event)"></app-product-price>
     </div>
 </div>
 

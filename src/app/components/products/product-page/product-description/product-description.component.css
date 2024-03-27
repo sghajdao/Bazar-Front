@@ -1,3 +1,14 @@
 .card-title {
     text-align: center;
 }
+
+.store-link {
+    color: #007185;
+    cursor: pointer;
+    width: 80px;
+}
+
+.store-link:hover {
+    text-decoration: underline;
+    color: #C7511F;
+}

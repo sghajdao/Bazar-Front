@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { ProductResponse } from 'src/app/models/product-response';
 
 @Component({
   selector: 'app-product-description',
@@ -10,5 +10,5 @@ export class ProductDescriptionComponent {
 
   constructor() {}
 
-  @Input() product?: Product
+  @Input() response?: ProductResponse
 }
