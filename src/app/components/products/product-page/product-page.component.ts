@@ -17,10 +17,15 @@ export class ProductPageComponent implements OnInit{
   ) {}
 
   product?: Product
+  addToCart: boolean = false
 
   ngOnInit(): void {
     this.route.params.pipe(mergeMap(id => this.productService.getById(+id['id']))).subscribe({
       next: data => this.product = data
     })
+  }
+
+  showAlert(event: boolean) {
+    this.addToCart = event
   }
 }

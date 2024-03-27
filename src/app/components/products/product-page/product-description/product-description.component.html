@@ -1,0 +1,32 @@
+<div *ngIf="product" class="card container">
+    <div class="card-body">
+        <h3 class="card-title">{{product.title}}</h3>
+        <br>
+        <h6 style="color: #067D62;">{{product.sales}} Sales</h6>
+        <hr>
+        <div style="display: flex;">
+            <div style="width: 120px;">
+                <h5>Category</h5>
+                <h5>Brand</h5>
+                <h5>Collections</h5>
+            </div>
+            <div style="color: rgba(0, 0, 0, 0.555);">
+                <h5>{{product.category}}</h5>
+                <h5>{{product.brand}}</h5>
+                <h5 *ngFor="let item of product.collection">
+                    <ul>
+                        <li>{{item}}</li>
+                    </ul>
+                </h5>
+            </div>
+        </div>
+        <p>{{product.sales}}</p>
+        <hr>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Description</h6>
+        <p class="card-text">{{product.description}}</p>
+    </div>
+</div>
+
+<div *ngIf="!product" class="position-absolute top-50 start-50 translate-middle">
+    <mat-spinner></mat-spinner>
+</div>

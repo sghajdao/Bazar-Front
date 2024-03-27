@@ -8,12 +8,16 @@ import { ProductImagesComponent } from './product-images/product-images.componen
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ProductDescriptionComponent } from './product-description/product-description.component';
+import { ProductPriceComponent } from './product-price/product-price.component';
 
 
 @NgModule({
   declarations: [
     ProductPageComponent,
     ProductImagesComponent,
+    ProductDescriptionComponent,
+    ProductPriceComponent,
   ],
   imports: [
     CommonModule,

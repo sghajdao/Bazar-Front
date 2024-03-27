@@ -1,7 +1,22 @@
 <app-navbar-user></app-navbar-user>
 
-<div *ngIf="product" class="container">
-    <app-product-images [product]="product"></app-product-images>
+<div *ngIf="addToCart" class="alert alert-primary alert-dismissible fade show container" role="alert">
+    This product has added to your cart.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div *ngIf="product" style="display: flex;" class="container">
+    <div>
+        <app-product-images [product]="product"></app-product-images>
+    </div>
+
+    <div style="padding-left: 20px;">
+        <app-product-description [product]="product"></app-product-description>
+    </div>
+
+    <div style="padding-left: 20px;">
+        <app-product-price [product]="product" (aler)="showAlert($event)"></app-product-price>
+    </div>
 </div>
 
 <div *ngIf="!product" class="position-absolute top-50 start-50 translate-middle">
