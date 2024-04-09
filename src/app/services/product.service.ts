@@ -34,6 +34,12 @@ export class ProductService {
     return this.http.get<ProductResponse>(environment.urlRequest + 'product/get/' + id);
   }
 
+  updateProduct(product: Product) {
+    if (!this.authService.isAuthenticated())
+      return new Observable<ProductResponse>()
+    return this.http.put<ProductResponse>(environment.urlRequest + 'product/update', product, this.getHeaders());
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

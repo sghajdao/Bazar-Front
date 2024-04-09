@@ -1,0 +1,17 @@
+.example-button-container {
+    position: absolute;
+    /* margin-right: 40%; */
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.card-body {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+}

@@ -4,7 +4,7 @@
     </button>
     <div [routerLink]="'/product/' + product.id">
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item [routerLink]="'/edit-product/' + product.id">
                 <mat-icon>edit</mat-icon>
                 <span>edit</span>
             </button>
