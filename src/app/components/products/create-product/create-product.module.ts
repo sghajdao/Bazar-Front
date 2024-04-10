@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CreateProductRoutingModule } from './create-product-routing.module';
 import { CreateProductComponent } from './create-product.component';
-import { NavbarUserModule } from '../../user/navbar-user/navbar-user.module';
+import { NavbarUserModule } from '../../navbar-user/navbar-user.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';

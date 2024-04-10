@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { NavbarUserModule } from '../user/navbar-user/navbar-user.module';
+import { NavbarUserModule } from '../navbar-user/navbar-user.module';
 import { DigitalComponent } from './digital/digital.component';
 import { CosmeticsComponent } from './cosmetics/cosmetics.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EditStoreRoutingModule } from './edit-store-routing.module';
 import { EditStoreComponent } from './edit-store.component';
-import { NavbarUserModule } from '../../user/navbar-user/navbar-user.module';
+import { NavbarUserModule } from '../../navbar-user/navbar-user.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';

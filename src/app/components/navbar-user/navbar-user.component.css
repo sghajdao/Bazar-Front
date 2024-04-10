@@ -2,6 +2,11 @@ nav {
     height: 70px;
 }
 
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
 .custom-button {
     background-color: #3498db;
     color: #ffffff;

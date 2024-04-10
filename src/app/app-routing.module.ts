@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: "edit-product",
     loadChildren:()=>import("./components/products/edit-product/edit-product.module").then(m=>m.EditProductModule),
+  },
+  {
+    path: "products-search",
+    loadChildren:()=>import("./components/products/search/search.module").then(m=>m.SearchModule),
   }
 ];
 

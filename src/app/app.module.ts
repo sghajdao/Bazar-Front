@@ -7,12 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './components/visitor/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './components/home/home.module';
-import { NavbarUserModule } from './components/user/navbar-user/navbar-user.module';
+import { NavbarUserModule } from './components/navbar-user/navbar-user.module';
 import { StorePageModule } from './components/store/store-page/store-page.module';
 import { EditStoreModule } from './components/store/edit-store/edit-store.module';
 import { ModalsModule } from './components/modals/modals.module';
 import { CreateProductModule } from './components/products/create-product/create-product.module';
 import { ProductPageModule } from './components/products/product-page/product-page.module';
+import { SearchModule } from './components/products/search/search.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProductPageModule } from './components/products/product-page/product-pa
     EditStoreModule,
     ModalsModule,
     CreateProductModule,
-    ProductPageModule
+    ProductPageModule,
+    SearchModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

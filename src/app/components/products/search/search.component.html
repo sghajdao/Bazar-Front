@@ -1,0 +1,23 @@
+<app-navbar-user></app-navbar-user>
+
+<div *ngIf="products" class="list">
+    <div *ngFor="let product of products" class="product">
+        <div class="card" style="width: 18rem;">
+            <div [routerLink]="'/product/' + product.id">
+                <img [src]="'http://localhost:8181/api/image/' + product.images![0]" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                    <h2 style="color: rgb(6, 23, 71);">{{product.price}}$</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="products && !products.length" class="position-absolute top-50 start-50 translate-middle">
+    <h2>There is no products with this keyword</h2>
+</div>
+
+<div *ngIf="!products">
+    <mat-spinner style="position: absolute;left: 45%;top: 40%;"></mat-spinner>
+</div>

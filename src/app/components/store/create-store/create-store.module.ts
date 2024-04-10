@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CreateStoreRoutingModule } from './create-store-routing.module';
-import { NavbarUserModule } from '../../user/navbar-user/navbar-user.module';
+import { NavbarUserModule } from '../../navbar-user/navbar-user.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';

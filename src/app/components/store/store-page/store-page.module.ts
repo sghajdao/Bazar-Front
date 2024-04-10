@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StorePageRoutingModule } from './store-page-routing.module';
 import { StorePageComponent } from './store-page.component';
-import { NavbarUserModule } from '../../user/navbar-user/navbar-user.module';
+import { NavbarUserModule } from '../../navbar-user/navbar-user.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';

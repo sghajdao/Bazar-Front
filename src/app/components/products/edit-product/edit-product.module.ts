@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EditProductRoutingModule } from './edit-product-routing.module';
 import { EditProductComponent } from './edit-product.component';
-import { NavbarUserModule } from '../../user/navbar-user/navbar-user.module';
+import { NavbarUserModule } from '../../navbar-user/navbar-user.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
