@@ -98,7 +98,7 @@ export class CreateProductComponent implements OnInit {
       images: [],
       category: this.categorization?.value.category,
       brand: this.categorization?.value.brand,
-      collection: this.categorization?.value.collection,
+      collections: this.categorization?.value.collection,
       keywords: this.categorization?.value.keyword,
       visibility: this.publishForm.value.visible,
       pushDate: this.publishForm.value.date,

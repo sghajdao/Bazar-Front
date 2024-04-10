@@ -27,6 +27,7 @@ export class LoginComponent {
     password: false
   }
 
+  loged: number = 0
   error:boolean = false
 
   onSignIn() {
@@ -37,14 +38,17 @@ export class LoginComponent {
 
     if (this.userData.value.email && this.userData.value.password) {      
       const user: LoginRequest = {email: this.userData.value.email, password: this.userData.value.password}
+      this.loged = 1
       this.authService.login(user).subscribe({
         next: data=> {
           if (data.message === "Login Success") {
             localStorage.setItem("token", data.token);
+            this.loged = 2
             this.router.navigateByUrl('')
           }
         },
         error: err=> {
+          this.loged = 0
           this.error = true
         }
       })

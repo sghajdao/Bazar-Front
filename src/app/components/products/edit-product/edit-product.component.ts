@@ -91,7 +91,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       images: [],
       category: this.response?.product.category!,
       brand: this.response?.product.brand!,
-      collection: this.response?.product.collection!,
+      collections: this.response?.product.collections!,
       visibility: this.response?.product.visibility!,
     }
     if (images)

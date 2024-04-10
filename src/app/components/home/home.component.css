@@ -1,0 +1,19 @@
+.card{
+    width: 21rem;
+    height: 17rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 2px 6px 10px rgba(89, 119, 255, 0.603);
+}
+
+.card-text {
+    text-align: center;
+    font-family: monospace;
+}
+
+.card-img-top {
+    height: 180px;
+}

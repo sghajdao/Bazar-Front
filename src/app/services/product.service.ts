@@ -40,6 +40,10 @@ export class ProductService {
     return this.http.put<ProductResponse>(environment.urlRequest + 'product/update', product, this.getHeaders());
   }
 
+  getCategory(category: string) {
+    return this.http.get<Product[]>(environment.urlRequest + 'product/category/' + category);
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

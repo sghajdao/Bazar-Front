@@ -10,7 +10,7 @@ export interface Product {
     stock:number,
     category:string,
     brand:string,
-    collection:string[],
+    collections:string[],
     keywords?:Keyword[],
     visibility:string,
     pushDate?:Date,

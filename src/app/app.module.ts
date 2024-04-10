@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './components/visitor/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './components/home/home.module';
-import { NavbarVisitorModule } from './components/visitor/navbar-visitor/navbar-visitor.module';
 import { NavbarUserModule } from './components/user/navbar-user/navbar-user.module';
 import { StorePageModule } from './components/store/store-page/store-page.module';
 import { EditStoreModule } from './components/store/edit-store/edit-store.module';
@@ -26,7 +25,6 @@ import { ProductPageModule } from './components/products/product-page/product-pa
     BrowserAnimationsModule,
     HttpClientModule,
     HomeModule,
-    NavbarVisitorModule,
     NavbarUserModule,
     StorePageModule,
     EditStoreModule,
