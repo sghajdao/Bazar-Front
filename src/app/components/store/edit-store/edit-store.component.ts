@@ -43,7 +43,8 @@ export class EditStoreComponent implements OnInit, OnDestroy {
           country: [res.country, Validators.required],
           phone: [res.phone, Validators.required]
         })
-      }
+      },
+      error: () => this.router.navigateByUrl('/not-found')
     })
     this.subscriptions.push(sub)
   }

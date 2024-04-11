@@ -42,6 +42,10 @@ const routes: Routes = [
     path: "verify-email",
     loadChildren:()=>import("./components/other-pages/verifiy-email/verifiy-email.module").then(m=>m.VerifiyEmailModule),
   },
+  {
+    path: "not-found",
+    loadChildren:()=>import("./components/other-pages/not-found/not-found.module").then(m=>m.NotFoundModule),
+  },
 ];
 
 @NgModule({

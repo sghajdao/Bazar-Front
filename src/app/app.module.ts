@@ -15,6 +15,7 @@ import { CreateProductModule } from './components/products/create-product/create
 import { ProductPageModule } from './components/products/product-page/product-page.module';
 import { SearchModule } from './components/products/search/search.module';
 import { VerifiyEmailModule } from './components/other-pages/verifiy-email/verifiy-email.module';
+import { NotFoundModule } from './components/other-pages/not-found/not-found.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { VerifiyEmailModule } from './components/other-pages/verifiy-email/verif
     ProductPageModule,
     SearchModule,
     VerifiyEmailModule,
+    NotFoundModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

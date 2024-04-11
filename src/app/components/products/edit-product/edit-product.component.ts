@@ -45,7 +45,8 @@ export class EditProductComponent implements OnInit, OnDestroy {
           price: [this.response.product.price, Validators.required],
           stock: [this.response.product.stock, Validators.required]
         })
-      }
+      },
+      error: () => this.router.navigateByUrl('/not-found')
     })
     this.subscriptions.push(sub)
   }

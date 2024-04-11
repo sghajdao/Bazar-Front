@@ -37,6 +37,10 @@ export class NavbarUserComponent implements OnInit, OnDestroy {
         next: user=> {
           if (user.store)
             this.user = user
+        },
+        error: () => {
+          localStorage.clear()
+          this.router.navigateByUrl('/auth/login')
         }
       })
       this.subscriptions.push(sub)

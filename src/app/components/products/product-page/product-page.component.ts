@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, Subscription } from 'rxjs';
 import { ProductResponse } from 'src/app/models/product-response';
 import { ProductService } from 'src/app/services/product.service';
@@ -14,6 +14,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
+    private router: Router,
   ) {}
 
   product?: ProductResponse
@@ -23,7 +24,8 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const sub = this.route.params.pipe(mergeMap(id => this.productService.getById(+id['id']))).subscribe({
-      next: data => this.product = data
+      next: data => this.product = data,
+      error: () => this.router.navigateByUrl('/not-found')
     })
     this.subscriptions.push(sub)
   }

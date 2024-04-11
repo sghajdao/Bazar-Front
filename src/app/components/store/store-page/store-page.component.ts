@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { StoreService } from 'src/app/services/store.service';
@@ -19,6 +19,7 @@ export class StorePageComponent implements OnInit, OnDestroy {
     private storeService: StoreService,
     private authService: AuthService,
     private dialog: MatDialog,
+    private router: Router,
   ) {}
 
   seller?: User
@@ -33,7 +34,8 @@ export class StorePageComponent implements OnInit, OnDestroy {
         if (this.authService.isAuthenticated() &&
           localStorage.getItem('userId') && user.id === +localStorage.getItem('userId')!)
           this.myStore = true
-      }
+      },
+      error: () => this.router.navigateByUrl('/not-found')
     })
     this.subscriptions.push(sub)
   }
