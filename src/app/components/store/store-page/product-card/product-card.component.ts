@@ -14,9 +14,9 @@ export class ProductCardComponent {
     private modal: MatDialog,
   ) {}
 
-  @Input() product?: Product
+  @Input() product?: {product: Product, myStore: boolean}
 
   deleteProduct() {
-    this.modal.open(DeleteProductComponent, {data: this.product})
+    this.modal.open(DeleteProductComponent, {data: this.product?.product})
   }
 }

@@ -1,3 +1,4 @@
+import { Follow } from "./follow";
 import { Store } from "./store";
 
 export interface User {
@@ -9,4 +10,5 @@ export interface User {
     verifiedEmail: boolean,
     role: any,
     store?: Store,
+    follows?: Follow[],
 }

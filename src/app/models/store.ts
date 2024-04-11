@@ -1,3 +1,4 @@
+import { Follow } from "./follow"
 import { Product } from "./product"
 import { User } from "./user"
 
@@ -10,5 +11,6 @@ export interface Store {
     country: string,
     phone: string
     seller?: User,
-    products?: Product[]
+    products?: Product[],
+    followers?: Follow[]
 }

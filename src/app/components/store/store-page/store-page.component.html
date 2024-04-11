@@ -1,5 +1,9 @@
 <app-navbar-user></app-navbar-user>
 
+<div *ngIf="follow === false" class="alert alert-danger container" role="alert">
+    There is a problem with the following process.
+</div>  
+
 <div *ngIf="seller && seller.store" class="container outside">
     <div class="card" style="width: 100%;">
         <div *ngIf="myStore" class="example-button-container">
@@ -9,8 +13,8 @@
         </div>
 
         <div *ngIf="!myStore" class="example-button-container">
-            <button *ngIf="!myStore" mat-icon-button [matMenuTriggerFor]="menu" color="primary" aria-label="Example icon-button with a menu">
-              <mat-icon>more_vert</mat-icon>
+            <button *ngIf="!myStore" [matMenuTriggerFor]="menu" mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+              <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="openDialog()">
@@ -21,7 +25,7 @@
                     <mat-icon>star</mat-icon>
                     <span>star</span>
                 </button>
-                <button mat-menu-item>
+                <button (click)="followStore()" mat-menu-item>
                     <mat-icon>person_add</mat-icon>
                     <span>follow</span>
                 </button>
@@ -34,7 +38,7 @@
             <p class="subtitle">{{seller.store.subtitle}}</p>
             <button mat-fab extended disabled>
                 <mat-icon>group</mat-icon>
-                Followers
+                Followers {{seller.store.followers?.length}}
             </button>
 
             <button style="float: right;" mat-fab extended disabled>
@@ -45,7 +49,7 @@
 
         <div style="display: flex;flex-wrap: wrap;" class="container">
             <div *ngFor="let product of seller.store.products" class="product">
-                <app-product-card [product]="product"></app-product-card>
+                <app-product-card [product]="{product, myStore}"></app-product-card>
             </div>
         </div>
     </div>

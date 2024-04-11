@@ -45,8 +45,8 @@ export class NavbarUserComponent implements OnInit, OnDestroy {
       })
       this.subscriptions.push(sub)
     }
-    else
-      this.router.navigateByUrl('/auth/login')
+    // else
+    //   this.router.navigateByUrl('/auth/login')
   }
 
   searchProducts() {

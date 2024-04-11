@@ -29,8 +29,6 @@ export class ProductService {
   }
 
   getById(id: number) {
-    if (!this.authService.isAuthenticated())
-      return new Observable<ProductResponse>()
     return this.http.get<ProductResponse>(environment.urlRequest + 'product/get/' + id);
   }
 
