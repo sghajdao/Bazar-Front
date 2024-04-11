@@ -14,6 +14,7 @@ import { ModalsModule } from './components/modals/modals.module';
 import { CreateProductModule } from './components/products/create-product/create-product.module';
 import { ProductPageModule } from './components/products/product-page/product-page.module';
 import { SearchModule } from './components/products/search/search.module';
+import { VerifiyEmailModule } from './components/other-pages/verifiy-email/verifiy-email.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SearchModule } from './components/products/search/search.module';
     CreateProductModule,
     ProductPageModule,
     SearchModule,
+    VerifiyEmailModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

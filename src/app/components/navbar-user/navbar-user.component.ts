@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { KeywordService } from 'src/app/services/keyword.service';
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './navbar-user.component.html',
   styleUrls: ['./navbar-user.component.css']
 })
-export class NavbarUserComponent implements OnInit{
+export class NavbarUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
@@ -25,17 +26,20 @@ export class NavbarUserComponent implements OnInit{
   search: string = ''
   keywords: string[] = []
 
+  subscriptions: Subscription[] = []
+
   ngOnInit(): void {
     this.authenticated = this.authService.isAuthenticated()
     this.authService.sessionsExpired()
     const email = this.userService.getEmail()
     if (email) {
-      this.userService.getUserByEmail(email).subscribe({
+      const sub = this.userService.getUserByEmail(email).subscribe({
         next: user=> {
           if (user.store)
             this.user = user
         }
       })
+      this.subscriptions.push(sub)
     }
     else
       this.router.navigateByUrl('/auth/login')
@@ -43,12 +47,13 @@ export class NavbarUserComponent implements OnInit{
 
   searchProducts() {
     if (this.search) {
-      this.keywordService.querySearch(this.search).subscribe({
+      const sub = this.keywordService.querySearch(this.search).subscribe({
         next: data => {
           this.keywords = []
           data.forEach(keyword => this.keywords.push(keyword.word))
         }
       })
+      this.subscriptions.push(sub)
     }
     else {
       this.keywords = []
@@ -63,5 +68,9 @@ export class NavbarUserComponent implements OnInit{
   onLogOut() {
     localStorage.removeItem("token")
     this.router.navigateByUrl('/auth/login')
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

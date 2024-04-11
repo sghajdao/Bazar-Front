@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, mergeMap, of } from 'rxjs';
+import { Observable, Subscription, mergeMap, of } from 'rxjs';
 import { ImageResponse } from 'src/app/models/image-response';
 import { Store } from 'src/app/models/store';
 import { ImageService } from 'src/app/services/image.service';
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './edit-store.component.html',
   styleUrls: ['./edit-store.component.css']
 })
-export class EditStoreComponent implements OnInit{
+export class EditStoreComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
@@ -27,11 +27,12 @@ export class EditStoreComponent implements OnInit{
 
   selectedFile?: File
   selectedImage: string | ArrayBuffer = ''
-
   form: any
 
+  subscriptions: Subscription[] = []
+
   ngOnInit(): void {
-    this.route.params.pipe(mergeMap(param=> this.storeService.getStoreById(+param['id']))).subscribe({
+    const sub = this.route.params.pipe(mergeMap(param=> this.storeService.getStoreById(+param['id']))).subscribe({
       next: res=> {
         this.store = res
         this.selectedImage = 'http://localhost:8181/api/image/' + res.image
@@ -44,6 +45,7 @@ export class EditStoreComponent implements OnInit{
         })
       }
     })
+    this.subscriptions.push(sub)
   }
 
   onImageSelected(event :any) {
@@ -72,8 +74,9 @@ export class EditStoreComponent implements OnInit{
 
   editStore() {
     if (this.selectedImage) {
-      this.uploadImage().pipe(mergeMap(res=> this.edit(res[0].name))).
+      const sub = this.uploadImage().pipe(mergeMap(res=> this.edit(res[0].name))).
         subscribe(data=>this.router.navigateByUrl('/store/' + this.store?.id))
+      this.subscriptions.push(sub)
     }
   }
 
@@ -92,5 +95,9 @@ export class EditStoreComponent implements OnInit{
         return this.storeService.updateStore(store);
     }
     return new Observable()
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

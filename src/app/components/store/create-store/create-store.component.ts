@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, mergeMap } from 'rxjs';
+import { Observable, Subscription, mergeMap } from 'rxjs';
 import { ImageResponse } from 'src/app/models/image-response';
 import { Store } from 'src/app/models/store';
 import { ImageService } from 'src/app/services/image.service';
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './create-store.component.html',
   styleUrls: ['./create-store.component.css']
 })
-export class CreateStoreComponent {
+export class CreateStoreComponent implements OnDestroy {
 
   constructor(
     private fb: FormBuilder,
@@ -25,6 +25,8 @@ export class CreateStoreComponent {
 
   selectedFile?: File
   selectedImage: string | ArrayBuffer = ''
+
+  subscriptions: Subscription[] = []
 
   form = this.fb.group({
     name: ['', Validators.required],
@@ -56,9 +58,10 @@ export class CreateStoreComponent {
 
   createStore() {
     if (this.selectedImage) {
-      this.uploadImage().pipe(mergeMap(res=> this.create(res[0].name))).subscribe({
+      const sub = this.uploadImage().pipe(mergeMap(res=> this.create(res[0].name))).subscribe({
         next: data => this.router.navigateByUrl('/store/' + data.id)
       })
+      this.subscriptions.push(sub)
     }
   }
 
@@ -78,5 +81,9 @@ export class CreateStoreComponent {
           return this.storeService.createStore(store, email);
     }
     return new Observable()
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

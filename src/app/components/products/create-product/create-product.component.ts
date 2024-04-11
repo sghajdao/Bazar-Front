@@ -1,7 +1,7 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Validators, FormBuilder, NgModel, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { mergeMap, Observable } from 'rxjs';
+import { mergeMap, Observable, Subscription } from 'rxjs';
 import { ImageResponse } from 'src/app/models/image-response';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
@@ -14,7 +14,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.css']
 })
-export class CreateProductComponent implements OnInit {
+export class CreateProductComponent implements OnInit, OnDestroy {
   
   constructor(
     private fb: FormBuilder,
@@ -48,14 +48,17 @@ export class CreateProductComponent implements OnInit {
   categorization?: FormGroup
   publishForm?: FormGroup
 
+  subscriptions: Subscription[] = []
+
   error: boolean = false
 
   ngOnInit(): void {
     const email = this.userService.getEmail()
     if (email) {
-      this.userService.getUserByEmail(email).subscribe({
+      const sub = this.userService.getUserByEmail(email).subscribe({
         next: user => this.seller = user
       })
+      this.subscriptions.push(sub)
     }
     else
       this.router.navigateByUrl('/auth/login')
@@ -112,11 +115,16 @@ export class CreateProductComponent implements OnInit {
     if (this.mainInfo?.valid && this.priceStock?.valid && this.selectedFile?.selectedImage 
       && this.categorization?.valid && event.valid) {
         this.error = false
-      this.uploadImages().pipe(mergeMap(res => this.create(event, res))).subscribe({
+      const sub = this.uploadImages().pipe(mergeMap(res => this.create(event, res))).subscribe({
         next: data => this.router.navigateByUrl('/store/' + this.seller?.store?.id)
       })
+      this.subscriptions.push(sub)
     }
     else
       this.error = true
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

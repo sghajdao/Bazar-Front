@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -8,16 +9,23 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './delete-product.component.html',
   styleUrls: ['./delete-product.component.css']
 })
-export class DeleteProductComponent {
+export class DeleteProductComponent implements OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Product,
     private productService: ProductService,
   ) {}
 
+  subscriptions: Subscription[] = []
+
   deleteProduct() {
-    this.productService.deleteProduct(this.data.id!).subscribe({
+    const sub = this.productService.deleteProduct(this.data.id!).subscribe({
       next: res => window.location.reload()
     });
+    this.subscriptions.push(sub)
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

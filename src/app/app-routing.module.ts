@@ -37,7 +37,11 @@ const routes: Routes = [
   {
     path: "products-search",
     loadChildren:()=>import("./components/products/search/search.module").then(m=>m.SearchModule),
-  }
+  },
+  {
+    path: "verify-email",
+    loadChildren:()=>import("./components/other-pages/verifiy-email/verifiy-email.module").then(m=>m.VerifiyEmailModule),
+  },
 ];
 
 @NgModule({

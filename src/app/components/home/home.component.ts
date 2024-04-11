@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,22 +8,29 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
   ) {}
 
+  subscriptions: Subscription[] = []
+
   ngOnInit(): void {
-      const email = this.userService.getEmail()
-      if (email) {
-        this.userService.getUserByEmail(email).subscribe({
-          next: user=> {
-            if (!localStorage.getItem('userId'))
-              localStorage.setItem('userId', user.id.toString())
-          }
-        })
-      }
+    const email = this.userService.getEmail()
+    if (email) {
+      const sub = this.userService.getUserByEmail(email).subscribe({
+        next: user=> {
+          if (!localStorage.getItem('userId'))
+            localStorage.setItem('userId', user.id.toString())
+        }
+      })
+      this.subscriptions.push(sub)
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

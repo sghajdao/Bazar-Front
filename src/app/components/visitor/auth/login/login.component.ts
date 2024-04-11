@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginRequest } from 'src/app/models/login-request';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
 
   constructor(
     private router: Router,
@@ -30,6 +31,8 @@ export class LoginComponent {
   loged: number = 0
   error:boolean = false
 
+  subscriptions: Subscription[] = []
+
   onSignIn() {
     this.validators = {
       email: this.userData.get('email')!.invalid,
@@ -39,7 +42,7 @@ export class LoginComponent {
     if (this.userData.value.email && this.userData.value.password) {      
       const user: LoginRequest = {email: this.userData.value.email, password: this.userData.value.password}
       this.loged = 1
-      this.authService.login(user).subscribe({
+      const sub = this.authService.login(user).subscribe({
         next: data=> {
           if (data.message === "Login Success") {
             localStorage.setItem("token", data.token);
@@ -52,10 +55,15 @@ export class LoginComponent {
           this.error = true
         }
       })
+      this.subscriptions.push(sub)
     }
   }
 
   onSignUp() {
     this.router.navigateByUrl('/auth/register')
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

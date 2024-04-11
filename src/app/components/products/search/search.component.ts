@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { mergeMap } from 'rxjs';
+import { mergeMap, Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
@@ -18,9 +18,16 @@ export class SearchComponent implements OnInit {
 
   products?: Product[]
 
+  subscriptions: Subscription[] = []
+
   ngOnInit(): void {
-    this.route.params.pipe(mergeMap(word => this.productService.getByKeyword(word['word']))).subscribe({
+    const sub = this.route.params.pipe(mergeMap(word => this.productService.getByKeyword(word['word']))).subscribe({
       next: data => this.products = data
     })
+    this.subscriptions.push(sub)
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }
