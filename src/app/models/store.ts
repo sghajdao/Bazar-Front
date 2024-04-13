@@ -1,9 +1,11 @@
 import { Follow } from "./follow"
 import { Product } from "./product"
+import { Star } from "./star"
 import { User } from "./user"
 
 export interface Store {
-    id?:number
+    id?:number,
+    createdAt: Date,
     image: string,
     name: string,
     subtitle: string,
@@ -12,5 +14,6 @@ export interface Store {
     phone: string
     seller?: User,
     products?: Product[],
-    followers?: Follow[]
+    followers?: Follow[],
+    stars?: Star[],
 }

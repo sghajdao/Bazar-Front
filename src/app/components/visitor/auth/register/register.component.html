@@ -12,22 +12,22 @@
 	<br>
 	<form [formGroup]="userData">
 		<div class="form-floating mb-3 field">
-			<input type="text" [class]="(validators.firstname && this.userData.get('firstname')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="firstname" placeholder="Firstname">
+			<input (keyup.enter)="onSignUp()" type="text" [class]="(validators.firstname && this.userData.get('firstname')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="firstname" placeholder="Firstname">
 			<label for="floatingInput">Firstname</label>
 			<span *ngIf="validators.firstname && this.userData.get('firstname')!.invalid" class="text-danger">firstname is required</span>
 		</div>
 		<div class="form-floating mb-3">
-			<input type="text" [class]="(validators.firstname && this.userData.get('lastname')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="lastname" placeholder="Lastname">
+			<input (keyup.enter)="onSignUp()" type="text" [class]="(validators.firstname && this.userData.get('lastname')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="lastname" placeholder="Lastname">
 			<label for="floatingPassword">Lastname</label>
 			<span *ngIf="validators.lastname && this.userData.get('lastname')!.invalid" class="text-danger">lastname is required</span>
 		</div>
 	    <div class="form-floating mb-3">
-			<input type="email" [class]="(validators.firstname && this.userData.get('email')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="email" placeholder="name@example.com">
+			<input (keyup.enter)="onSignUp()" type="email" [class]="(validators.firstname && this.userData.get('email')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="email" placeholder="name@example.com">
 			<label for="floatingInput">Email address</label>
 			<span *ngIf="validators.email && this.userData.get('email')!.invalid" class="text-danger">email is required</span>
 		</div>
 	    <div class="form-floating mb-3">
-			<input type="password" [class]="(validators.firstname && this.userData.get('password')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="password" placeholder="Password">
+			<input (keyup.enter)="onSignUp()" type="password" [class]="(validators.firstname && this.userData.get('password')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="password" placeholder="Password">
 			<label for="floatingPassword">Password</label>
 			<span *ngIf="validators.password && this.userData.get('password')!.invalid" class="text-danger">password is required</span>
 		</div>

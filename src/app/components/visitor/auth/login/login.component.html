@@ -13,11 +13,11 @@
 	<form [formGroup]="userData">
 		<div class="form-floating mb-3">
 			<input type="email" [class]="(validators.email && this.userData.get('email')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="email" placeholder="name@example.com">
-			<label for="floatingInput">Email address</label>
+			<label (keyup.enter)="onSignIn()" for="floatingInput">Email address</label>
 			<span *ngIf="validators.email && this.userData.get('email')!.invalid" class="text-danger">email is required</span>
 		</div>
 		<div class="form-floating">
-			<input type="password" [class]="(validators.password && this.userData.get('password')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="password" placeholder="Password">
+			<input (keyup.enter)="onSignIn()" type="password" [class]="(validators.password && this.userData.get('password')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="password" placeholder="Password">
 			<label for="floatingPassword">Password</label>
 			<span *ngIf="validators.password && this.userData.get('password')!.invalid" class="text-danger">password is required</span>
 		</div>

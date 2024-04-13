@@ -32,16 +32,17 @@ export class EditStoreComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = []
 
   ngOnInit(): void {
-    const sub = this.route.params.pipe(mergeMap(param=> this.storeService.getStoreById(+param['id']))).subscribe({
+    const userId: number = localStorage.getItem('userId')? +localStorage.getItem('userId')!: -1;
+    const sub = this.route.params.pipe(mergeMap(param=> this.storeService.getStoreById({storeId:+param['id'], userId:userId}))).subscribe({
       next: res=> {
-        this.store = res
-        this.selectedImage = 'http://localhost:8181/api/image/' + res.image
+        this.store = res.store
+        this.selectedImage = 'http://localhost:8181/api/image/' + this.store.image
         this.form = this.fb.group({
-          name: [res.name, Validators.required],
-          subtitle: [res.subtitle, Validators.required],
-          email: [res.email, Validators.required],
-          country: [res.country, Validators.required],
-          phone: [res.phone, Validators.required]
+          name: [this.store.name, Validators.required],
+          subtitle: [this.store.subtitle, Validators.required],
+          email: [this.store.email, Validators.required],
+          country: [this.store.country, Validators.required],
+          phone: [this.store.phone, Validators.required]
         })
       },
       error: () => this.router.navigateByUrl('/not-found')
@@ -86,6 +87,7 @@ export class EditStoreComponent implements OnInit, OnDestroy {
       && this.form.value.phone && this.form.value.subtitle) {
         const store:Store = {
           id: this.store?.id,
+          createdAt: this.store?.createdAt!,
           name: this.form.value.name,
           subtitle: this.form.value.subtitle,
           email: this.form.value.email,

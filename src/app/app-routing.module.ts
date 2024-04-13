@@ -46,6 +46,10 @@ const routes: Routes = [
     path: "not-found",
     loadChildren:()=>import("./components/other-pages/not-found/not-found.module").then(m=>m.NotFoundModule),
   },
+  {
+    path: "recent-products",
+    loadChildren:()=>import("./components/products/last-products/last-products.module").then(m=>m.LastProductsModule),
+  },
 ];
 
 @NgModule({

@@ -1,4 +1,5 @@
 import { Follow } from "./follow";
+import { Star } from "./star";
 import { Store } from "./store";
 
 export interface User {
@@ -11,4 +12,5 @@ export interface User {
     role: any,
     store?: Store,
     follows?: Follow[],
+    raters?: Star[],
 }

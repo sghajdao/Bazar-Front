@@ -1,13 +1,13 @@
 <app-navbar-user></app-navbar-user>
 
-<div *ngIf="follow === false" class="alert alert-danger container" role="alert">
-    There is a problem with the following process.
-</div>  
+<div *ngIf="response && response.status === false" class="alert alert-danger container" role="alert">
+    {{response.message}}
+</div>
 
-<div *ngIf="seller && seller.store" class="container outside">
+<div *ngIf="storeResponse && storeResponse.store" class="container outside">
     <div class="card" style="width: 100%;">
         <div *ngIf="myStore" class="example-button-container">
-            <button [routerLink]="'/edit-store/' + seller.store.id" mat-mini-fab matTooltip="Edit" color="primary" aria-label="Example icon button with a menu icon">
+            <button [routerLink]="'/edit-store/' + storeResponse.store.id" mat-mini-fab matTooltip="Edit" color="primary" aria-label="Example icon button with a menu icon">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
@@ -21,38 +21,46 @@
                     <mat-icon>info</mat-icon>
                     <span>info</span>
                 </button>
-                <button mat-menu-item>
+                <button *ngIf="!followAndStar[1]" (click)="rateStore()" mat-menu-item>
                     <mat-icon>star</mat-icon>
                     <span>star</span>
                 </button>
-                <button (click)="followStore()" mat-menu-item>
+                <button *ngIf="followAndStar[1]" (click)="rateStore()" mat-menu-item>
+                    <mat-icon>star</mat-icon>
+                    <span>remove star</span>
+                </button>
+                <button *ngIf="!followAndStar[0]" (click)="followStore()" mat-menu-item>
                     <mat-icon>person_add</mat-icon>
                     <span>follow</span>
+                </button>
+                <button *ngIf="followAndStar[0]" (click)="unfollowStore()" mat-menu-item>
+                    <mat-icon>person_remove</mat-icon>
+                    <span>unfollow</span>
                 </button>
             </mat-menu>
         </div>
 
-        <img [src]="'http://localhost:8181/api/image/'+ seller.store.image" class="card-img-top image" alt="store image">
+        <img [src]="'http://localhost:8181/api/image/'+ storeResponse.store.image" class="card-img-top image" alt="store image">
         <div class="card-body">
-            <h3>{{seller.store.name}}</h3>
-            <p class="subtitle">{{seller.store.subtitle}}</p>
+            <h3>{{storeResponse.store.name}}</h3>
+            <p class="subtitle">{{storeResponse.store.subtitle}}</p>
             <button mat-fab extended disabled>
                 <mat-icon>group</mat-icon>
-                Followers {{seller.store.followers?.length}}
+                Followers {{storeResponse.store.followers?.length}}
             </button>
 
             <button style="float: right;" mat-fab extended disabled>
                 <mat-icon>shopping_cart</mat-icon>
-                Products {{seller.store.products?.length}}
+                Products {{storeResponse.store.products?.length}}
             </button>
         </div>
 
         <div style="display: flex;flex-wrap: wrap;" class="container">
-            <div *ngFor="let product of seller.store.products" class="product">
+            <div *ngFor="let product of storeResponse.store.products" class="product">
                 <app-product-card [product]="{product, myStore}"></app-product-card>
             </div>
         </div>
     </div>
 </div>
 
-<mat-spinner *ngIf="!seller || !seller.store" style="position: absolute;left: 45%;top: 40%;"></mat-spinner>
+<mat-spinner *ngIf="!storeResponse || !storeResponse.store" style="position: absolute;left: 45%;top: 40%;"></mat-spinner>

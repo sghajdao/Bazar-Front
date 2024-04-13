@@ -69,6 +69,7 @@ export class CreateStoreComponent implements OnDestroy {
     if (this.form.value.country && this.form.value.email && this.form.value.name
       && this.form.value.phone && this.form.value.subtitle) {
         const store:Store = {
+          createdAt: new Date(),
           name: this.form.value.name,
           subtitle: this.form.value.subtitle,
           email: this.form.value.email,

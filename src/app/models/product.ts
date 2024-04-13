@@ -3,6 +3,7 @@ import { Store } from "./store";
 
 export interface Product {
     id?:number,
+    createdAt:Date
     title:string,
     description:string,
     images?:(string | ArrayBuffer)[],

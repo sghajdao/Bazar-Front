@@ -85,6 +85,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   update(data: FormGroup, images: ImageResponse[]) {
     let product: Product = {
       id: this.response?.product.id,
+      createdAt: this.response?.product.createdAt!,
       title: data.value.title,
       description: data.value.description,
       price: data.value.price,

@@ -16,6 +16,7 @@ import { ProductPageModule } from './components/products/product-page/product-pa
 import { SearchModule } from './components/products/search/search.module';
 import { VerifiyEmailModule } from './components/other-pages/verifiy-email/verifiy-email.module';
 import { NotFoundModule } from './components/other-pages/not-found/not-found.module';
+import { LastProductsModule } from './components/products/last-products/last-products.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { NotFoundModule } from './components/other-pages/not-found/not-found.mod
     SearchModule,
     VerifiyEmailModule,
     NotFoundModule,
+    LastProductsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

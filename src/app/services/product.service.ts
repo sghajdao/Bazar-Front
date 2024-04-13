@@ -46,6 +46,10 @@ export class ProductService {
     return this.http.get<Product[]>(environment.urlRequest + 'product/search/' + word);
   }
 
+  getLastProducts() {
+    return this.http.get<Product[]>(environment.urlRequest + 'product/last');
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

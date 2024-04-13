@@ -10,7 +10,7 @@
               <button mat-button color="primary">Best seller</button>
             </li>
             <li class="nav-item">
-              <button mat-button color="primary">Most recent</button>
+              <button routerLink="/recent-products" mat-button color="primary">Most recent</button>
             </li>
             <li class="nav-item">
               <button mat-button color="primary">Top rated stores</button>
@@ -20,7 +20,7 @@
             </li>
           </ul>
           <form class="d-flex search" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [matAutocomplete]="auto" [ngModelOptions]="{standalone: true}" [(ngModel)]="search" (ngModelChange)="searchProducts()">
+            <input (keyup.enter)="onSearch()" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [matAutocomplete]="auto" [ngModelOptions]="{standalone: true}" [(ngModel)]="search" (ngModelChange)="searchProducts()">
             <mat-autocomplete #auto="matAutocomplete">
               <div *ngFor="let keyword of keywords">
                 <mat-option [value]="keyword">{{keyword}}</mat-option>

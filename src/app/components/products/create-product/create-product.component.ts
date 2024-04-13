@@ -94,6 +94,7 @@ export class CreateProductComponent implements OnInit, OnDestroy {
   create(event: FormGroup, images: ImageResponse[]) {
     this.publishForm = event
     let product: Product = {
+      createdAt: new Date(),
       title: this.mainInfo?.value.title,
       description: this.mainInfo?.value.description,
       price: this.priceStock?.value.price,

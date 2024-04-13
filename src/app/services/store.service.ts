@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { StoreResponse } from '../models/storeResponse';
+import { StoreRequest } from '../models/storeRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +35,8 @@ export class StoreService {
     return this.http.put<Store>(environment.urlRequest + 'store/update', store, this.getHeaders());
   }
 
-  getStoreById(id: number) {
-    if (!this.authService.isAuthenticated())
-      return new Observable<Store>()
-    return this.http.get<Store>(environment.urlRequest + 'store/' + id, this.getHeaders())
+  getStoreById(request: StoreRequest) {
+    return this.http.post<StoreResponse>(environment.urlRequest + 'store/id', request);
   }
 
   private getHeaders(){

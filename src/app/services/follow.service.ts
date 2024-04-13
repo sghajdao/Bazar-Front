@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FollowRequest } from '../models/followRequest';
 import { environment } from 'src/environments/environment';
+import { FollowingAndStarResp } from '../models/followingAndStarResp';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,11 @@ export class FollowService {
   ) { }
 
   followStore(request: FollowRequest) {
-    return this.http.post<boolean>(environment.urlRequest + 'follow/new', request, this.getHeaders());
+    return this.http.post<FollowingAndStarResp>(environment.urlRequest + 'follow/new', request, this.getHeaders());
+  }
+
+  unfollowStore(id: number, userEmail: string) {
+    return this.http.delete<FollowingAndStarResp>(environment.urlRequest + 'follow/unfollow/' + id + '/' + userEmail, this.getHeaders());
   }
 
   getHeaders(){
