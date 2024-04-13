@@ -25,7 +25,7 @@
                     <mat-icon>star</mat-icon>
                     <span>star</span>
                 </button>
-                <button *ngIf="followAndStar[1]" (click)="rateStore()" mat-menu-item>
+                <button *ngIf="followAndStar[1]" (click)="removeStar()" mat-menu-item>
                     <mat-icon>star</mat-icon>
                     <span>remove star</span>
                 </button>
@@ -50,8 +50,8 @@
             </button>
 
             <button style="float: right;" mat-fab extended disabled>
-                <mat-icon>shopping_cart</mat-icon>
-                Products {{storeResponse.store.products?.length}}
+                <mat-icon>star</mat-icon>
+                Stars {{storeResponse.store.stars?.length}}
             </button>
         </div>
 

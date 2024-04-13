@@ -15,12 +15,12 @@ import { ImageClickedComponent } from './image-clicked/image-clicked.component';
     StoreInfoComponent,
     SessionExpiredComponent,
     DeleteProductComponent,
-    ImageClickedComponent
+    ImageClickedComponent,
   ],
   imports: [
     CommonModule,
     MatDialogModule, MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ]
 })
 export class ModalsModule { }

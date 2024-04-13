@@ -2,11 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, Subscription } from 'rxjs';
-import { User } from 'src/app/models/user';
 import { StoreService } from 'src/app/services/store.service';
 import { StoreInfoComponent } from '../../modals/store-info/store-info.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { Follow } from 'src/app/models/follow';
 import { FollowRequest } from 'src/app/models/followRequest';
 import { UserService } from 'src/app/services/user.service';
 import { FollowService } from 'src/app/services/follow.service';
@@ -97,6 +95,8 @@ export class StorePageComponent implements OnInit, OnDestroy {
         }
       })
     }
+    else if (!email || !this.authService.isAuthenticated())
+      this.router.navigateByUrl('/auth/login')
   }
 
   rateStore() {
@@ -113,6 +113,20 @@ export class StorePageComponent implements OnInit, OnDestroy {
         }
       })
       this.subscriptions.push(sub)
+    }
+    else if (!email || !this.authService.isAuthenticated())
+      this.router.navigateByUrl('/auth/login')
+  }
+
+  removeStar() {
+    const email = this.userService.getEmail()
+    if (!this.myStore && this.storeResponse?.seller && email && this.authService.isAuthenticated()) {
+      const sub = this.starService.removeStar(this.storeResponse.store.id!, email).subscribe({
+        next: data => {
+          this.response = data
+          this.followAndStar[1] = !this.followAndStar[1]
+        }
+      })
     }
     else if (!email || !this.authService.isAuthenticated())
       this.router.navigateByUrl('/auth/login')
