@@ -7,19 +7,23 @@ import { NavbarUserModule } from '../../navbar-user/navbar-user.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from './header/header.component';
+import { SalesChartComponent } from './sales-chart/sales-chart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
   declarations: [
     SellerDashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    SalesChartComponent
   ],
   imports: [
     CommonModule,
     SellerDashboardRoutingModule,
     NavbarUserModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    NgApexchartsModule
   ]
 })
 export class SellerDashboardModule { }

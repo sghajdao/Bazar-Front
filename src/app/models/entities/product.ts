@@ -1,4 +1,5 @@
 import { Keyword } from "./keyword";
+import { Sales } from "./sales";
 import { Store } from "./store";
 
 export interface Product {
@@ -18,7 +19,7 @@ export interface Product {
     visitors?:number,
     sales?:number,
     store?:Store,
-    store2?:Store,
+    sold?: Sales,
 }
 
 export enum Category {

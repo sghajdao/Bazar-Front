@@ -1,5 +1,6 @@
 import { Follow } from "./follow"
 import { Product } from "./product"
+import { Sales } from "./sales"
 import { Star } from "./star"
 import { User } from "./user"
 
@@ -17,4 +18,5 @@ export interface Store {
     sales?: Product[],
     followers?: Follow[],
     stars?: Star[],
+    solds?: Sales[],
 }

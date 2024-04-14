@@ -1,3 +1,9 @@
+.square {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 15px;
+}
+
 .example-card {
     max-width: 300px;
 }
