@@ -54,6 +54,10 @@ const routes: Routes = [
     path: "seller-dashboard",
     loadChildren:()=>import("./components/dashboards/seller-dashboard/seller-dashboard.module").then(m=>m.SellerDashboardModule),
   },
+  {
+    path: "top-rated-store",
+    loadChildren:()=>import("./components/store/top-rated-store/top-rated-store.module").then(m=>m.TopRatedStoreModule),
+  },
 ];
 
 @NgModule({

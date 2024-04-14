@@ -39,6 +39,10 @@ export class StoreService {
     return this.http.post<StoreResponse>(environment.urlRequest + 'store/id', request);
   }
 
+  getTopRated() {
+    return this.http.get<Store[]>(environment.urlRequest + 'store/top-rated');
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

@@ -11,6 +11,7 @@ import {
   ApexFill
 } from "ng-apexcharts";
 import { StoreResponse } from 'src/app/models/dtos/storeResponse';
+import { Store } from 'src/app/models/entities/store';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -36,17 +37,71 @@ export class SalesChartComponent implements OnChanges {
   @ViewChild("chart") chart?: ChartComponent;
   chartOptions?: Partial<ChartOptions>;
 
+  incomes: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.response)
+    if (this.response) {
       this.setChart()
+      if (this.response.store.sales)
+        this.getData(this.response.store)
+    }
+
+  }
+
+  getData(store: Store) {
+    const year: number = new Date().getFullYear()
+    for (let sale of store.sales!) {
+      if (new Date(sale.sold?.soldAt!).getFullYear() === year) {
+        switch (new Date(sale.sold?.soldAt!).getMonth()) {
+          case 1:
+            this.incomes[0] += sale.price
+            break;
+          case 2:
+            this.incomes[1] += sale.price
+            break;
+          case 3:
+            this.incomes[2] += sale.price
+            break;
+          case 4:
+            this.incomes[3] += sale.price
+            break;
+          case 5:
+            this.incomes[4] += sale.price
+            break;
+          case 6:
+            this.incomes[5] += sale.price
+            break;
+          case 7:
+            this.incomes[6] += sale.price
+            break;
+          case 8:
+            this.incomes[7] += sale.price
+            break;
+          case 9:
+            this.incomes[8] += sale.price
+            break;
+          case 10:
+            this.incomes[9] += sale.price
+            break;
+          case 11:
+            this.incomes[10] += sale.price
+            break;
+          case 12:
+            this.incomes[11] += sale.price
+            break;
+          default:
+            break;
+        }
+      }
+    }
   }
 
   setChart() {
     this.chartOptions = {
       series: [
         {
-          name: "Inflation",
-          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+          name: "Incomes",
+          data: [200.3, 300.1, 400.0, 1000.1, 400.0, 300.6, 300.2, 200.3, 100.4, 100.8, 1000.5, 100.2]
         }
       ],
       chart: {
@@ -63,7 +118,7 @@ export class SalesChartComponent implements OnChanges {
       dataLabels: {
         enabled: true,
         formatter: function(val) {
-          return val + "%";
+          return val + "$";
         },
         offsetY: -20,
         style: {
@@ -137,12 +192,12 @@ export class SalesChartComponent implements OnChanges {
         labels: {
           show: false,
           formatter: function(val) {
-            return val + "%";
+            return val + "$";
           }
         }
       },
       title: {
-        text: "Monthly Sales",
+        text: "Monthly Incomes",
         // floating: 0,
         offsetY: 320,
         align: "center",
