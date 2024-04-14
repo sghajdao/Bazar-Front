@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegisterRequest } from '../models/register-request';
-import { AuthResponse } from '../models/auth-response';
+import { RegisterRequest } from '../models/dtos/register-request';
+import { AuthResponse } from '../models/dtos/auth-response';
 import { environment } from 'src/environments/environment';
-import { LoginRequest } from '../models/login-request';
+import { LoginRequest } from '../models/dtos/login-request';
 import { jwtDecode } from 'jwt-decode';
 import { MatDialog } from '@angular/material/dialog';
 import { SessionExpiredComponent } from '../components/modals/session-expired/session-expired.component';

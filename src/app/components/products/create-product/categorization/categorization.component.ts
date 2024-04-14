@@ -2,7 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { Category, Collection } from 'src/app/models/product';
+import { Category, Collection } from 'src/app/models/entities/product';
 
 @Component({
   selector: 'app-categorization',

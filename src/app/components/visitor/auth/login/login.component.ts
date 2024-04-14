@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoginRequest } from 'src/app/models/login-request';
+import { LoginRequest } from 'src/app/models/dtos/login-request';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({

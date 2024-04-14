@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FollowRequest } from '../models/followRequest';
+import { FollowRequest } from '../models/dtos/followRequest';
 import { environment } from 'src/environments/environment';
-import { FollowingAndStarResp } from '../models/followingAndStarResp';
+import { FollowingAndStarResp } from '../models/dtos/followingAndStarResp';
 
 @Injectable({
   providedIn: 'root'

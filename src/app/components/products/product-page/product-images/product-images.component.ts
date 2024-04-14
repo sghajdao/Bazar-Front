@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageClickedComponent } from 'src/app/components/modals/image-clicked/image-clicked.component';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/models/entities/product';
 
 @Component({
   selector: 'app-product-images',

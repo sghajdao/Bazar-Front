@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/user';
-import { VerifyEmailRequest } from 'src/app/models/verifyEmailRequest';
+import { User } from 'src/app/models/entities/user';
+import { VerifyEmailRequest } from 'src/app/models/dtos/verifyEmailRequest';
 import { MailService } from 'src/app/services/mail.service';
 import { UserService } from 'src/app/services/user.service';
 

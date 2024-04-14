@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StarRequest } from '../models/starRequest';
-import { Star } from '../models/star';
+import { StarRequest } from '../models/dtos/starRequest';
+import { Star } from '../models/entities/star';
 import { environment } from 'src/environments/environment';
-import { FollowingAndStarResp } from '../models/followingAndStarResp';
+import { FollowingAndStarResp } from '../models/dtos/followingAndStarResp';
 
 @Injectable({
   providedIn: 'root'

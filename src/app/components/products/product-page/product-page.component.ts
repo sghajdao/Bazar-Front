@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, Subscription } from 'rxjs';
-import { ProductResponse } from 'src/app/models/product-response';
+import { ProductResponse } from 'src/app/models/dtos/product-response';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({

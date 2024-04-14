@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProductResponse } from 'src/app/models/product-response';
+import { ProductResponse } from 'src/app/models/dtos/product-response';
 
 @Component({
   selector: 'app-product-description',

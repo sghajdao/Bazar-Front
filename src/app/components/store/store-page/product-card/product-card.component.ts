@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteProductComponent } from 'src/app/components/modals/delete-product/delete-product.component';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/models/entities/product';
 
 @Component({
   selector: 'app-product-card',

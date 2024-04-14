@@ -18,6 +18,7 @@ export interface Product {
     visitors?:number,
     sales?:number,
     store?:Store,
+    store2?:Store,
 }
 
 export enum Category {

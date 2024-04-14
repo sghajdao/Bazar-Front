@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ImageResponse } from 'src/app/models/image-response';
+import { ImageResponse } from 'src/app/models/dtos/image-response';
 import { ImageService } from 'src/app/services/image.service';
 
 @Component({

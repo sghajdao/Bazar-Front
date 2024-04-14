@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Store } from 'src/app/models/store';
+import { Store } from 'src/app/models/entities/store';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';

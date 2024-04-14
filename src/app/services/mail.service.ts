@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { VerifyEmailRequest } from '../models/verifyEmailRequest';
+import { VerifyEmailRequest } from '../models/dtos/verifyEmailRequest';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 

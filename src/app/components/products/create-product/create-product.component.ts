@@ -2,9 +2,9 @@ import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular
 import { Validators, FormBuilder, NgModel, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { mergeMap, Observable, Subscription } from 'rxjs';
-import { ImageResponse } from 'src/app/models/image-response';
-import { Product } from 'src/app/models/product';
-import { User } from 'src/app/models/user';
+import { ImageResponse } from 'src/app/models/dtos/image-response';
+import { Product } from 'src/app/models/entities/product';
+import { User } from 'src/app/models/entities/user';
 import { ImageService } from 'src/app/services/image.service';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';

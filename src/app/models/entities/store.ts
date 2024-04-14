@@ -14,6 +14,7 @@ export interface Store {
     phone: string
     seller?: User,
     products?: Product[],
+    sales?: Product[],
     followers?: Follow[],
     stars?: Star[],
 }

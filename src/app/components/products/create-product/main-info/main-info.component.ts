@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/models/entities/product';
 
 @Component({
   selector: 'app-main-info',

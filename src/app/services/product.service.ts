@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product';
+import { Product } from '../models/entities/product';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
-import { ProductResponse } from '../models/product-response';
+import { ProductResponse } from '../models/dtos/product-response';
 
 @Injectable({
   providedIn: 'root'

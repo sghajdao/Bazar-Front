@@ -32,14 +32,18 @@
             </button>
           </form>
 
-          <a class="navbar-brand" *ngIf="authenticated">
+          <a class="navbar-brand" *ngIf="authenticated && user">
             <img src="./../../../../assets/images/Unknown_person.jpg" style="width:40px;cursor: pointer;" class="rounded-pill ms-3" mat-button [matMenuTriggerFor]="menu">
             <mat-menu #menu="matMenu">
               <button *ngIf="!user?.store" routerLink="/new-store" mat-menu-item>
                 <mat-icon>foundation</mat-icon>
                 <span>Create store</span>
               </button>
-              <button *ngIf="user?.store" [routerLink]="'/store/' + user?.store?.id" mat-menu-item>
+              <button *ngIf="user?.store" [routerLink]="'/seller-dashboard/' + user.store?.id"  mat-menu-item>
+                <mat-icon>insert_chart</mat-icon>
+                <span>My dashboard</span>
+              </button>
+              <button *ngIf="user?.store" [routerLink]="'/store/' + user.store?.id" mat-menu-item>
                 <mat-icon>storefront</mat-icon>
                 <span>My store</span>
               </button>

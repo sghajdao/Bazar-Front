@@ -5,14 +5,14 @@ import { mergeMap, Subscription } from 'rxjs';
 import { StoreService } from 'src/app/services/store.service';
 import { StoreInfoComponent } from '../../modals/store-info/store-info.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { FollowRequest } from 'src/app/models/followRequest';
+import { FollowRequest } from 'src/app/models/dtos/followRequest';
 import { UserService } from 'src/app/services/user.service';
 import { FollowService } from 'src/app/services/follow.service';
 import { StarService } from 'src/app/services/star.service';
-import { StarRequest } from 'src/app/models/starRequest';
-import { FollowingAndStarResp } from 'src/app/models/followingAndStarResp';
-import { StoreResponse } from 'src/app/models/storeResponse';
-import { StoreRequest } from '../../../models/storeRequest';
+import { StarRequest } from 'src/app/models/dtos/starRequest';
+import { FollowingAndStarResp } from 'src/app/models/dtos/followingAndStarResp';
+import { StoreResponse } from 'src/app/models/dtos/storeResponse';
+import { StoreRequest } from '../../../models/dtos/storeRequest';
 
 @Component({
   selector: 'app-store-page',

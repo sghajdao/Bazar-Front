@@ -50,6 +50,10 @@ const routes: Routes = [
     path: "recent-products",
     loadChildren:()=>import("./components/products/last-products/last-products.module").then(m=>m.LastProductsModule),
   },
+  {
+    path: "seller-dashboard",
+    loadChildren:()=>import("./components/dashboards/seller-dashboard/seller-dashboard.module").then(m=>m.SellerDashboardModule),
+  },
 ];
 
 @NgModule({

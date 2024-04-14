@@ -17,6 +17,7 @@ import { SearchModule } from './components/products/search/search.module';
 import { VerifiyEmailModule } from './components/other-pages/verifiy-email/verifiy-email.module';
 import { NotFoundModule } from './components/other-pages/not-found/not-found.module';
 import { LastProductsModule } from './components/products/last-products/last-products.module';
+import { SellerDashboardModule } from './components/dashboards/seller-dashboard/seller-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LastProductsModule } from './components/products/last-products/last-pro
     VerifiyEmailModule,
     NotFoundModule,
     LastProductsModule,
+    SellerDashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

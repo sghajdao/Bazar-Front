@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, Observable, Subscription } from 'rxjs';
-import { ImageResponse } from 'src/app/models/image-response';
-import { Product } from 'src/app/models/product';
-import { ProductResponse } from 'src/app/models/product-response';
+import { ImageResponse } from 'src/app/models/dtos/image-response';
+import { Product } from 'src/app/models/entities/product';
+import { ProductResponse } from 'src/app/models/dtos/product-response';
 import { ImageService } from 'src/app/services/image.service';
 import { ProductService } from 'src/app/services/product.service';
 

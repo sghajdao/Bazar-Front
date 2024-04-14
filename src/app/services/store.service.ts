@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '../models/store';
+import { Store } from '../models/entities/store';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user';
+import { User } from '../models/entities/user';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
-import { StoreResponse } from '../models/storeResponse';
-import { StoreRequest } from '../models/storeRequest';
+import { StoreResponse } from '../models/dtos/storeResponse';
+import { StoreRequest } from '../models/dtos/storeRequest';
 
 @Injectable({
   providedIn: 'root'

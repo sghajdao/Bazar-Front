@@ -1,5 +1,5 @@
-import { Store } from "./store";
-import { User } from "./user";
+import { Store } from "../entities/store";
+import { User } from "../entities/user";
 
 export interface StoreResponse {
     store: Store,
