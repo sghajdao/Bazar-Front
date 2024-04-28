@@ -19,6 +19,7 @@ import { NotFoundModule } from './components/other-pages/not-found/not-found.mod
 import { LastProductsModule } from './components/products/last-products/last-products.module';
 import { SellerDashboardModule } from './components/dashboards/seller-dashboard/seller-dashboard.module';
 import { TopRatedStoreModule } from './components/store/top-rated-store/top-rated-store.module';
+import { VerifyStoreEmailModule } from './components/other-pages/verify-store-email/verify-store-email.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TopRatedStoreModule } from './components/store/top-rated-store/top-rate
     NotFoundModule,
     LastProductsModule,
     SellerDashboardModule,
-    TopRatedStoreModule
+    TopRatedStoreModule,
+    VerifyStoreEmailModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

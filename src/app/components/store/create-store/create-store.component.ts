@@ -73,6 +73,7 @@ export class CreateStoreComponent implements OnDestroy {
           name: this.form.value.name,
           subtitle: this.form.value.subtitle,
           email: this.form.value.email,
+          verified: false,
           country: this.form.value.country,
           phone: this.form.value.phone,
           image: image,

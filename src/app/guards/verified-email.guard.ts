@@ -14,6 +14,10 @@ export const verifiedEmailGuard: CanActivateFn = (route, state) => {
           router.navigateByUrl('/verify-email')
           return false;
         }
+        else if (user.store && !user.store.verified) {
+          router.navigateByUrl('/verify-store-email')
+          return false;
+        }
         return true;
       })
     )

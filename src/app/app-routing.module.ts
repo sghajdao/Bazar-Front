@@ -58,6 +58,10 @@ const routes: Routes = [
     path: "top-rated-store",
     loadChildren:()=>import("./components/store/top-rated-store/top-rated-store.module").then(m=>m.TopRatedStoreModule),
   },
+  {
+    path: "verify-store-email",
+    loadChildren:()=>import("./components/other-pages/verify-store-email/verify-store-email.module").then(m=>m.VerifyStoreEmailModule),
+  },
 ];
 
 @NgModule({

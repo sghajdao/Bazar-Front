@@ -35,7 +35,6 @@ export class NavbarUserComponent implements OnInit, OnDestroy {
     if (email) {
       const sub = this.userService.getUserByEmail(email).subscribe({
         next: user=> {
-          if (user.store)
             this.user = user
         },
         error: () => {
@@ -45,8 +44,6 @@ export class NavbarUserComponent implements OnInit, OnDestroy {
       })
       this.subscriptions.push(sub)
     }
-    // else
-    //   this.router.navigateByUrl('/auth/login')
   }
 
   searchProducts() {

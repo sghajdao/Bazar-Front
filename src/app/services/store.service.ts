@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { StoreResponse } from '../models/dtos/storeResponse';
 import { StoreRequest } from '../models/dtos/storeRequest';
+import { CreateStoreRequest } from '../models/dtos/createStoreRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class StoreService {
   ) { }
 
   createStore(store: Store, sellerEmail: string) {
-    const request = {store, sellerEmail}
+    const request: CreateStoreRequest = {store, sellerEmail}
     if (!this.authService.isAuthenticated())
       return new Observable<Store>()
     return this.http.post<Store>(environment.urlRequest + 'store/create', request, this.getHeaders())
@@ -41,6 +42,18 @@ export class StoreService {
 
   getTopRated() {
     return this.http.get<Store[]>(environment.urlRequest + 'store/top-rated');
+  }
+
+  verifyEmail(id: number) {
+    if (!this.authService.isAuthenticated())
+      return new Observable<boolean>()
+    return this.http.put<boolean>(environment.urlRequest + 'store/verify', id, this.getHeaders());
+  }
+
+  changeEmail(id: number, email: string) {
+    if (!this.authService.isAuthenticated())
+      return new Observable<boolean>()
+    return this.http.put<boolean>(environment.urlRequest + 'store/change-email/' + id, email, this.getHeaders())
   }
 
   private getHeaders(){

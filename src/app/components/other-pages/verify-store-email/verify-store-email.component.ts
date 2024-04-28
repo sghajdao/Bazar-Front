@@ -1,20 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/models/entities/user';
 import { VerifyEmailRequest } from 'src/app/models/dtos/verifyEmailRequest';
+import { User } from 'src/app/models/entities/user';
 import { MailService } from 'src/app/services/mail.service';
-import { UserService } from 'src/app/services/user.service';
 import { StoreService } from 'src/app/services/store.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-verifiy-email',
-  templateUrl: './verifiy-email.component.html',
-  styleUrls: ['./verifiy-email.component.css']
+  selector: 'app-verify-store-email',
+  templateUrl: './verify-store-email.component.html',
+  styleUrls: ['./verify-store-email.component.css']
 })
-export class VerifiyEmailComponent implements OnInit, OnDestroy {
-
+export class VerifyStoreEmailComponent {
   constructor(
     private userService: UserService,
     private mailService: MailService,
@@ -28,6 +27,7 @@ export class VerifiyEmailComponent implements OnInit, OnDestroy {
   number?: number
   loading: boolean = false
   error: boolean = false
+  newEmail: {click: boolean, email: string} = {click: false, email: ''}
 
   subscriptions: Subscription[] = []
 
@@ -46,11 +46,11 @@ export class VerifiyEmailComponent implements OnInit, OnDestroy {
   }
 
   sendVerifyNumber() {
-    if (this.user) {
+    if (this.user && this.user.store) {
       this.loading = true
       this.number = Math.floor(Math.random()*90000) + 10000;
       const request: VerifyEmailRequest = {
-        email: this.user.email,
+        email: this.user.store.email,
         number: this.number
       }
       const sub = this.mailService.sendVerifyNumber(request).subscribe({
@@ -65,11 +65,11 @@ export class VerifiyEmailComponent implements OnInit, OnDestroy {
 
   verifyEmail() {
     const email = this.userService.getEmail()
-    if (this.user && !this.user.store && this.form.valid && +this.form.value.number === this.number) {
+    if (this.user && this.user.store && this.form.valid && +this.form.value.number === this.number) {
       this.loading = true
       this.error = false
-      const sub = this.mailService.verifyEmail(this.user.email).subscribe({
-        next: data => {
+      const sub = this.storeService.verifyEmail(this.user.store.id!).subscribe({
+        next: () => {
           this.loading = false
           this.router.navigateByUrl('/')
         },
@@ -82,22 +82,23 @@ export class VerifiyEmailComponent implements OnInit, OnDestroy {
     }
     else if (this.form.valid && +this.form.value.number != this.number)
       this.error = true
-    else if (this.user && this.user.store) {
-      this.loading = true
-      this.error = false
-      this.verifyEmail()
-    }
   }
 
-  verifyStoreEmail() {
-    const sub = this.storeService.verifyEmail(this.user?.store?.id!).subscribe({
-      next: () => {
-        this.loading = false
-        this.router.navigateByUrl('/')
-      },
-      error: () => this.router.navigateByUrl('/auth/login')
-    })
-    this.subscriptions.push(sub)
+  changeEmail() {
+    if (!this.newEmail.click) {
+      this.newEmail.click = true
+      return
+    }
+    else if (this.newEmail.email && this.user && this.user.store) {
+      const sub = this.storeService.changeEmail(this.user.store.id!, this.newEmail.email).subscribe({
+        next: data => {
+          if (data)
+            location.reload()
+        },
+        error: err => this.router.navigateByUrl('/auth/login')
+      })
+      this.subscriptions.push(sub)
+    }
   }
 
   ngOnDestroy(): void {

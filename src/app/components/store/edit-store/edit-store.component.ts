@@ -91,6 +91,7 @@ export class EditStoreComponent implements OnInit, OnDestroy {
           name: this.form.value.name,
           subtitle: this.form.value.subtitle,
           email: this.form.value.email,
+          verified: this.store?.verified!,
           country: this.form.value.country,
           phone: this.form.value.phone,
           image: image,

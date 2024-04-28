@@ -11,6 +11,7 @@ export interface Store {
     name: string,
     subtitle: string,
     email: string,
+    verified: boolean,
     country: string,
     phone: string
     seller?: User,

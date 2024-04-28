@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { VerifiyEmailComponent } from './verifiy-email.component';
+import { VerifyStoreEmailComponent } from './verify-store-email.component';
 import { authGuard } from 'src/app/guards/auth.guard';
+import { sellerGuard } from 'src/app/guards/seller.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: VerifiyEmailComponent,
-    canActivate: [authGuard]
+    component: VerifyStoreEmailComponent,
+    canActivate: [authGuard, sellerGuard]
   }
 ];
 
@@ -15,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class VerifiyEmailRoutingModule { }
+export class VerifyStoreEmailRoutingModule { }
