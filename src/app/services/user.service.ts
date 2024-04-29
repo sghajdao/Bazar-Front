@@ -42,6 +42,12 @@ export class UserService {
     return this.http.get<User>(environment.urlRequest + 'user/id/' + id, this.getHeaders())
   }
 
+  addAdmin(id: number) {
+    if (!this.authService.isAuthenticated())
+      return new Observable<User>()
+    return this.http.put<User>(environment.urlRequest + 'user/admin', id, this.getHeaders())
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

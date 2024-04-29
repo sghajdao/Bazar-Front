@@ -62,6 +62,10 @@ const routes: Routes = [
     path: "verify-store-email",
     loadChildren:()=>import("./components/other-pages/verify-store-email/verify-store-email.module").then(m=>m.VerifyStoreEmailModule),
   },
+  {
+    path: "admin-dashboard",
+    loadChildren:()=>import("./components/dashboards/admin-dashboard/admin-dashboard.module").then(m=>m.AdminDashboardModule),
+  },
 ];
 
 @NgModule({

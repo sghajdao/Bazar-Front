@@ -20,6 +20,7 @@ import { LastProductsModule } from './components/products/last-products/last-pro
 import { SellerDashboardModule } from './components/dashboards/seller-dashboard/seller-dashboard.module';
 import { TopRatedStoreModule } from './components/store/top-rated-store/top-rated-store.module';
 import { VerifyStoreEmailModule } from './components/other-pages/verify-store-email/verify-store-email.module';
+import { AdminDashboardModule } from './components/dashboards/admin-dashboard/admin-dashboard.module';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { VerifyStoreEmailModule } from './components/other-pages/verify-store-em
     SellerDashboardModule,
     TopRatedStoreModule,
     VerifyStoreEmailModule,
+    AdminDashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -39,6 +39,10 @@
                 <mat-icon>foundation</mat-icon>
                 <span>Create store</span>
               </button>
+              <button *ngIf="user.role === 'ADMIN'" [routerLink]="'/admin-dashboard/' + user.id"  mat-menu-item>
+                <mat-icon>admin_panel_settings</mat-icon>
+                <span>Admin dashboard</span>
+              </button>
               <button *ngIf="user?.store" [routerLink]="'/seller-dashboard/' + user.store?.id"  mat-menu-item>
                 <mat-icon>insert_chart</mat-icon>
                 <span>My dashboard</span>
