@@ -1,3 +1,3 @@
 export const environment = {
-    urlRequest: 'http://localhost:8181/api/'
+    urlRequest: 'https://bazar-server-production.up.railway.app/api/'
 };
