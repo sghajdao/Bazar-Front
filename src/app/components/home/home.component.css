@@ -17,3 +17,15 @@
 .card-img-top {
     height: 180px;
 }
+
+.list {
+    display: flex;justify-content: center;padding-bottom: 20px;
+}
+
+.line {
+    display: flex;flex-wrap: wrap;justify-content: center;
+}
+
+.item {
+    padding-right: 20px;padding-bottom: 20px;
+}

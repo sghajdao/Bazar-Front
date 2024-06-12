@@ -19,12 +19,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const email = this.userService.getEmail()
-    // if (email) {
-    //   const sub = this.userService.getUserByEmail(email).subscribe({
-    //     next: user=> localStorage.setItem('userId', user.id.toString())
-    //   })
-    //   this.subscriptions.push(sub)
-    // }
+    if (email) {
+      const sub = this.userService.getUserByEmail(email).subscribe({
+        next: user=> localStorage.setItem('userId', user.id.toString())
+      })
+      this.subscriptions.push(sub)
+    }
   }
 
   ngOnDestroy(): void {
