@@ -36,7 +36,7 @@ export class EditStoreComponent implements OnInit, OnDestroy {
     const sub = this.route.params.pipe(mergeMap(param=> this.storeService.getStoreById({storeId:+param['id'], userId:userId}))).subscribe({
       next: res=> {
         this.store = res.store
-        this.selectedImage = 'http://localhost:8181/api/image/' + this.store.image
+        this.selectedImage = 'https://bazar-server-production.up.railway.app/api/image/' + this.store.image
         this.form = this.fb.group({
           name: [this.store.name, Validators.required],
           subtitle: [this.store.subtitle, Validators.required],

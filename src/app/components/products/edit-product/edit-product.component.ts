@@ -37,7 +37,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       next: data => {
         this.response = data
         for (let index = 0; index < this.response.product.images!.length; index++) {
-          this.selectedImage[index] = 'http://localhost:8181/api/image/' + this.response.product.images![index]
+          this.selectedImage[index] = 'https://bazar-server-production.up.railway.app/api/image/' + this.response.product.images![index]
         }
         this.old = this.fb.group({
           title: [this.response.product.title, Validators.required],

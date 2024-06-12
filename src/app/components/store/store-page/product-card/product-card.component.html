@@ -13,7 +13,7 @@
                 <span>delete</span>
             </button>
         </mat-menu>
-        <img [src]="'http://localhost:8181/api/image/' + product.product.images![0]" class="card-img-top" alt="...">
+        <img [src]="'https://bazar-server-production.up.railway.app/api/image/' + product.product.images![0]" class="card-img-top" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{product.product.title}}</h5>
             <h2 style="color: rgb(6, 23, 71);">{{product.product.price}}$</h2>
