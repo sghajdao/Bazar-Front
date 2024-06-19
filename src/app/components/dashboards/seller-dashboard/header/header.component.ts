@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { StoreResponse } from 'src/app/models/dtos/storeResponse';
 
 @Component({
@@ -6,7 +6,7 @@ import { StoreResponse } from 'src/app/models/dtos/storeResponse';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnChanges {
 
   constructor() {}
 
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   followers: number = 0
   stars: number = 0
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.response) {
       this.response.store.sales?.forEach(product => this.earning += product.price)
       this.buying = this.response.store.sales? this.response.store.sales.length : 0

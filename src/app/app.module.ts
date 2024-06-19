@@ -21,6 +21,8 @@ import { SellerDashboardModule } from './components/dashboards/seller-dashboard/
 import { TopRatedStoreModule } from './components/store/top-rated-store/top-rated-store.module';
 import { VerifyStoreEmailModule } from './components/other-pages/verify-store-email/verify-store-email.module';
 import { AdminDashboardModule } from './components/dashboards/admin-dashboard/admin-dashboard.module';
+import { BestSellerComponent } from './components/products/best-seller/best-seller.component';
+import { BestSellerModule } from './components/products/best-seller/best-seller.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { AdminDashboardModule } from './components/dashboards/admin-dashboard/ad
     SellerDashboardModule,
     TopRatedStoreModule,
     VerifyStoreEmailModule,
-    AdminDashboardModule
+    AdminDashboardModule,
+    BestSellerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

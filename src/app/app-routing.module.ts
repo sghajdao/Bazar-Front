@@ -66,6 +66,10 @@ const routes: Routes = [
     path: "admin-dashboard",
     loadChildren:()=>import("./components/dashboards/admin-dashboard/admin-dashboard.module").then(m=>m.AdminDashboardModule),
   },
+  {
+    path: "best-seller",
+    loadChildren:()=>import("./components/products/best-seller/best-seller.module").then(m=>m.BestSellerModule),
+  },
 ];
 
 @NgModule({

@@ -50,6 +50,10 @@ export class ProductService {
     return this.http.get<Product[]>(environment.urlRequest + 'product/last');
   }
 
+  getBestSeller() {
+    return this.http.get<Product[]>(environment.urlRequest + 'product/best-seller');
+  }
+
   private getHeaders(){
     const accessToken = localStorage.getItem("token");
     const headers = { Authorization: `Bearer ${accessToken}` };

@@ -41,9 +41,9 @@ export class SalesChartComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.response) {
-      this.setChart()
       if (this.response.store.sales)
         this.getData(this.response.store)
+      this.setChart()
     }
 
   }
@@ -101,7 +101,8 @@ export class SalesChartComponent implements OnChanges {
       series: [
         {
           name: "Incomes",
-          data: [200.3, 300.1, 400.0, 1000.1, 400.0, 300.6, 300.2, 200.3, 100.4, 100.8, 1000.5, 100.2]
+          data: this.incomes
+          // data: [200.3, 300.1, 400.0, 1000.1, 400.0, 300.6, 300.2, 200.3, 100.4, 100.8, 1000.5, 100.2]
         }
       ],
       chart: {
