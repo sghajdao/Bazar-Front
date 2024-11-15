@@ -1,5 +1,9 @@
 <app-navbar-user></app-navbar-user>
 
+<div *ngIf="error" class="alert alert-danger container" role="alert">
+    Can not create this store! (already used email or unknown user)
+</div>
+
 <div class="container form">
     <mat-card class="example-card">
         <label for="customFile1" style="cursor: pointer;">

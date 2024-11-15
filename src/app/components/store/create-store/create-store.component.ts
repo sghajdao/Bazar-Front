@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription, mergeMap } from 'rxjs';
+import { CreateStoreResponse } from 'src/app/models/dtos/createStoreResponse';
 import { ImageResponse } from 'src/app/models/dtos/image-response';
 import { Store } from 'src/app/models/entities/store';
 import { ImageService } from 'src/app/services/image.service';
@@ -25,6 +26,7 @@ export class CreateStoreComponent implements OnDestroy {
 
   selectedFile?: File
   selectedImage: string | ArrayBuffer = ''
+  error: boolean = false
 
   subscriptions: Subscription[] = []
 
@@ -59,13 +61,14 @@ export class CreateStoreComponent implements OnDestroy {
   createStore() {
     if (this.selectedImage) {
       const sub = this.uploadImage().pipe(mergeMap(res=> this.create(res[0].name))).subscribe({
-        next: data => this.router.navigateByUrl('/store/' + data.id)
+        next: data => this.router.navigateByUrl('/store/' + data.store.id),
+        error: () => this.error = true
       })
       this.subscriptions.push(sub)
     }
   }
 
-  create(image: string): Observable<Store> {
+  create(image: string): Observable<CreateStoreResponse> {
     if (this.form.value.country && this.form.value.email && this.form.value.name
       && this.form.value.phone && this.form.value.subtitle) {
         const store:Store = {

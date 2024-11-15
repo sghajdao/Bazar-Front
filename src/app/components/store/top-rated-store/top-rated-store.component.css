@@ -22,7 +22,7 @@
 }
 
 img {
-    background-size: cover;
+    object-fit: cover;
     height: 200px;
 }
 

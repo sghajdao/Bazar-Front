@@ -1,39 +1,62 @@
 <div *ngIf="loged === 0">
-<h1 class="fw-bold text-primary" style="text-align: center;">Bazar</h1>
-<div class="container example-button-container">
-	<button routerLink="/" matTooltip="Home" mat-fab color="basic" aria-label="Example icon button with a home icon">
-		<mat-icon>home</mat-icon>
-	</button>
-</div>
-<br>
-
-<div class="container shadow-lg p-3 mb-5 bg-body rounded" style="height: 90%;width: 40%;">
-	<h3 class="text-body-tertiary" style="text-align: center;">Login</h3>
-	<br>
-	<form [formGroup]="userData">
-		<div class="form-floating mb-3">
-			<input type="email" [class]="(validators.email && this.userData.get('email')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="email" placeholder="name@example.com">
-			<label (keyup.enter)="onSignIn()" for="floatingInput">Email address</label>
-			<span *ngIf="validators.email && this.userData.get('email')!.invalid" class="text-danger">email is required</span>
-		</div>
-		<div class="form-floating">
-			<input (keyup.enter)="onSignIn()" type="password" [class]="(validators.password && this.userData.get('password')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="password" placeholder="Password">
-			<label for="floatingPassword">Password</label>
-			<span *ngIf="validators.password && this.userData.get('password')!.invalid" class="text-danger">password is required</span>
-		</div>
-	</form>
-
-	<br *ngIf="error">
-	<div *ngIf="error" class="alert alert-danger" role="alert">
-		This user is not exist or incorrect password!
+	<h1 class="fw-bold text-primary" style="text-align: center;">Bazar</h1>
+	<div class="container example-button-container">
+		<button routerLink="/" matTooltip="Home" mat-fab color="basic" aria-label="Example icon button with a home icon">
+			<mat-icon>home</mat-icon>
+		</button>
 	</div>
-
 	<br>
-	<button mat-raised-button color="primary" style="width: 100%;" (click)="onSignIn()">Sign in</button>
-	<hr>
-	<p class="text-secondary" style="text-align: center;">New to Bazar?</p>
-	<button mat-raised-button style="width: 100%;" (click)="onSignUp()">Sign up</button>
-</div>
+
+	<div class="page">
+		<div class="form shadow-lg p-3 mb-5 bg-body rounded">
+			<h3 class="text-body-tertiary" style="text-align: center;">Login</h3>
+			<br>
+			<form [formGroup]="userData">
+				<div class="form-floating mb-3">
+					<input type="email" [class]="(validators.email && this.userData.get('email')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="email" placeholder="name@example.com">
+					<label (keyup.enter)="onSignIn()" for="floatingInput">Email address</label>
+					<span *ngIf="validators.email && this.userData.get('email')!.invalid" class="text-danger">email is required</span>
+				</div>
+				<div class="form-floating">
+					<input (keyup.enter)="onSignIn()" type="password" [class]="(validators.password && this.userData.get('password')!.invalid)? 'form-control border-danger-subtle' : 'form-control'" formControlName="password" placeholder="Password">
+					<label for="floatingPassword">Password</label>
+					<span *ngIf="validators.password && this.userData.get('password')!.invalid" class="text-danger">password is required</span>
+				</div>
+			</form>
+		
+			<br *ngIf="error">
+			<div *ngIf="error" class="alert alert-danger" role="alert">
+				This user is not exist or incorrect password!
+			</div>
+		
+			<br>
+			<button mat-raised-button color="primary" style="width: 100%;" (click)="onSignIn()">Sign in</button>
+			<p class="text-secondary" style="text-align: center;padding-top: 10px;">or</p>
+			<div class="google-div">
+				<div class="google-button" id="g_id_onload"
+				    data-client_id="1055051213536-lhmklmv26mchlqs4ft5pid3chgoah1kf.apps.googleusercontent.com"
+				    data-context="signin"
+				    data-ux_mode="popup"
+				    data-auto_select="false"
+				    data-itp_support="true"
+					data-callback="googleLogin">
+				</div>
+
+				<div class="g_id_signin"
+				    data-type="standard"
+				    data-shape="rectangular"
+				    data-theme="outline"
+				    data-text="signin_with"
+				    data-size="large"
+				    data-logo_alignment="left"
+					data-width=365>
+				</div>
+			</div>
+			<hr>
+			<p class="text-secondary" style="text-align: center;">New to Bazar?</p>
+			<button mat-raised-button style="width: 100%;" (click)="onSignUp()">Sign up</button>
+		</div>
+	</div>
 </div>
 
 <div *ngIf="loged === 1" class="position-absolute top-50 start-50 translate-middle">

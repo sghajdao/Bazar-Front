@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { StoreResponse } from '../models/dtos/storeResponse';
 import { StoreRequest } from '../models/dtos/storeRequest';
 import { CreateStoreRequest } from '../models/dtos/createStoreRequest';
+import { CreateStoreResponse } from '../models/dtos/createStoreResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class StoreService {
   createStore(store: Store, sellerEmail: string) {
     const request: CreateStoreRequest = {store, sellerEmail}
     if (!this.authService.isAuthenticated())
-      return new Observable<Store>()
-    return this.http.post<Store>(environment.urlRequest + 'store/create', request, this.getHeaders())
+      return new Observable<CreateStoreResponse>()
+    return this.http.post<CreateStoreResponse>(environment.urlRequest + 'store/create', request, this.getHeaders())
   }
 
   getSellerByStoreId(id: number) {

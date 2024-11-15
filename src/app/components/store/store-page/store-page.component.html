@@ -40,7 +40,7 @@
             </mat-menu>
         </div>
 
-        <img [src]="'https://bazar-server-production.up.railway.app/api/image/'+ storeResponse.store.image" class="card-img-top image" alt="store image">
+        <img [src]="'http://localhost:8181/api/image/'+ storeResponse.store.image" class="card-img-top image" alt="store image">
         <div class="card-body">
             <h3>{{storeResponse.store.name}}</h3>
             <p class="subtitle">{{storeResponse.store.subtitle}}</p>

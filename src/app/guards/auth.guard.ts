@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
@@ -9,12 +10,20 @@ export const authGuard: CanActivateFn = (route, state) => {
     
     if (Math.floor((new Date).getTime() / 1000) > user.exp) {
       const router = inject(Router)
-      router.navigate(['/login'])
+      const location = inject(Location)
+      router.navigateByUrl('/auth/login').then(() => {
+        location.go('/auth/login');
+        window.location.reload();
+      });
       return false;
     }
     return true
   }
   const router = inject(Router)
-  router.navigate(['/login'])
+  const location = inject(Location)
+  router.navigateByUrl('/auth/login').then(() => {
+    location.go('/auth/login');
+    window.location.reload();
+  });
   return false
 };

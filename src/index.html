@@ -9,6 +9,69 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script>
+    function decodeJWTToken(token) {
+      return JSON.parse(atob(token.split(".")[1]));
+    }
+    function googleRegister(response) {
+      // to decode the credential response.
+      const responsePayload = decodeJWTToken(response.credential);
+      const user = {
+        firstname: responsePayload.given_name,
+        lastname: responsePayload.family_name,
+        email: responsePayload.email,
+        password: ''
+      }
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:8181/api/auth/register");
+      xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+      xhr.onload = () => {
+        if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 201)) {
+          console.log(JSON.parse(xhr.responseText).message)
+          if (JSON.parse(xhr.responseText).message === 'Success registration') {
+            localStorage.setItem("token", JSON.parse(xhr.responseText).token)
+            window.location.href = "/";
+          }
+          else
+            window.location.href = "/auth/login";
+        } else {
+          window.location.href = "/auth/login";
+        }
+      };
+      xhr.send(JSON.stringify(user));
+    }
+    
+    function handleSignout() {
+      google.accounts.id.disableAutoSelect();
+    }    
+  </script>
+  <script>
+    function googleLogin(response) {
+      // to decode the credential response.
+      const responsePayload = decodeJWTToken(response.credential);
+      const user = {
+        email: responsePayload.email,
+        password: ''
+      }
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:8181/api/auth/google-login");
+      xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+      xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          if (JSON.parse(xhr.responseText).message === 'Login Success') {
+            localStorage.setItem("token", JSON.parse(xhr.responseText).token)
+            window.location.href = "/";
+          }
+          else
+            window.location.href = "/auth/register";
+        } else {
+          window.location.href = "/auth/register";
+        }
+      };
+      xhr.send(JSON.stringify(user));
+    }
+  </script>
 </head>
 <body class="mat-typography">
   <app-root></app-root>

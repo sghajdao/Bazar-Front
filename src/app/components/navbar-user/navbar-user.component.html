@@ -58,11 +58,17 @@
               </button>
             </mat-menu>
           </a>
-          <a class="navbar-brand" *ngIf="!authenticated">
+          <a class="navbar-brand" *ngIf="!user">
             <img src="./../../../../assets/images/Unknown_person.jpg" style="width:40px;cursor: pointer;" class="rounded-pill ms-3" mat-button [matMenuTriggerFor]="menu">
             <mat-menu #menu="matMenu">
-              <button routerLink="/auth/login" mat-menu-item>Login</button>
-              <button routerLink="/auth/register" mat-menu-item>Register</button>
+              <button (click)="authPage('/auth/login')" mat-menu-item>
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
+              </button>
+              <button (click)="authPage('/auth/register')" mat-menu-item>
+                <mat-icon>person_add</mat-icon>
+                <span>Register</span>
+              </button>
             </mat-menu>
           </a>
         </div>

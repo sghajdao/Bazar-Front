@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,7 +16,8 @@ export class LoginComponent implements OnDestroy {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private location: Location,
   ) {}
 
   userData = this.fb.group({
@@ -60,7 +62,10 @@ export class LoginComponent implements OnDestroy {
   }
 
   onSignUp() {
-    this.router.navigateByUrl('/auth/register')
+    this.router.navigateByUrl('/auth/register').then(() => {
+      this.location.go('/auth/register');
+      window.location.reload();
+    });
   }
 
   ngOnDestroy(): void {

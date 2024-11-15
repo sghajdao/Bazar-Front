@@ -6,6 +6,10 @@
     max-height: 500px;
 }
 
+img {
+    object-fit: cover;
+}
+
 .example-button-container {
     position: absolute;
     padding: 10px;

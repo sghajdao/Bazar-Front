@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
@@ -19,6 +20,7 @@ export class NavbarUserComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     private keywordService: KeywordService,
+    private location: Location
   ) {}
 
   user?: User
@@ -64,6 +66,13 @@ export class NavbarUserComponent implements OnInit, OnDestroy {
   onSearch() {
     if (this.search)
       this.router.navigateByUrl('/products-search/' + this.search);
+  }
+
+  authPage(path: string) {
+    this.router.navigateByUrl(path).then(() => {
+      this.location.go(path);
+      window.location.reload();
+    });
   }
 
   onLogOut() {

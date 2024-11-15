@@ -1,5 +1,20 @@
+.page {
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    width: 400px;
+}
+
 .example-button-container {
     display: flex;
     justify-content: center;
     width: 120px;
+}
+
+.google-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

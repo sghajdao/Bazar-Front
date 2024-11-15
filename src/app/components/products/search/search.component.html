@@ -4,7 +4,7 @@
     <div *ngFor="let product of products" class="product">
         <div class="card" style="width: 18rem;">
             <div [routerLink]="'/product/' + product.id">
-                <img [src]="'https://bazar-server-production.up.railway.app/api/image/' + product.images![0]" class="card-img-top" alt="...">
+                <img [src]="'http://localhost:8181/api/image/' + product.images![0]" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{product.title}}</h5>
                     <h2 style="color: rgb(6, 23, 71);">{{product.price}}$</h2>
